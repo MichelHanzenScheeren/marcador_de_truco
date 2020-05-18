@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './hystory_tab/history_tab.dart';
 import './points_tab/points_tab.dart';
 
 class Game extends StatefulWidget {
@@ -34,7 +35,7 @@ class _GameState extends State<Game> {
         body: TabBarView(
           children: <Widget>[
             PointsTab(),
-            Container(color: Colors.deepPurple),
+            HistoryTab(),
           ],
         ),
       ),
