@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../statics/project_images.dart';
 
 class TrucoButton extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class TrucoButton extends StatelessWidget {
 
   Widget cardImage() {
     return Image.asset(
-      "images/truco.png",
+      MyImages.truco,
       fit: BoxFit.fill,
       height: 45,
       width: 45,

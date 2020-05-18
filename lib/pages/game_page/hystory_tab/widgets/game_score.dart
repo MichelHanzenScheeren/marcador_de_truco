@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../statics/project_images.dart';
 
 class GameScore extends StatelessWidget {
   @override
@@ -21,7 +22,7 @@ class GameScore extends StatelessWidget {
           children: <Widget>[
             ClipOval(
               child: Image.asset(
-                "images/player1.png",
+                MyImages.player1,
                 fit: BoxFit.fill,
                 width: 70,
                 height: 70,
@@ -32,7 +33,7 @@ class GameScore extends StatelessWidget {
             Text("8", style: TextStyle(fontSize: 40)),
             ClipOval(
               child: Image.asset(
-                "images/player2.png",
+                MyImages.player2,
                 fit: BoxFit.fill,
                 width: 70,
                 height: 70,

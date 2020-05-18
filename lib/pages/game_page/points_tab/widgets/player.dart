@@ -8,9 +8,9 @@ class Player extends StatelessWidget {
 
   Player({
     this.playerName: "",
-    this.playerImage: "images/player1.png",
+    @required this.playerImage,
     this.points: "0",
-    this.incrementImage: "images/increment_left.png",
+    @required this.incrementImage,
   });
 
   @override

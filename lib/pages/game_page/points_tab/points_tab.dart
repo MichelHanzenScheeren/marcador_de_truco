@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import './widgets/player.dart';
 import './widgets/truco_button.dart';
 import './widgets/undo_round_button.dart';
+import '../../../statics/project_images.dart';
 
 class PointsTab extends StatelessWidget {
   @override
@@ -15,15 +16,15 @@ class PointsTab extends StatelessWidget {
           children: <Widget>[
             Player(
               playerName: "Nós",
-              playerImage: "images/player1.png",
+              playerImage: MyImages.player1,
               points: "0",
-              incrementImage: "images/increment_left.png",
+              incrementImage: MyImages.incrementLeft,
             ),
             Player(
               playerName: "Eles",
-              playerImage: "images/player2.png",
+              playerImage: MyImages.player2,
               points: "0",
-              incrementImage: "images/increment_right.png",
+              incrementImage: MyImages.incrementRight,
             ),
           ],
         ),
