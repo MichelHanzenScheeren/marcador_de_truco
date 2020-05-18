@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './player.dart';
-import './truco_button.dart';
-import './undo_round_button.dart';
+import './widgets/player.dart';
+import './widgets/truco_button.dart';
+import './widgets/undo_round_button.dart';
 
 class PointsTab extends StatelessWidget {
   @override
