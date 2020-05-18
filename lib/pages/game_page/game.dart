@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/truco.dart';
 import './hystory_tab/history_tab.dart';
 import './points_tab/points_tab.dart';
 
