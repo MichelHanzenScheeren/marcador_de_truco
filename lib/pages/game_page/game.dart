@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './points_tab/points_tab.dart';
 
 class Game extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _GameState extends State<Game> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Container(color: Colors.purple),
+            PointsTab(),
             Container(color: Colors.deepPurple),
           ],
         ),
