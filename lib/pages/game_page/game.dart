@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/models/player.dart';
-import 'package:marcadordetruco/models/truco.dart';
 import './hystory_tab/history_tab.dart';
 import './points_tab/points_tab.dart';
+import '../../models/truco.dart';
 
 class Game extends StatefulWidget {
   @override
@@ -10,6 +10,11 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
+  final Truco truco = Truco(
+    player1: Player(name: "Nós"),
+    player2: Player(name: "Eles"),
+  );
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,7 +41,7 @@ class _GameState extends State<Game> {
         ),
         body: TabBarView(
           children: <Widget>[
-            PointsTab(),
+            PointsTab(truco),
             HistoryTab(),
           ],
         ),

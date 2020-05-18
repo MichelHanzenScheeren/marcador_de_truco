@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../../../models/truco.dart';
+import '../../../../models/player.dart';
 
-class Player extends StatelessWidget {
-  final String playerName;
-  final String playerImage;
-  final String points;
+class PlayerWidget extends StatelessWidget {
+  final Player player;
+  final int playerNumber;
   final String incrementImage;
+  final Truco truco;
 
-  Player({
-    this.playerName: "",
-    @required this.playerImage,
-    this.points: "0",
+  PlayerWidget({
+    @required this.player,
+    @required this.playerNumber,
     @required this.incrementImage,
+    @required this.truco,
   });
 
   @override
@@ -36,22 +39,24 @@ class Player extends StatelessWidget {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage(playerImage),
+                      image: AssetImage(player.image),
                     ),
                   ),
                 ),
                 SizedBox(height: 8),
                 Text(
-                  playerName,
+                  player.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25),
                 ),
               ],
             ),
-            Text(
-              points,
-              style: TextStyle(fontSize: 90),
-            ),
+            Observer(builder: (_) {
+              return Text(
+                "${player.points}",
+                style: TextStyle(fontSize: 90),
+              );
+            }),
             InkWell(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Container(
@@ -65,20 +70,22 @@ class Player extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(4),
+                  padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       color: Colors.deepPurpleAccent, shape: BoxShape.circle),
-                  child: Text(
-                    "+1",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
-                  ),
+                  child: Observer(builder: (_) {
+                    return Text(
+                      "${truco.currentValue}",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                    );
+                  }),
                 ),
               ),
-              onTap: () {},
+              onTap: () => truco.incrementPoint(playerNumber),
             )
           ],
         ),

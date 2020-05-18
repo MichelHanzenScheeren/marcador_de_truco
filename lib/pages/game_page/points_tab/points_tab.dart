@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './widgets/player.dart';
 import './widgets/truco_button.dart';
+import './widgets/player_widget.dart';
 import './widgets/undo_round_button.dart';
+import '../../../models/truco.dart';
 import '../../../statics/project_images.dart';
 
 class PointsTab extends StatelessWidget {
+  final Truco truco;
+  PointsTab(this.truco);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,21 +18,21 @@ class PointsTab extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Player(
-              playerName: "Nós",
-              playerImage: MyImages.player1,
-              points: "0",
+            PlayerWidget(
+              player: truco.player1,
+              playerNumber: 1,
               incrementImage: MyImages.incrementLeft,
+              truco: truco,
             ),
-            Player(
-              playerName: "Eles",
-              playerImage: MyImages.player2,
-              points: "0",
+            PlayerWidget(
+              player: truco.player2,
+              playerNumber: 2,
               incrementImage: MyImages.incrementRight,
+              truco: truco,
             ),
           ],
         ),
-        TrucoButton(),
+        TrucoButton(truco: truco),
         UndoRoundButton(),
         Padding(
           padding: const EdgeInsets.only(bottom: 15),

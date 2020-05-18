@@ -18,10 +18,41 @@ abstract class _TrucoBase with Store {
     startDate = DateTime.now();
   }
 
+  @action
+  void setCurrentValue() {
+    if (currentValue == 1)
+      currentValue = 3;
+    else if (currentValue == 12)
+      currentValue = 1;
+    else
+      currentValue += 3;
+  }
+
+  @computed
+  String get getTrucoText {
+    if (currentValue == 1)
+      return "Truco!";
+    else if (currentValue == 3)
+      return "Seis!";
+    else if (currentValue == 6)
+      return "Nove!";
+    else if (currentValue == 9)
+      return "Doze!";
+    else
+      return "Cancelar";
+  }
+
   void incrementPoint(int player) {
     if (player == 1)
-      player1.incrementPoints();
+      increment(player1);
     else
-      player2.incrementPoints();
+      increment(player2);
+  }
+
+  void increment(Player player) {
+    if (player.points + currentValue <= 12)
+      player.setPoints(player.points + currentValue);
+    else
+      player.setPoints(12);
   }
 }

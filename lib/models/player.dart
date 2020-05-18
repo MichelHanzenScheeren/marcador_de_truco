@@ -19,7 +19,7 @@ abstract class _PlayerBase with Store {
   _PlayerBase({@required this.name, this.image: "", this.points: 0}) {
     if (image.isEmpty) {
       image = <String>[MyImages.player1, MyImages.player2]
-          .elementAt(Random().nextInt(1));
+          .elementAt(Random().nextInt(2));
     }
   }
 
@@ -30,10 +30,7 @@ abstract class _PlayerBase with Store {
   void setImage(String text) => image = text;
 
   @action
-  void incrementPoints() => points++;
-
-  @action
-  void decrementPoints() => points--;
+  void setPoints(int value) => points = value;
 
   @action
   void resetPoints() => points = 0;

@@ -79,22 +79,11 @@ mixin _$Player on _PlayerBase, Store {
   }
 
   @override
-  void incrementPoints() {
+  void setPoints(int value) {
     final _$actionInfo = _$_PlayerBaseActionController.startAction(
-        name: '_PlayerBase.incrementPoints');
+        name: '_PlayerBase.setPoints');
     try {
-      return super.incrementPoints();
-    } finally {
-      _$_PlayerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void decrementPoints() {
-    final _$actionInfo = _$_PlayerBaseActionController.startAction(
-        name: '_PlayerBase.decrementPoints');
-    try {
-      return super.decrementPoints();
+      return super.setPoints(value);
     } finally {
       _$_PlayerBaseActionController.endAction(_$actionInfo);
     }
