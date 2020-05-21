@@ -5,13 +5,11 @@ import '../../../../models/player.dart';
 
 class PlayerWidget extends StatelessWidget {
   final Player player;
-  final int playerNumber;
   final String incrementImage;
   final Truco truco;
 
   PlayerWidget({
     @required this.player,
-    @required this.playerNumber,
     @required this.incrementImage,
     @required this.truco,
   });
@@ -85,7 +83,7 @@ class PlayerWidget extends StatelessWidget {
                   }),
                 ),
               ),
-              onTap: () => truco.incrementPoint(playerNumber),
+              onTap: () => truco.doRound(player.playerNumber),
             )
           ],
         ),

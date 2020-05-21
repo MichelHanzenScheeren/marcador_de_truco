@@ -11,8 +11,8 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   final Truco truco = Truco(
-    player1: Player(name: "Nós"),
-    player2: Player(name: "Eles"),
+    player1: Player(name: "Nós", playerNumber: Players.p1),
+    player2: Player(name: "Eles", playerNumber: Players.p2),
   );
 
   @override
@@ -42,7 +42,7 @@ class _GameState extends State<Game> {
         body: TabBarView(
           children: <Widget>[
             PointsTab(truco),
-            HistoryTab(),
+            HistoryTab(truco),
           ],
         ),
       ),

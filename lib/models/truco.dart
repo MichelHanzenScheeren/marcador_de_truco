@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/round.dart';
 import 'package:mobx/mobx.dart';
 part 'truco.g.dart';
 
@@ -14,6 +15,8 @@ abstract class _TrucoBase with Store {
   @observable
   int currentValue = 1;
 
+  ObservableList<Round> rounds = ObservableList<Round>();
+
   _TrucoBase({@required this.player1, @required this.player2}) {
     startDate = DateTime.now();
   }
@@ -26,6 +29,16 @@ abstract class _TrucoBase with Store {
       currentValue = 1;
     else
       currentValue += 3;
+  }
+
+  @action
+  restartCurrentValue() {
+    if (currentValue != 1) currentValue = 1;
+  }
+
+  @action
+  void saveRound(Players playerNumber) {
+    rounds.add(Round(playerNumber: playerNumber, points: currentValue));
   }
 
   @computed
@@ -42,8 +55,14 @@ abstract class _TrucoBase with Store {
       return "Cancelar";
   }
 
-  void incrementPoint(int player) {
-    if (player == 1)
+  void doRound(Players playerNumber) {
+    incrementPoint(playerNumber);
+    saveRound(playerNumber);
+    restartCurrentValue();
+  }
+
+  void incrementPoint(Players playerNumber) {
+    if (playerNumber == player1.playerNumber)
       increment(player1);
     else
       increment(player2);

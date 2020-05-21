@@ -6,6 +6,8 @@ part 'player.g.dart';
 
 class Player = _PlayerBase with _$Player;
 
+enum Players { p1, p2 }
+
 abstract class _PlayerBase with Store {
   @observable
   String image;
@@ -16,7 +18,13 @@ abstract class _PlayerBase with Store {
   @observable
   int points;
 
-  _PlayerBase({@required this.name, this.image: "", this.points: 0}) {
+  Players playerNumber; //enumeração
+
+  _PlayerBase(
+      {@required this.name,
+      this.image: "",
+      this.points: 0,
+      @required this.playerNumber}) {
     if (image.isEmpty) {
       image = <String>[MyImages.player1, MyImages.player2]
           .elementAt(Random().nextInt(2));

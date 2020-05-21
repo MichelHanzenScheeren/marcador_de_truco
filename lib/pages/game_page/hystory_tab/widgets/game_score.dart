@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../../../statics/project_images.dart';
+import '../../../../models/truco.dart';
 
 class GameScore extends StatelessWidget {
+  final Truco truco;
+  GameScore(this.truco);
+
   @override
   Widget build(BuildContext context) {
     return Column(

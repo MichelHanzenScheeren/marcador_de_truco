@@ -46,6 +46,28 @@ mixin _$Truco on _TrucoBase, Store {
   }
 
   @override
+  dynamic restartCurrentValue() {
+    final _$actionInfo = _$_TrucoBaseActionController.startAction(
+        name: '_TrucoBase.restartCurrentValue');
+    try {
+      return super.restartCurrentValue();
+    } finally {
+      _$_TrucoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void saveRound(Players playerNumber) {
+    final _$actionInfo =
+        _$_TrucoBaseActionController.startAction(name: '_TrucoBase.saveRound');
+    try {
+      return super.saveRound(playerNumber);
+    } finally {
+      _$_TrucoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentValue: ${currentValue},

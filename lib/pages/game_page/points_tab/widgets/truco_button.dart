@@ -17,7 +17,7 @@ class TrucoButton extends StatelessWidget {
         color: Colors.deepPurpleAccent,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
-      child: GestureDetector(
+      child: InkWell(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -35,6 +35,7 @@ class TrucoButton extends StatelessWidget {
           ],
         ),
         onTap: truco.setCurrentValue,
+        onLongPress: truco.restartCurrentValue,
       ),
     );
   }

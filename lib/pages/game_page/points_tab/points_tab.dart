@@ -20,13 +20,11 @@ class PointsTab extends StatelessWidget {
           children: <Widget>[
             PlayerWidget(
               player: truco.player1,
-              playerNumber: 1,
               incrementImage: MyImages.incrementLeft,
               truco: truco,
             ),
             PlayerWidget(
               player: truco.player2,
-              playerNumber: 2,
               incrementImage: MyImages.incrementRight,
               truco: truco,
             ),
