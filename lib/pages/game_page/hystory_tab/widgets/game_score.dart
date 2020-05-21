@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../statics/project_images.dart';
 import '../../../../models/truco.dart';
 
 class GameScore extends StatelessWidget {
@@ -15,8 +14,8 @@ class GameScore extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Nós", style: TextStyle(fontSize: 18)),
-              Text("Eles", style: TextStyle(fontSize: 18)),
+              Text(truco.player1.name, style: TextStyle(fontSize: 18)),
+              Text(truco.player2.name, style: TextStyle(fontSize: 18)),
             ],
           ),
         ),
@@ -26,18 +25,18 @@ class GameScore extends StatelessWidget {
           children: <Widget>[
             ClipOval(
               child: Image.asset(
-                MyImages.player1,
+                truco.player1.image,
                 fit: BoxFit.fill,
                 width: 70,
                 height: 70,
               ),
             ),
-            Text("12", style: TextStyle(fontSize: 40)),
+            Text("${truco.player1.points}", style: TextStyle(fontSize: 40)),
             Text("X", style: TextStyle(fontSize: 40)),
-            Text("8", style: TextStyle(fontSize: 40)),
+            Text("${truco.player2.points}", style: TextStyle(fontSize: 40)),
             ClipOval(
               child: Image.asset(
-                MyImages.player2,
+                truco.player2.image,
                 fit: BoxFit.fill,
                 width: 70,
                 height: 70,

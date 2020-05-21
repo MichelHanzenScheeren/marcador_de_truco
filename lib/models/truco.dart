@@ -41,6 +41,17 @@ abstract class _TrucoBase with Store {
     rounds.add(Round(playerNumber: playerNumber, points: currentValue));
   }
 
+  @action
+  void undoRound() {
+    if (rounds.length == 0) return;
+
+    Round round = rounds.removeLast();
+    if (round.playerNumber == player1.playerNumber)
+      decrementPoint(player1, round.points);
+    else
+      decrementPoint(player2, round.points);
+  }
+
   @computed
   String get getTrucoText {
     if (currentValue == 1)
@@ -73,5 +84,9 @@ abstract class _TrucoBase with Store {
       player.setPoints(player.points + currentValue);
     else
       player.setPoints(12);
+  }
+
+  void decrementPoint(Player player, int value) {
+    player.setPoints(player.points - value);
   }
 }

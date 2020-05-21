@@ -9,18 +9,30 @@ class GameRounds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: truco.rounds.length,
-        itemBuilder: (context, index) {
-          if (truco.rounds.length == 0) {
-            return Text("Nenhuma rodada por enquanto...");
-          } else {
+    if (truco.rounds.length == 0) {
+      return Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.update, size: 100),
+            SizedBox(height: 20),
+            Text(
+              "Nada por enquanto...",
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Expanded(
+        child: ListView.builder(
+          itemCount: truco.rounds.length,
+          itemBuilder: (context, index) {
             return roundLine(truco.rounds[index], index);
-          }
-        },
-      ),
-    );
+          },
+        ),
+      );
+    }
   }
 
   Widget roundLine(Round round, int index) {

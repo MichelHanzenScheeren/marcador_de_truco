@@ -31,7 +31,7 @@ class PointsTab extends StatelessWidget {
           ],
         ),
         TrucoButton(truco: truco),
-        UndoRoundButton(),
+        UndoRoundButton(undoFunction: truco.undoRound),
         Padding(
           padding: const EdgeInsets.only(bottom: 15),
           child: Row(

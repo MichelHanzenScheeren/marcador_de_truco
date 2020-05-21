@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class UndoRoundButton extends StatelessWidget {
+  final Function undoFunction;
+  UndoRoundButton({this.undoFunction});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +24,7 @@ class UndoRoundButton extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: undoFunction,
       ),
     );
   }
