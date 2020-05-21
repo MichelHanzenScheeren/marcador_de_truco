@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import './edit_name_player.dart';
+import './edit_image_player.dart';
 import '../../../../models/truco.dart';
 import '../../../../models/player.dart';
 
@@ -26,28 +28,60 @@ class PlayerWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[350],
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(player.image),
-                    ),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  InkWell(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    child: Observer(builder: (_) {
+                      return Container(
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[350],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(player.image),
+                          ),
+                        ),
+                      );
+                    }),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => EditImagePlayer(player),
+                      );
+                    },
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  player.name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25),
-                ),
-              ],
+                  SizedBox(height: 8),
+                  InkWell(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Observer(builder: (_) {
+                        return Text(
+                          player.name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 25),
+                        );
+                      }),
+                    ),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        enableDrag: true,
+                        isDismissible: true,
+                        builder: (context) =>
+                            EditNamePlayer(player.name, player.setName),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
             Observer(builder: (_) {
               return Text(

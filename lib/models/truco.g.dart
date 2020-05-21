@@ -68,6 +68,17 @@ mixin _$Truco on _TrucoBase, Store {
   }
 
   @override
+  void undoRound() {
+    final _$actionInfo =
+        _$_TrucoBaseActionController.startAction(name: '_TrucoBase.undoRound');
+    try {
+      return super.undoRound();
+    } finally {
+      _$_TrucoBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentValue: ${currentValue},

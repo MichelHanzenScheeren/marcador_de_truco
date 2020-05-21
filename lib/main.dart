@@ -13,6 +13,25 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: Colors.deepPurpleAccent,
         accentColor: Colors.deepPurpleAccent,
+        inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.deepPurpleAccent),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.red),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: BorderSide(color: Colors.red),
+          ),
+        ),
       ),
       home: Game(),
     );
