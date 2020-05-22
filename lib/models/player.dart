@@ -5,12 +5,15 @@ import '../statics/project_images.dart';
 part 'player.g.dart';
 
 class Player = _PlayerBase with _$Player;
-
 enum Players { p1, p2 }
+enum ImageType { asset, file }
 
 abstract class _PlayerBase with Store {
   @observable
   String image;
+
+  @observable
+  ImageType imageType;
 
   @observable
   String name;
@@ -28,6 +31,7 @@ abstract class _PlayerBase with Store {
     if (image.isEmpty) {
       image = <String>[MyImages.player1, MyImages.player2]
           .elementAt(Random().nextInt(2));
+      imageType = ImageType.asset;
     }
   }
 

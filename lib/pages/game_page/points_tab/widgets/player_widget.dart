@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import './edit_name_player.dart';
-import './edit_image_player.dart';
+import '../../../../widgets/edit_image_player.dart';
+import '../../../../widgets/edit_name_player.dart';
 import '../../../../models/truco.dart';
 import '../../../../models/player.dart';
+import '../../../../widgets/image_container.dart';
 
 class PlayerWidget extends StatelessWidget {
   final Player player;
@@ -36,17 +37,11 @@ class PlayerWidget extends StatelessWidget {
                   InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Observer(builder: (_) {
-                      return Container(
+                      return ImageContainer(
                         width: 90,
                         height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[350],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(player.image),
-                          ),
-                        ),
+                        image: player.image,
+                        type: player.imageType,
                       );
                     }),
                     onTap: () {

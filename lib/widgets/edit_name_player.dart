@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../../models/edit_name.dart';
+import '../models/edit_name.dart';
 
 class EditNamePlayer extends StatefulWidget {
   final String initialName;
@@ -50,7 +50,8 @@ class _EditNamePlayerState extends State<EditNamePlayer> {
                   color: Theme.of(context).accentColor,
                   disabledColor: Colors.grey,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Text("Salvar", style: TextStyle(color: Colors.white)),
                   onPressed: editName.isValid
                       ? () {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../../../widgets/image_container.dart';
 import '../../../../models/truco.dart';
 
 class GameScore extends StatelessWidget {
@@ -23,14 +25,14 @@ class GameScore extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            ClipOval(
-              child: Image.asset(
-                truco.player1.image,
-                fit: BoxFit.fill,
+            Observer(builder: (_) {
+              return ImageContainer(
+                image: truco.player1.image,
+                type: truco.player1.imageType,
                 width: 70,
                 height: 70,
-              ),
-            ),
+              );
+            }),
             Text("${truco.player1.points}", style: TextStyle(fontSize: 40)),
             Text("X", style: TextStyle(fontSize: 40)),
             Text("${truco.player2.points}", style: TextStyle(fontSize: 40)),
