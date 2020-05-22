@@ -24,6 +24,21 @@ mixin _$Player on _PlayerBase, Store {
     });
   }
 
+  final _$imageTypeAtom = Atom(name: '_PlayerBase.imageType');
+
+  @override
+  ImageType get imageType {
+    _$imageTypeAtom.reportRead();
+    return super.imageType;
+  }
+
+  @override
+  set imageType(ImageType value) {
+    _$imageTypeAtom.reportWrite(value, super.imageType, () {
+      super.imageType = value;
+    });
+  }
+
   final _$nameAtom = Atom(name: '_PlayerBase.name');
 
   @override
@@ -68,11 +83,11 @@ mixin _$Player on _PlayerBase, Store {
   }
 
   @override
-  void setImage(String text) {
+  void setImage(String text, ImageType type) {
     final _$actionInfo =
         _$_PlayerBaseActionController.startAction(name: '_PlayerBase.setImage');
     try {
-      return super.setImage(text);
+      return super.setImage(text, type);
     } finally {
       _$_PlayerBaseActionController.endAction(_$actionInfo);
     }
@@ -104,6 +119,7 @@ mixin _$Player on _PlayerBase, Store {
   String toString() {
     return '''
 image: ${image},
+imageType: ${imageType},
 name: ${name},
 points: ${points}
     ''';

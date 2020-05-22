@@ -22,9 +22,9 @@ class PlayerWidget extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.5,
-      height: size.height * 0.5,
+      height: size.height * 0.55,
       child: Padding(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,8 +38,8 @@ class PlayerWidget extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Observer(builder: (_) {
                       return ImageContainer(
-                        width: 90,
-                        height: 90,
+                        width: 100,
+                        height: 100,
                         image: player.image,
                         type: player.imageType,
                       );
@@ -55,7 +55,7 @@ class PlayerWidget extends StatelessWidget {
                   InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(2),
                       child: Observer(builder: (_) {
                         return Text(
                           player.name,
@@ -81,14 +81,14 @@ class PlayerWidget extends StatelessWidget {
             Observer(builder: (_) {
               return Text(
                 "${player.points}",
-                style: TextStyle(fontSize: 90),
+                style: TextStyle(fontSize: 85),
               );
             }),
             InkWell(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               child: Container(
-                width: 90,
-                height: 90,
+                width: 80,
+                height: 80,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -106,7 +106,7 @@ class PlayerWidget extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 25,
+                        fontSize: 22,
                       ),
                     );
                   }),

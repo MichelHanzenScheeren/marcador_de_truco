@@ -8,23 +8,23 @@ import '../models/player.dart';
 
 class EditImagePlayer extends StatelessWidget {
   final Player player;
-  final style = TextStyle(color: Colors.white, fontSize: 16);
+  final style = TextStyle(color: Colors.white, fontSize: 15);
   final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
   EditImagePlayer(this.player);
 
-  void imageCropp(File image) async {
+  void imageSelected(BuildContext context, File image, ImageType type) async {
     if (image == null) return;
-    try {
-      File croppedImage = await ImageCropper.cropImage(
-        sourcePath: image.path,
-        cropStyle: CropStyle.circle,
-        aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
-      );
-      player.setImage(croppedImage.path);
-    } catch (_) {
-      print("Crop error");
-      return;
-    }
+    File cropped = await croppImage(image);
+    if (cropped == null) return;
+    player.setImage(cropped.path, ImageType.file);
+  }
+
+  Future<File> croppImage(File image) async {
+    return await ImageCropper.cropImage(
+      sourcePath: image.path,
+      cropStyle: CropStyle.circle,
+      aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+    );
   }
 
   @override
@@ -40,13 +40,13 @@ class EditImagePlayer extends StatelessWidget {
             children: <Widget>[
               Observer(builder: (_) {
                 return ImageContainer(
-                  width: 250,
-                  height: 250,
+                  width: 220,
+                  height: 220,
                   image: player.image,
                   type: player.imageType,
                 );
               }),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -59,8 +59,7 @@ class EditImagePlayer extends StatelessWidget {
                       File image = await ImagePicker.pickImage(
                         source: ImageSource.gallery,
                       );
-                      imageCropp(image);
-                      print("OK");
+                      imageSelected(context, image, ImageType.file);
                     },
                   ),
                   SizedBox(height: 10),
@@ -73,7 +72,7 @@ class EditImagePlayer extends StatelessWidget {
                       File image = await ImagePicker.pickImage(
                         source: ImageSource.camera,
                       );
-                      imageCropp(image);
+                      imageSelected(context, image, ImageType.file);
                     },
                   ),
                 ],

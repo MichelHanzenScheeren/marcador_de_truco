@@ -12,14 +12,14 @@ class TrucoButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       alignment: Alignment.center,
-      width: 230,
+      width: 220,
       decoration: BoxDecoration(
         color: Colors.deepPurpleAccent,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: InkWell(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             cardImage(),
             Padding(
@@ -27,7 +27,7 @@ class TrucoButton extends StatelessWidget {
               child: Observer(builder: (_) {
                 return Text(
                   truco.getTrucoText,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  style: TextStyle(fontSize: 25, color: Colors.white),
                 );
               }),
             ),
@@ -44,8 +44,8 @@ class TrucoButton extends StatelessWidget {
     return Image.asset(
       MyImages.truco,
       fit: BoxFit.fill,
-      height: 45,
-      width: 45,
+      height: 40,
+      width: 40,
     );
   }
 }

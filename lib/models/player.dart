@@ -29,17 +29,23 @@ abstract class _PlayerBase with Store {
       this.points: 0,
       @required this.playerNumber}) {
     if (image.isEmpty) {
-      image = <String>[MyImages.player1, MyImages.player2]
-          .elementAt(Random().nextInt(2));
-      imageType = ImageType.asset;
+      setImage(getRandomImage(), ImageType.asset);
     }
+  }
+
+  String getRandomImage() {
+    return <String>[MyImages.player1, MyImages.player2]
+        .elementAt(Random().nextInt(2));
   }
 
   @action
   void setName(String text) => name = text;
 
   @action
-  void setImage(String text) => image = text;
+  void setImage(String text, ImageType type) {
+    image = text;
+    imageType = type;
+  }
 
   @action
   void setPoints(int value) => points = value;
