@@ -9,21 +9,32 @@ class HistoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      color: Colors.grey[350],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        child: Column(
-          children: <Widget>[
-            GameScore(truco),
-            Divider(),
-            Text("Rodadas:", style: TextStyle(fontSize: 30)),
-            SizedBox(height: 5),
-            GameRounds(truco),
-          ],
+    return ListView(
+      shrinkWrap: true,
+      children: <Widget>[
+        Card(
+          borderOnForeground: false,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          color: Colors.grey[350],
+          elevation: 0,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              dividerColor: Colors.transparent,
+              accentColor: Colors.black,
+            ),
+            child: ExpansionTile(
+              initiallyExpanded: true,
+              title: GameScore(truco),
+              children: <Widget>[
+                GameRounds(truco),
+              ],
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

@@ -10,27 +10,35 @@ class GameRounds extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (truco.rounds.length == 0) {
-      return Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(Icons.update, size: 100),
-            SizedBox(height: 20),
-            Text(
-              "Nada por enquanto...",
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text("Rodadas", style: TextStyle(fontSize: 25)),
+          SizedBox(height: 5),
+          Icon(Icons.update, size: 100),
+          Text(
+            "Nada por enquanto...",
+            style: TextStyle(fontSize: 18),
+          ),
+          SizedBox(height: 20),
+        ],
       );
     } else {
-      return Expanded(
-        child: ListView.builder(
-          itemCount: truco.rounds.length,
-          itemBuilder: (context, index) {
-            return roundLine(truco.rounds[index], index);
-          },
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 10),
+          Text("Rodadas", style: TextStyle(fontSize: 25)),
+          SizedBox(height: 5),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: truco.rounds.length,
+            itemBuilder: (context, index) {
+              return roundLine(truco.rounds[index], index);
+            },
+          ),
+          SizedBox(height: 10),
+        ],
       );
     }
   }

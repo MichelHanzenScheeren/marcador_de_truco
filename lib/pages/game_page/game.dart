@@ -32,9 +32,7 @@ class _GameState extends State<Game> {
           bottom: TabBar(
             indicatorColor: Theme.of(context).hintColor,
             tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.play_circle_filled),
-              ),
+              Tab(icon: Icon(Icons.play_circle_filled)),
               Tab(icon: Icon(Icons.history)),
             ],
           ),
