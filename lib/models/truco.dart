@@ -11,13 +11,18 @@ abstract class _TrucoBase with Store {
   Player player2;
   DateTime startDate;
   DateTime finalDate;
+  int maxPoints;
 
   @observable
   int currentValue = 1;
 
   ObservableList<Round> rounds = ObservableList<Round>();
 
-  _TrucoBase({@required this.player1, @required this.player2}) {
+  _TrucoBase({
+    @required this.player1,
+    @required this.player2,
+    this.maxPoints: 12,
+  }) {
     startDate = DateTime.now();
   }
 
@@ -66,6 +71,12 @@ abstract class _TrucoBase with Store {
       return "Cancelar";
   }
 
+  @computed
+  bool get finishGame =>
+      player1.points == maxPoints || player2.points == maxPoints;
+
+  Player get getWinner => player1.points == maxPoints ? player1 : player2;
+
   void doRound(Players playerNumber) {
     incrementPoint(playerNumber);
     saveRound(playerNumber);
@@ -80,10 +91,10 @@ abstract class _TrucoBase with Store {
   }
 
   void increment(Player player) {
-    if (player.points + currentValue <= 12)
+    if (player.points + currentValue <= maxPoints)
       player.setPoints(player.points + currentValue);
     else
-      player.setPoints(12);
+      player.setPoints(maxPoints);
   }
 
   void decrementPoint(Player player, int value) {

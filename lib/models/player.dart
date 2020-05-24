@@ -26,6 +26,7 @@ abstract class _PlayerBase with Store {
   _PlayerBase(
       {@required this.name,
       this.image: "",
+      this.imageType,
       this.points: 0,
       @required this.playerNumber}) {
     if (image.isEmpty) {

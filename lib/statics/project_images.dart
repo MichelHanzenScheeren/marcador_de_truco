@@ -6,4 +6,5 @@ class MyImages {
   static const String player1 = "images/player1.png";
   static const String player2 = "images/player2.png";
   static const String truco = "images/truco.png";
+  static const String victory = "images/victory.png";
 }

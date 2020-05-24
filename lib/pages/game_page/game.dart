@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/models/game_model.dart';
-import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/pages/game_page/victory_page/victory_page.dart';
+import 'package:mobx/mobx.dart';
 import './hystory_tab/history_tab.dart';
 import './points_tab/points_tab.dart';
 import '../../models/truco.dart';
+import '../../models/game_model.dart';
+import '../../models/player.dart';
 
 class Game extends StatefulWidget {
   @override
@@ -17,11 +19,36 @@ class _GameState extends State<Game> {
     player2: Player(name: "Eles", playerNumber: Players.p2),
   );
   final gameModel = GameModel();
+  ReactionDisposer disposer;
 
   @override
   void initState() {
     super.initState();
     gameModel.addGame(truco);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    disposer =
+        reaction((_) => gameModel.games[0].finishGame, (finishGame) async {
+      if (finishGame) {
+        Truco truco = await Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => VictoryPage(truco: gameModel.games[0]),
+        ));
+        if (truco == null) {
+          Navigator.pop(context);
+        } else {
+          gameModel.addGame(truco);
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    disposer.call();
+    super.dispose();
   }
 
   @override
