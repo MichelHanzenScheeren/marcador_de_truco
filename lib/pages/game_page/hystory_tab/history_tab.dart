@@ -21,7 +21,6 @@ class HistoryTab extends StatelessWidget {
         itemCount: gameModel.games.length,
         itemBuilder: (context, index) {
           if (index == 0) {
-            print("ooi");
             return Column(
               children: <Widget>[
                 SizedBox(height: 15),
