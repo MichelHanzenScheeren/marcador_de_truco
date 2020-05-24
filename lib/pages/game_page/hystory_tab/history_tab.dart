@@ -7,30 +7,59 @@ class HistoryTab extends StatelessWidget {
   final GameModel gameModel;
   HistoryTab(this.gameModel);
 
+  final TextStyle titleStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  final ScrollController controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
-      itemCount: gameModel.games.length,
-      itemBuilder: (context, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            buildTrucoGame(context, index),
-            Divider(),
-          ],
-        );
-      },
-    );
+        controller: controller,
+        itemCount: gameModel.games.length,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            print("ooi");
+            return Column(
+              children: <Widget>[
+                SizedBox(height: 15),
+                Text("Partida atual:", style: titleStyle),
+                buildTrucoCard(context, index, true),
+              ],
+            );
+          } else if (index == 1) {
+            return Column(
+              children: <Widget>[
+                Divider(),
+                gameModel.games.length == 2
+                    ? Text("Partida anterior:", style: titleStyle)
+                    : Text("Partidas anteriores:", style: titleStyle),
+                buildTrucoCard(context, index, false),
+                SizedBox(height: 10),
+              ],
+            );
+          } else if (index == gameModel.games.length - 1) {
+            return Column(
+              children: <Widget>[
+                buildTrucoCard(context, index, false),
+                SizedBox(height: 10),
+              ],
+            );
+          } else {
+            return buildTrucoCard(context, index, false);
+          }
+        });
   }
 
-  Widget buildTrucoGame(BuildContext context, int index) {
+  Widget buildTrucoCard(BuildContext context, int index, bool startExpanded) {
     return Card(
       borderOnForeground: false,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       color: Colors.grey[350],
       elevation: 0,
       child: Theme(
@@ -39,10 +68,13 @@ class HistoryTab extends StatelessWidget {
           accentColor: Colors.black,
         ),
         child: ExpansionTile(
-          initiallyExpanded: true,
+          initiallyExpanded: startExpanded,
           title: GameScore(gameModel.games[index]),
           children: <Widget>[
-            GameRounds(gameModel.games[index]),
+            GameRounds(
+              gameModel.games[index],
+              controller,
+            ),
           ],
         ),
       ),

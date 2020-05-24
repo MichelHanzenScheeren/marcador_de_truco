@@ -16,6 +16,12 @@ mixin _$Truco on _TrucoBase, Store {
       (_$getTrucoTextComputed ??= Computed<String>(() => super.getTrucoText,
               name: '_TrucoBase.getTrucoText'))
           .value;
+  Computed<bool> _$finishGameComputed;
+
+  @override
+  bool get finishGame => (_$finishGameComputed ??=
+          Computed<bool>(() => super.finishGame, name: '_TrucoBase.finishGame'))
+      .value;
 
   final _$currentValueAtom = Atom(name: '_TrucoBase.currentValue');
 
@@ -82,7 +88,8 @@ mixin _$Truco on _TrucoBase, Store {
   String toString() {
     return '''
 currentValue: ${currentValue},
-getTrucoText: ${getTrucoText}
+getTrucoText: ${getTrucoText},
+finishGame: ${finishGame}
     ''';
   }
 }

@@ -33,6 +33,7 @@ class _GameState extends State<Game> {
     disposer =
         reaction((_) => gameModel.games[0].finishGame, (finishGame) async {
       if (finishGame) {
+        gameModel.incrementWins(gameModel.games[0].getWinner.playerNumber);
         Truco truco = await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => VictoryPage(truco: gameModel.games[0]),
         ));
@@ -76,7 +77,11 @@ class _GameState extends State<Game> {
         body: TabBarView(
           children: <Widget>[
             Observer(builder: (_) {
-              return PointsTab(gameModel.games[0]);
+              return PointsTab(
+                gameModel.games[0],
+                gameModel.player1Wins,
+                gameModel.player2Wins,
+              );
             }),
             HistoryTab(gameModel),
           ],

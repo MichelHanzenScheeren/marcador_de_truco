@@ -5,7 +5,8 @@ import '../../../../models/truco.dart';
 
 class GameRounds extends StatelessWidget {
   final Truco truco;
-  GameRounds(this.truco);
+  final ScrollController controller;
+  GameRounds(this.truco, this.controller);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class GameRounds extends StatelessWidget {
           Text("Rodadas", style: TextStyle(fontSize: 25)),
           SizedBox(height: 5),
           ListView.builder(
+            controller: controller,
             shrinkWrap: true,
             itemCount: truco.rounds.length,
             itemBuilder: (context, index) {
@@ -45,7 +47,7 @@ class GameRounds extends StatelessWidget {
 
   Widget roundLine(Round round, int index) {
     return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 5),
+      padding: EdgeInsets.only(left: 30, right: 30, bottom: 5),
       child: Row(
         mainAxisAlignment: round.playerNumber == Players.p1
             ? MainAxisAlignment.start

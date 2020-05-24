@@ -8,7 +8,9 @@ import '../../../statics/project_images.dart';
 
 class PointsTab extends StatelessWidget {
   final Truco truco;
-  PointsTab(this.truco);
+  final int p1Wins;
+  final int p2Wins;
+  PointsTab(this.truco, this.p1Wins, this.p2Wins);
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +39,9 @@ class PointsTab extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text("0", style: TextStyle(fontSize: 20)),
+              Text("$p1Wins", style: TextStyle(fontSize: 20)),
               Text("Vitórias", style: TextStyle(fontSize: 20)),
-              Text("0", style: TextStyle(fontSize: 20)),
+              Text("$p2Wins", style: TextStyle(fontSize: 20)),
             ],
           ),
         )
