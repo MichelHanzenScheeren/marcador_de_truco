@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './pages/game_page/game.dart';
+import 'package:marcadordetruco/pages/home_page/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Game(),
+      home: Home(),
     );
   }
 }
