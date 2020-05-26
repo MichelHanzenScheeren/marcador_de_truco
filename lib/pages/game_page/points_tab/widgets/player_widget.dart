@@ -46,6 +46,8 @@ class PlayerWidget extends StatelessWidget {
                     }),
                     onTap: () {
                       showModalBottomSheet(
+                        isScrollControlled: true,
+                        enableDrag: false,
                         context: context,
                         builder: (context) => EditImagePlayer(player),
                       );
@@ -68,7 +70,7 @@ class PlayerWidget extends StatelessWidget {
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
-                        enableDrag: true,
+                        enableDrag: false,
                         isDismissible: true,
                         builder: (context) => EditNamePlayer(
                           initialValue: player.name,

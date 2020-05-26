@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import './custom_button.dart';
 import './image_container.dart';
 import '../models/player.dart';
 
@@ -33,7 +34,7 @@ class EditImagePlayer extends StatelessWidget {
       enableDrag: false,
       builder: (context) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -46,15 +47,14 @@ class EditImagePlayer extends StatelessWidget {
                   type: player.imageType,
                 );
               }),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  RaisedButton(
-                    elevation: 0,
-                    color: Theme.of(context).accentColor,
-                    shape: shape,
-                    child: textButton("Imagem da galeria"),
+                  CustomButton(
+                    buttonText: "Imagem da galeria",
+                    backGroundColor: Theme.of(context).accentColor,
+                    textColor: Theme.of(context).splashColor,
                     onPressed: () async {
                       File image = await ImagePicker.pickImage(
                         source: ImageSource.gallery,
@@ -63,16 +63,26 @@ class EditImagePlayer extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 10),
-                  RaisedButton(
-                    elevation: 0,
-                    color: Theme.of(context).accentColor,
-                    shape: shape,
-                    child: textButton("Imagem da câmera"),
+                  CustomButton(
+                    buttonText: "Imagem da câmera",
+                    backGroundColor: Theme.of(context).accentColor,
+                    textColor: Theme.of(context).splashColor,
                     onPressed: () async {
                       File image = await ImagePicker.pickImage(
                         source: ImageSource.camera,
                       );
                       imageSelected(context, image, ImageType.file);
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  CustomButton(
+                    buttonText: "Voltar",
+                    backGroundColor: Colors.transparent,
+                    borderColor: Colors.red,
+                    textColor: Colors.black,
+                    onPressed: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      Navigator.pop(context);
                     },
                   ),
                 ],
