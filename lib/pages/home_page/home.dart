@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/models/player.dart';
-import 'package:marcadordetruco/pages/home_page/custom_text_field.dart';
-import 'package:marcadordetruco/pages/home_page/players_images.dart';
-import 'package:marcadordetruco/statics/project_images.dart';
-import 'package:marcadordetruco/widgets/image_container.dart';
+import 'package:marcadordetruco/pages/home_page/widgets/players_names.dart';
+import 'package:marcadordetruco/widgets/custom_button.dart';
+import './widgets/players_images.dart';
+import '../../widgets/custom_text_field.dart';
+import '../../statics/project_images.dart';
+import '../../models/player.dart';
+import '../../widgets/title_divider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -23,36 +25,60 @@ class _HomeState extends State<Home> {
     name: "Eles",
     playerNumber: Players.p2,
   );
+  final maxPointsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final double space = 10;
+    final double width = MediaQuery.of(context).size.width;
+    final Color primaryColor = Theme.of(context).accentColor;
+    final Color secondaryColor = Theme.of(context).splashColor;
     return Scaffold(
       appBar: AppBar(
         title: Text("Marcador de Truco"),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.all(space),
           child: Form(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                PlayersImages(player1, player2),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    CustomTextField(
-                      text: player1.name,
-                      playerNumber: "1",
-                      changed: player1.setName,
-                    ),
-                    CustomTextField(
-                      text: player2.name,
-                      playerNumber: "2",
-                      changed: player2.setName,
-                    ),
-                  ],
+                SizedBox(height: space),
+                TitleDivider(
+                  text: "Jogadores",
+                  dividerColor: primaryColor,
+                ),
+                SizedBox(height: space),
+                PlayersImages(
+                  player1: player1,
+                  player2: player2,
+                  imageSize: (width / 2) - space - (space / 2),
+                ),
+                SizedBox(height: space),
+                PlayersNames(
+                  player1: player1,
+                  player2: player2,
+                  space: space,
+                ),
+                SizedBox(height: 2 * space),
+                TitleDivider(
+                  text: "Configurações da Partida",
+                  dividerColor: primaryColor,
+                ),
+                SizedBox(height: space),
+                CustomTextField(
+                  initialValue: "12",
+                  label: "Máximo de Pontos",
+                  textController: maxPointsController,
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(height: space * 2),
+                CustomButton(
+                  backGroundColor: primaryColor,
+                  buttonText: "Iniciar Partida",
+                  textColor: secondaryColor,
+                  onPressed: () {},
                 ),
               ],
             ),

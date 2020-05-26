@@ -74,9 +74,9 @@ mixin _$EditName on _EditNameBase, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-name: ${name},
-isValid: ${isValid}
+isLoading: $isLoading,
+name: $name,
+isValid: $isValid
     ''';
   }
 }

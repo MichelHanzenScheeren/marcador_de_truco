@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: Colors.deepPurpleAccent,
         accentColor: Colors.deepPurpleAccent,
+        splashColor: Colors.white,
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           enabledBorder: OutlineInputBorder(

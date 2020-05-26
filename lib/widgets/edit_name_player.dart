@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marcadordetruco/widgets/custom_button.dart';
 import '../models/edit_name.dart';
 
 class EditNamePlayer extends StatefulWidget {
@@ -45,14 +46,10 @@ class _EditNamePlayerState extends State<EditNamePlayer> {
             Container(
               height: 50,
               child: Observer(builder: (context) {
-                return RaisedButton(
-                  elevation: 0,
-                  color: Theme.of(context).accentColor,
-                  disabledColor: Colors.grey,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text("Salvar", style: TextStyle(color: Colors.white)),
+                return CustomButton(
+                  buttonText: "Salvar",
+                  backGroundColor: Theme.of(context).accentColor,
+                  textColor: Theme.of(context).splashColor,
                   onPressed: editName.isValid
                       ? () {
                           FocusScope.of(context).requestFocus(FocusNode());

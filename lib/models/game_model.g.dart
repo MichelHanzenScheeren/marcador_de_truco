@@ -67,8 +67,8 @@ mixin _$GameModel on _GameModelBase, Store {
   @override
   String toString() {
     return '''
-player1Wins: ${player1Wins},
-player2Wins: ${player2Wins}
+player1Wins: $player1Wins,
+player2Wins: $player2Wins
     ''';
   }
 }

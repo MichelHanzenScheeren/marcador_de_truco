@@ -87,9 +87,9 @@ mixin _$Truco on _TrucoBase, Store {
   @override
   String toString() {
     return '''
-currentValue: ${currentValue},
-getTrucoText: ${getTrucoText},
-finishGame: ${finishGame}
+currentValue: $currentValue,
+getTrucoText: $getTrucoText,
+finishGame: $finishGame
     ''';
   }
 }

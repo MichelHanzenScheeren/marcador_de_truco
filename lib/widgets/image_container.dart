@@ -7,11 +7,13 @@ class ImageContainer extends StatelessWidget {
   final ImageType type;
   final double width;
   final double height;
+  final Color borderColor;
   ImageContainer({
     @required this.image,
     @required this.type,
     this.height: 70,
     this.width: 70,
+    this.borderColor: Colors.transparent,
   });
 
   @override
@@ -22,6 +24,7 @@ class ImageContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[350],
         shape: BoxShape.circle,
+        border: Border.all(color: borderColor),
         image: DecorationImage(
           fit: BoxFit.fill,
           image: type == ImageType.asset
