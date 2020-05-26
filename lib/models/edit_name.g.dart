@@ -16,21 +16,6 @@ mixin _$EditName on _EditNameBase, Store {
           Computed<bool>(() => super.isValid, name: '_EditNameBase.isValid'))
       .value;
 
-  final _$isLoadingAtom = Atom(name: '_EditNameBase.isLoading');
-
-  @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
-  }
-
-  @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
-    });
-  }
-
   final _$nameAtom = Atom(name: '_EditNameBase.name');
 
   @override
@@ -61,22 +46,10 @@ mixin _$EditName on _EditNameBase, Store {
   }
 
   @override
-  void setLoading() {
-    final _$actionInfo = _$_EditNameBaseActionController.startAction(
-        name: '_EditNameBase.setLoading');
-    try {
-      return super.setLoading();
-    } finally {
-      _$_EditNameBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-isLoading: $isLoading,
-name: $name,
-isValid: $isValid
+name: ${name},
+isValid: ${isValid}
     ''';
   }
 }

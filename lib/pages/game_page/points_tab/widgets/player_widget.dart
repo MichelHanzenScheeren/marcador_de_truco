@@ -70,8 +70,11 @@ class PlayerWidget extends StatelessWidget {
                         isScrollControlled: true,
                         enableDrag: true,
                         isDismissible: true,
-                        builder: (context) =>
-                            EditNamePlayer(player.name, player.setName),
+                        builder: (context) => EditNamePlayer(
+                          initialValue: player.name,
+                          setName: player.setName,
+                          controller: TextEditingController(text: player.name),
+                        ),
                       );
                     },
                   ),

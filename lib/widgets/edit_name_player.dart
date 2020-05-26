@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/widgets/custom_button.dart';
-import '../models/edit_name.dart';
+import '../validators/form_validators.dart';
+import './custom_button.dart';
+import './custom_text_field.dart';
 
 class EditNamePlayer extends StatefulWidget {
-  final String initialName;
+  final TextEditingController controller;
+  final String initialValue;
   final Function(String value) setName;
-  EditNamePlayer(this.initialName, this.setName);
+  EditNamePlayer({
+    this.controller,
+    this.initialValue,
+    this.setName,
+  });
 
   @override
   _EditNamePlayerState createState() => _EditNamePlayerState();
 }
 
 class _EditNamePlayerState extends State<EditNamePlayer> {
-  final EditName editName = EditName();
-  TextEditingController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController(text: widget.initialName);
-    editName.setName(controller.text);
-  }
+  final fieldKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +30,41 @@ class _EditNamePlayerState extends State<EditNamePlayer> {
           right: 30,
           bottom: MediaQuery.of(context).viewInsets.bottom + 30,
         ),
-        child: Column(
+        child: Flex(
+          direction: Axis.vertical,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TextField(
-              controller: controller,
-              autofocus: true,
-              onChanged: editName.setName,
+            CustomTextField(
+              autoFocus: true,
+              fieldKey: fieldKey,
+              label: "Nome",
+              textController: widget.controller,
+              validator: FormValidators.name,
             ),
             SizedBox(height: 20),
-            Container(
-              height: 50,
-              child: Observer(builder: (context) {
-                return CustomButton(
-                  buttonText: "Salvar",
-                  backGroundColor: Theme.of(context).accentColor,
-                  textColor: Theme.of(context).splashColor,
-                  onPressed: editName.isValid
-                      ? () {
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          widget.setName(controller.text);
-                          Navigator.pop(context);
-                        }
-                      : null,
-                );
-              }),
+            CustomButton(
+              buttonText: "Salvar",
+              backGroundColor: Theme.of(context).accentColor,
+              textColor: Theme.of(context).splashColor,
+              onPressed: () {
+                if (fieldKey.currentState.validate()) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  widget.setName(widget.controller.text);
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            SizedBox(height: 10),
+            CustomButton(
+              buttonText: "Cancelar",
+              backGroundColor: Colors.transparent,
+              borderColor: Colors.red,
+              textColor: Colors.black,
+              onPressed: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
