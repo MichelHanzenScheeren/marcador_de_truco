@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/controllers/game_controller.dart';
-import 'package:marcadordetruco/models/truco.dart';
-import 'package:marcadordetruco/pages/game_page/game.dart';
-import 'package:marcadordetruco/pages/home_page/widgets/players_names.dart';
-import 'package:marcadordetruco/statics/my_theme.dart';
-import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 import './widgets/players_images.dart';
+import './widgets/players_names.dart';
+import '../game_page/game.dart';
+import '../../controllers/game_controller.dart';
+import '../../models/my_theme.dart';
+import '../../models/truco.dart';
+import '../../statics/my_players.dart';
+import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../statics/my_images.dart';
 import '../../models/player.dart';
 import '../../widgets/title_divider.dart';
 
@@ -18,18 +18,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Player player1 = Player(
-    image: MyImages.player1,
-    imageType: ImageType.asset,
-    name: "Nós",
-    playerNumber: Players.p1,
-  );
-  final Player player2 = Player(
-    image: MyImages.player2,
-    imageType: ImageType.asset,
-    name: "Eles",
-    playerNumber: Players.p2,
-  );
+  final Player player1 = MyPlayers.player1;
+  final Player player2 = MyPlayers.player2;
   MyTheme myTheme;
 
   @override

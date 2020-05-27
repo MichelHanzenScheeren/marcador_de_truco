@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/models/player.dart';
+import '../models/player.dart';
 import '../validators/form_validators.dart';
 import './custom_button.dart';
 import './custom_text_field.dart';
