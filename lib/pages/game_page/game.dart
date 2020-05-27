@@ -74,17 +74,19 @@ class _GameState extends State<Game> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            Observer(builder: (_) {
-              return PointsTab(
-                gameModel.games[0],
-                gameModel.player1Wins,
-                gameModel.player2Wins,
-              );
-            }),
-            HistoryTab(gameModel),
-          ],
+        body: SafeArea(
+          child: TabBarView(
+            children: <Widget>[
+              Observer(builder: (_) {
+                return PointsTab(
+                  gameModel.games[0],
+                  gameModel.player1Wins,
+                  gameModel.player2Wins,
+                );
+              }),
+              HistoryTab(gameModel),
+            ],
+          ),
         ),
       ),
     );

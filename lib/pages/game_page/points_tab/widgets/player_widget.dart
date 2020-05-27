@@ -10,19 +10,20 @@ class PlayerWidget extends StatelessWidget {
   final Player player;
   final String incrementImage;
   final Truco truco;
+  final Size size;
 
   PlayerWidget({
     @required this.player,
     @required this.incrementImage,
     @required this.truco,
+    @required this.size,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width * 0.5,
-      height: size.height * 0.55,
+      height: size.height * 0.65,
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Column(
@@ -75,7 +76,7 @@ class PlayerWidget extends StatelessWidget {
                         builder: (context) => EditNamePlayer(
                           initialValue: player.name,
                           setName: player.setName,
-                          controller: TextEditingController(text: player.name),
+                          playerNumber: player.playerNumber,
                         ),
                       );
                     },

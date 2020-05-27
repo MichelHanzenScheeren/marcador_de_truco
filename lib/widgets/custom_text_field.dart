@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool autoFocus;
   final Function validator;
   final GlobalKey<FormFieldState> fieldKey;
+  final bool textCenter;
 
   CustomTextField({
     this.myPadding: EdgeInsets.zero,
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     this.autoFocus: false,
     this.validator,
     this.fieldKey,
+    this.textCenter: true,
   });
 
   @override
@@ -34,7 +36,7 @@ class CustomTextField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         initialValue: initialValue,
-        textAlign: TextAlign.center,
+        textAlign: textCenter ? TextAlign.center : TextAlign.left,
         onChanged: changed,
         decoration: InputDecoration(
           labelText: label,
