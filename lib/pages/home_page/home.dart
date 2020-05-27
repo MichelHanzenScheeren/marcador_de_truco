@@ -3,10 +3,12 @@ import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/players_names.dart';
+import 'package:marcadordetruco/statics/my_theme.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
+import 'package:provider/provider.dart';
 import './widgets/players_images.dart';
 import '../../widgets/custom_text_field.dart';
-import '../../statics/project_images.dart';
+import '../../statics/my_images.dart';
 import '../../models/player.dart';
 import '../../widgets/title_divider.dart';
 
@@ -28,6 +30,13 @@ class _HomeState extends State<Home> {
     name: "Eles",
     playerNumber: Players.p2,
   );
+  MyTheme myTheme;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    myTheme = Provider.of<MyTheme>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +47,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Marcador de Truco"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.lightbulb_outline),
+            onPressed: myTheme.setTheme,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

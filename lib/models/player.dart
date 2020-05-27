@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'dart:math';
-import '../statics/project_images.dart';
+import '../statics/my_images.dart';
 part 'player.g.dart';
 
 class Player = _PlayerBase with _$Player;

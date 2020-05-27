@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marcadordetruco/pages/game_page/game.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/pages/home_page/home.dart';
+import 'package:marcadordetruco/statics/my_theme.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final MyTheme myTheme = MyTheme();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -13,35 +17,16 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MaterialApp(
-      title: 'Marcador de truco',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        primaryColor: Colors.deepPurpleAccent,
-        accentColor: Colors.deepPurpleAccent,
-        splashColor: Colors.white,
-        inputDecorationTheme: InputDecorationTheme(
-          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(color: Colors.deepPurpleAccent),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(color: Colors.deepPurpleAccent),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(color: Colors.red),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: BorderSide(color: Colors.red),
-          ),
-        ),
-      ),
-      home: Home(),
+    return Provider(
+      create: (_) => myTheme,
+      child: Observer(builder: (_) {
+        return MaterialApp(
+          title: 'Marcador de truco',
+          debugShowCheckedModeBanner: false,
+          theme: myTheme.getTheme,
+          home: Home(),
+        );
+      }),
     );
   }
 }

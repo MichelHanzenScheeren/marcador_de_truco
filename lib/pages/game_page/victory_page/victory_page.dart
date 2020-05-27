@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/pages/game_page/victory_page/myButton.dart';
-import '../../../statics/project_images.dart';
+import '../../../statics/my_images.dart';
 import '../../../models/truco.dart';
 
 class VictoryPage extends StatelessWidget {

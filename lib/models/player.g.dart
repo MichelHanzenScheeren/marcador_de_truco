@@ -118,10 +118,10 @@ mixin _$Player on _PlayerBase, Store {
   @override
   String toString() {
     return '''
-image: $image,
-imageType: $imageType,
-name: $name,
-points: $points
+image: ${image},
+imageType: ${imageType},
+name: ${name},
+points: ${points}
     ''';
   }
 }

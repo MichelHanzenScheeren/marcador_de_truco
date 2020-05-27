@@ -48,8 +48,8 @@ mixin _$EditName on _EditNameBase, Store {
   @override
   String toString() {
     return '''
-name: ${name},
-isValid: ${isValid}
+name: $name,
+isValid: $isValid
     ''';
   }
 }

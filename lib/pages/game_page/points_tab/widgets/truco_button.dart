@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../models/truco.dart';
-import '../../../../statics/project_images.dart';
+import '../../../../statics/my_images.dart';
 
 class TrucoButton extends StatelessWidget {
   final Truco truco;
