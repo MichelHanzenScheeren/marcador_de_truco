@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../validators/form_validators.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../../models/player.dart';
 
@@ -16,6 +17,7 @@ class PlayersNames extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Flexible(
           flex: 1,
@@ -24,6 +26,7 @@ class PlayersNames extends StatelessWidget {
             initialValue: player1.name,
             label: "Player 1",
             changed: player1.setName,
+            validator: FormValidators.playerName,
           ),
         ),
         Flexible(
@@ -33,6 +36,7 @@ class PlayersNames extends StatelessWidget {
             initialValue: player2.name,
             label: "Player 2",
             changed: player2.setName,
+            validator: FormValidators.playerName,
           ),
         ),
       ],

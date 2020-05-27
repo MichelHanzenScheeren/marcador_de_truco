@@ -39,6 +39,7 @@ class CustomTextField extends StatelessWidget {
         textAlign: textCenter ? TextAlign.center : TextAlign.left,
         onChanged: changed,
         decoration: InputDecoration(
+          errorMaxLines: 2,
           labelText: label,
         ),
       ),

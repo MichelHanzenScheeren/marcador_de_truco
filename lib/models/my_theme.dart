@@ -56,18 +56,18 @@ abstract class _MyThemeBase with Store {
 
   final ThemeData darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    primaryColor: Colors.deepOrangeAccent,
-    accentColor: Colors.deepOrangeAccent,
+    primaryColor: Colors.deepPurple,
+    accentColor: Colors.deepPurple,
     splashColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurpleAccent),
+        borderSide: BorderSide(color: Colors.deepPurple),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurpleAccent),
+        borderSide: BorderSide(color: Colors.deepPurple),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30),

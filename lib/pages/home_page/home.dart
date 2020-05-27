@@ -11,6 +11,7 @@ import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../models/player.dart';
 import '../../widgets/title_divider.dart';
+import '../../validators/form_validators.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -20,6 +21,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final Player player1 = MyPlayers.player1;
   final Player player2 = MyPlayers.player2;
+  final double space = 10;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   MyTheme myTheme;
 
   @override
@@ -30,7 +33,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double space = 10;
     final double width = MediaQuery.of(context).size.width;
     final Color primaryColor = Theme.of(context).accentColor;
     final Color secondaryColor = Theme.of(context).splashColor;
@@ -48,7 +50,9 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: EdgeInsets.all(space),
           child: Form(
+            key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 SizedBox(height: space),
@@ -78,13 +82,18 @@ class _HomeState extends State<Home> {
                   initialValue: "12",
                   label: "Máximo de Pontos",
                   keyboardType: TextInputType.number,
+                  validator: FormValidators.maxPoint,
                 ),
                 SizedBox(height: space * 2),
                 CustomButton(
                   backGroundColor: primaryColor,
                   buttonText: "Iniciar Partida",
                   textColor: secondaryColor,
-                  onPressed: () => initGame(context),
+                  onPressed: () {
+                    if (formKey.currentState.validate()) {
+                      initGame(context);
+                    }
+                  },
                 ),
               ],
             ),
@@ -95,11 +104,10 @@ class _HomeState extends State<Home> {
   }
 
   void initGame(BuildContext context) {
-    Truco truco = Truco(player1: player1, player2: player2);
-    GameController gameModel = GameController();
-    gameModel.addGame(truco);
+    GameController gameController = GameController();
+    gameController.addGame(Truco(player1: player1, player2: player2));
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => Game(gameModel)),
+      MaterialPageRoute(builder: (context) => Game(gameController)),
     );
   }
 }
