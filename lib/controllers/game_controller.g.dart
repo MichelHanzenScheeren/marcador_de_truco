@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'game_model.dart';
+part of 'game_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'game_model.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$GameModel on _GameModelBase, Store {
-  final _$player1WinsAtom = Atom(name: '_GameModelBase.player1Wins');
+mixin _$GameController on _GameControllerBase, Store {
+  final _$player1WinsAtom = Atom(name: '_GameControllerBase.player1Wins');
 
   @override
   int get player1Wins {
@@ -24,7 +24,7 @@ mixin _$GameModel on _GameModelBase, Store {
     });
   }
 
-  final _$player2WinsAtom = Atom(name: '_GameModelBase.player2Wins');
+  final _$player2WinsAtom = Atom(name: '_GameControllerBase.player2Wins');
 
   @override
   int get player2Wins {
@@ -39,36 +39,36 @@ mixin _$GameModel on _GameModelBase, Store {
     });
   }
 
-  final _$_GameModelBaseActionController =
-      ActionController(name: '_GameModelBase');
+  final _$_GameControllerBaseActionController =
+      ActionController(name: '_GameControllerBase');
 
   @override
   dynamic incrementWins(Players playerNumber) {
-    final _$actionInfo = _$_GameModelBaseActionController.startAction(
-        name: '_GameModelBase.incrementWins');
+    final _$actionInfo = _$_GameControllerBaseActionController.startAction(
+        name: '_GameControllerBase.incrementWins');
     try {
       return super.incrementWins(playerNumber);
     } finally {
-      _$_GameModelBaseActionController.endAction(_$actionInfo);
+      _$_GameControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void addGame(Truco truco) {
-    final _$actionInfo = _$_GameModelBaseActionController.startAction(
-        name: '_GameModelBase.addGame');
+    final _$actionInfo = _$_GameControllerBaseActionController.startAction(
+        name: '_GameControllerBase.addGame');
     try {
       return super.addGame(truco);
     } finally {
-      _$_GameModelBaseActionController.endAction(_$actionInfo);
+      _$_GameControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-player1Wins: $player1Wins,
-player2Wins: $player2Wins
+player1Wins: ${player1Wins},
+player2Wins: ${player2Wins}
     ''';
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/controllers/game_controller.dart';
+import 'package:marcadordetruco/models/truco.dart';
+import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/players_names.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
 import './widgets/players_images.dart';
@@ -25,7 +28,6 @@ class _HomeState extends State<Home> {
     name: "Eles",
     playerNumber: Players.p2,
   );
-  final maxPointsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +72,6 @@ class _HomeState extends State<Home> {
                 CustomTextField(
                   initialValue: "12",
                   label: "Máximo de Pontos",
-                  textController: maxPointsController,
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: space * 2),
@@ -78,13 +79,22 @@ class _HomeState extends State<Home> {
                   backGroundColor: primaryColor,
                   buttonText: "Iniciar Partida",
                   textColor: secondaryColor,
-                  onPressed: () {},
+                  onPressed: () => initGame(context),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void initGame(BuildContext context) {
+    Truco truco = Truco(player1: player1, player2: player2);
+    GameController gameModel = GameController();
+    gameModel.addGame(truco);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => Game(gameModel)),
     );
   }
 }

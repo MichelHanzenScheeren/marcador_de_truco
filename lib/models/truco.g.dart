@@ -16,12 +16,13 @@ mixin _$Truco on _TrucoBase, Store {
       (_$getTrucoTextComputed ??= Computed<String>(() => super.getTrucoText,
               name: '_TrucoBase.getTrucoText'))
           .value;
-  Computed<bool> _$finishGameComputed;
+  Computed<bool> _$finishedGameComputed;
 
   @override
-  bool get finishGame => (_$finishGameComputed ??=
-          Computed<bool>(() => super.finishGame, name: '_TrucoBase.finishGame'))
-      .value;
+  bool get finishedGame =>
+      (_$finishedGameComputed ??= Computed<bool>(() => super.finishedGame,
+              name: '_TrucoBase.finishedGame'))
+          .value;
 
   final _$currentValueAtom = Atom(name: '_TrucoBase.currentValue');
 
@@ -87,9 +88,9 @@ mixin _$Truco on _TrucoBase, Store {
   @override
   String toString() {
     return '''
-currentValue: $currentValue,
-getTrucoText: $getTrucoText,
-finishGame: $finishGame
+currentValue: ${currentValue},
+getTrucoText: ${getTrucoText},
+finishedGame: ${finishedGame}
     ''';
   }
 }

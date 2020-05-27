@@ -72,7 +72,7 @@ abstract class _TrucoBase with Store {
   }
 
   @computed
-  bool get finishGame =>
+  bool get finishedGame =>
       player1.points == maxPoints || player2.points == maxPoints;
 
   Player get getWinner => player1.points == maxPoints ? player1 : player2;

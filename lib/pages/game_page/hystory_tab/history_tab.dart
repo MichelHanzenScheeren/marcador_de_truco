@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/models/game_model.dart';
 import './widgets/game_rounds.dart';
 import './widgets/game_score.dart';
+import '../../../controllers/game_controller.dart';
 
 class HistoryTab extends StatelessWidget {
-  final GameModel gameModel;
+  final GameController gameModel;
   HistoryTab(this.gameModel);
 
   final TextStyle titleStyle = TextStyle(

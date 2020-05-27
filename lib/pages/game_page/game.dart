@@ -1,54 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/pages/game_page/victory_page/victory_page.dart';
-import 'package:mobx/mobx.dart';
 import './hystory_tab/history_tab.dart';
 import './points_tab/points_tab.dart';
-import '../../models/truco.dart';
-import '../../models/game_model.dart';
-import '../../models/player.dart';
+import '../../controllers/game_controller.dart';
 
 class Game extends StatefulWidget {
+  final GameController gameModel;
+  Game(this.gameModel);
+
   @override
-  _GameState createState() => _GameState();
+  _GameState createState() => _GameState(gameModel);
 }
 
 class _GameState extends State<Game> {
-  Truco truco = Truco(
-    player1: Player(name: "Nós", playerNumber: Players.p1),
-    player2: Player(name: "Eles", playerNumber: Players.p2),
-  );
-  final gameModel = GameModel();
-  ReactionDisposer disposer;
-
-  @override
-  void initState() {
-    super.initState();
-    gameModel.addGame(truco);
-  }
+  final gameModel;
+  _GameState(this.gameModel);
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    disposer =
-        reaction((_) => gameModel.games[0].finishGame, (finishGame) async {
-      if (finishGame) {
-        gameModel.incrementWins(gameModel.games[0].getWinner.playerNumber);
-        Truco truco = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => VictoryPage(truco: gameModel.games[0]),
-        ));
-        if (truco == null) {
-          Navigator.pop(context);
-        } else {
-          gameModel.addGame(truco);
-        }
-      }
-    });
+    gameModel.victoryReaction(this.context);
   }
 
   @override
   void dispose() {
-    disposer.call();
+    gameModel.dispose();
     super.dispose();
   }
 
@@ -74,19 +50,17 @@ class _GameState extends State<Game> {
             ],
           ),
         ),
-        body: SafeArea(
-          child: TabBarView(
-            children: <Widget>[
-              Observer(builder: (_) {
-                return PointsTab(
-                  gameModel.games[0],
-                  gameModel.player1Wins,
-                  gameModel.player2Wins,
-                );
-              }),
-              HistoryTab(gameModel),
-            ],
-          ),
+        body: TabBarView(
+          children: <Widget>[
+            Observer(builder: (_) {
+              return PointsTab(
+                gameModel.games[0],
+                gameModel.player1Wins,
+                gameModel.player2Wins,
+              );
+            }),
+            HistoryTab(gameModel),
+          ],
         ),
       ),
     );
