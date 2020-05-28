@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../models/player.dart';
-import '../../../widgets/edit_image_player.dart';
-import '../../../widgets/image_container.dart';
+import '../../../../../models/player.dart';
+import '../../../../../widgets/edit_image_player.dart';
+import '../../../../../widgets/image_container.dart';
 
 class PlayersImages extends StatelessWidget {
   final Player player1;

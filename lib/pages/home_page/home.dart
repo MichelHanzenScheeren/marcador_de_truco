@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marcadordetruco/controllers/home_controller.dart';
+import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
-import './widgets/players_images.dart';
-import './widgets/players_names.dart';
-import '../game_page/game.dart';
-import '../../controllers/game_controller.dart';
 import '../../models/my_theme.dart';
-import '../../models/truco.dart';
-import '../../statics/my_players.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/custom_text_field.dart';
-import '../../models/player.dart';
-import '../../widgets/title_divider.dart';
-import '../../validators/form_validators.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -19,11 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Player player1 = MyPlayers.player1;
-  final Player player2 = MyPlayers.player2;
-  final double space = 10;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   MyTheme myTheme;
+  final homeController = HomeController();
 
   @override
   void didChangeDependencies() {
@@ -33,9 +23,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-    final Color primaryColor = Theme.of(context).accentColor;
-    final Color secondaryColor = Theme.of(context).splashColor;
     return Scaffold(
       appBar: AppBar(
         title: Text("Marcador de Truco"),
@@ -46,68 +33,27 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(space),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                SizedBox(height: space),
-                TitleDivider(
-                  text: "Jogadores",
-                  dividerColor: primaryColor,
-                ),
-                SizedBox(height: space),
-                PlayersImages(
-                  player1: player1,
-                  player2: player2,
-                  imageSize: (width / 2) - space - (space / 2),
-                ),
-                SizedBox(height: space),
-                PlayersNames(
-                  player1: player1,
-                  player2: player2,
-                  space: space,
-                ),
-                SizedBox(height: 2 * space),
-                TitleDivider(
-                  text: "Configurações da Partida",
-                  dividerColor: primaryColor,
-                ),
-                SizedBox(height: space),
-                CustomTextField(
-                  initialValue: "12",
-                  label: "Máximo de Pontos",
-                  keyboardType: TextInputType.number,
-                  validator: FormValidators.maxPoint,
-                ),
-                SizedBox(height: space * 2),
-                CustomButton(
-                  backGroundColor: primaryColor,
-                  buttonText: "Iniciar Partida",
-                  textColor: secondaryColor,
-                  onPressed: () {
-                    if (formKey.currentState.validate()) {
-                      initGame(context);
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
+      body: Observer(
+        builder: (context) {
+          return homeController.getTab;
+        },
       ),
-    );
-  }
-
-  void initGame(BuildContext context) {
-    GameController gameController = GameController();
-    gameController.addGame(Truco(player1: player1, player2: player2));
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => Game(gameController)),
+      bottomNavigationBar: Observer(builder: (_) {
+        return BottomNavigationBar(
+          currentIndex: homeController.currentPage,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.play_circle_outline),
+              title: Text("Início"),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              title: Text("Histórico"),
+            ),
+          ],
+          onTap: homeController.setPage,
+        );
+      }),
     );
   }
 }

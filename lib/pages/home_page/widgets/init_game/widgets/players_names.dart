@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../validators/form_validators.dart';
-import '../../../widgets/custom_text_field.dart';
-import '../../../models/player.dart';
+import '../../../../../validators/form_validators.dart';
+import '../../../../../widgets/custom_text_field.dart';
+import '../../../../../models/player.dart';
 
 class PlayersNames extends StatelessWidget {
   final Player player1;
