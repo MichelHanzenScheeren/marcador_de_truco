@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
+
 part 'my_theme.g.dart';
 
 enum theme { light, dark }
@@ -12,20 +14,18 @@ abstract class _MyThemeBase with Store {
 
   @action
   void setTheme() {
-    if (currentTheme == theme.light) {
+    if (currentTheme == theme.light)
       currentTheme = theme.dark;
-    } else {
+    else
       currentTheme = theme.light;
-    }
   }
 
   @computed
   ThemeData get getTheme {
-    if (currentTheme == theme.light) {
+    if (currentTheme == theme.light)
       return lightTheme;
-    } else {
+    else
       return darkTheme;
-    }
   }
 
   final ThemeData lightTheme = ThemeData(
@@ -35,22 +35,10 @@ abstract class _MyThemeBase with Store {
     splashColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurpleAccent),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurpleAccent),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.red),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.red),
-      ),
+      enabledBorder: getBorder(Colors.deepPurpleAccent),
+      focusedBorder: getBorder(Colors.deepPurpleAccent),
+      errorBorder: getBorder(Colors.red),
+      focusedErrorBorder: getBorder(Colors.red),
     ),
   );
 
@@ -61,22 +49,24 @@ abstract class _MyThemeBase with Store {
     splashColor: Colors.white,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurple),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.deepPurple),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.red),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: BorderSide(color: Colors.red),
-      ),
+      enabledBorder: getBorder(Colors.deepPurple),
+      focusedBorder: getBorder(Colors.deepPurple),
+      errorBorder: getBorder(Colors.red),
+      focusedErrorBorder: getBorder(Colors.red),
     ),
   );
+
+  static OutlineInputBorder getBorder(Color receivedColor) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(30),
+      borderSide: BorderSide(color: receivedColor),
+    );
+  }
+
+  void configureOrientation() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
 }

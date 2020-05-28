@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/controllers/home_controller.dart';
-import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
-import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
+import '../../controllers/home_controller.dart';
 import '../../models/my_theme.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  MyTheme myTheme;
+class Home extends StatelessWidget {
   final homeController = HomeController();
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    myTheme = Provider.of<MyTheme>(context);
-  }
+  final MyTheme myTheme;
+  Home(this.myTheme);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +21,8 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: Observer(
-        builder: (context) {
-          return homeController.getTab;
-        },
-      ),
-      bottomNavigationBar: Observer(builder: (_) {
+      body: Observer(builder: (_) => homeController.getTab),
+      bottomNavigationBar: Observer(builder: (context) {
         return BottomNavigationBar(
           currentIndex: homeController.currentPage,
           items: <BottomNavigationBarItem>[
