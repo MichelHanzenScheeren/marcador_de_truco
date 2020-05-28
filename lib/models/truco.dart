@@ -9,12 +9,12 @@ class Truco = _TrucoBase with _$Truco;
 abstract class _TrucoBase with Store {
   Player player1;
   Player player2;
+  int maxPoints;
   DateTime startDate;
   DateTime finalDate;
-  int maxPoints;
 
   @observable
-  int currentValue = 1;
+  int currentValue;
 
   ObservableList<Round> rounds = ObservableList<Round>();
 
@@ -24,6 +24,7 @@ abstract class _TrucoBase with Store {
     this.maxPoints: 12,
   }) {
     startDate = DateTime.now();
+    currentValue = 1;
   }
 
   @action
@@ -99,5 +100,10 @@ abstract class _TrucoBase with Store {
 
   void decrementPoint(Player player, int value) {
     player.setPoints(player.points - value);
+  }
+
+  void reset() {
+    player1?.resetPoints();
+    player2?.resetPoints();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/pages/victory_page/victory_page.dart';
 import 'package:mobx/mobx.dart';
 import '../models/player.dart';
 import '../models/truco.dart';
-import '../pages/game_page/victory_page/victory_page.dart';
 
 part 'game_controller.g.dart';
 
@@ -50,8 +50,7 @@ abstract class _GameControllerBase with Store {
   }
 
   void dispose() {
-    if (disposer != null) {
-      disposer.call();
-    }
+    disposer?.call();
+    getCurrent?.reset();
   }
 }

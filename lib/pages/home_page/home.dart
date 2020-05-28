@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marcadordetruco/pages/home_page/widgets/games_history/game_history.dart';
+import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
 import '../../controllers/home_controller.dart';
 import '../../models/my_theme.dart';
 
 class Home extends StatelessWidget {
-  final homeController = HomeController();
-
+  static final homeController = HomeController();
+  final tabs = [InitGame(homeController), GameHistory(homeController)];
   final MyTheme myTheme;
   Home(this.myTheme);
 
@@ -21,7 +23,9 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
-      body: Observer(builder: (_) => homeController.getTab),
+      body: Observer(builder: (_) {
+        return tabs[homeController.currentPage];
+      }),
       bottomNavigationBar: Observer(builder: (context) {
         return BottomNavigationBar(
           currentIndex: homeController.currentPage,

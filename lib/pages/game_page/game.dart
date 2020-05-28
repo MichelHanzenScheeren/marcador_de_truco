@@ -5,26 +5,26 @@ import './points_tab/points_tab.dart';
 import '../../controllers/game_controller.dart';
 
 class Game extends StatefulWidget {
-  final GameController gameModel;
-  Game(this.gameModel);
+  final GameController gameController;
+  Game(this.gameController);
 
   @override
-  _GameState createState() => _GameState(gameModel);
+  _GameState createState() => _GameState(gameController);
 }
 
 class _GameState extends State<Game> {
-  final gameModel;
-  _GameState(this.gameModel);
+  final gameController;
+  _GameState(this.gameController);
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    gameModel.victoryReaction(this.context);
+    gameController.victoryReaction(this.context);
   }
 
   @override
   void dispose() {
-    gameModel.dispose();
+    gameController.dispose();
     super.dispose();
   }
 
@@ -54,12 +54,12 @@ class _GameState extends State<Game> {
           children: <Widget>[
             Observer(builder: (_) {
               return PointsTab(
-                gameModel.games[0],
-                gameModel.player1Wins,
-                gameModel.player2Wins,
+                gameController.games[0],
+                gameController.player1Wins,
+                gameController.player2Wins,
               );
             }),
-            HistoryTab(gameModel),
+            HistoryTab(gameController),
           ],
         ),
       ),

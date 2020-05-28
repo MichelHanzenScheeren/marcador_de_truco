@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/models/player.dart';
-import 'package:marcadordetruco/pages/game_page/victory_page/myButton.dart';
-import '../../../statics/my_images.dart';
-import '../../../models/truco.dart';
+import 'package:marcadordetruco/models/truco.dart';
+import 'package:marcadordetruco/pages/victory_page/myButton.dart';
+import 'package:marcadordetruco/statics/my_images.dart';
 
 class VictoryPage extends StatelessWidget {
   final Truco truco;
@@ -52,29 +52,12 @@ class VictoryPage extends StatelessWidget {
               borderColor: primaryColor,
               backColor: primaryColor,
               function: () {
-                Navigator.pop(
-                  context,
-                  Truco(
-                    maxPoints: truco.maxPoints,
-                    player1: Player(
-                      image: truco.player1.image,
-                      imageType: truco.player1.imageType,
-                      name: truco.player1.name,
-                      playerNumber: Players.p1,
-                    ),
-                    player2: Player(
-                      image: truco.player2.image,
-                      imageType: truco.player2.imageType,
-                      name: truco.player2.name,
-                      playerNumber: Players.p2,
-                    ),
-                  ),
-                );
+                Navigator.pop(context, newTruco());
               },
             ),
             SizedBox(height: 10),
             MyButton(
-              text: "Voltar a página inicial",
+              text: "Alterar Jogadores",
               size: size,
               backColor: backColor,
               borderColor: primaryColor,
@@ -85,6 +68,24 @@ class VictoryPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Truco newTruco() {
+    return Truco(
+      maxPoints: truco.maxPoints,
+      player1: Player(
+        image: truco.player1.image,
+        imageType: truco.player1.imageType,
+        name: truco.player1.name,
+        playerNumber: Players.p1,
+      ),
+      player2: Player(
+        image: truco.player2.image,
+        imageType: truco.player2.imageType,
+        name: truco.player2.name,
+        playerNumber: Players.p2,
       ),
     );
   }
