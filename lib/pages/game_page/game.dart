@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import './hystory_tab/history_tab.dart';
+import 'package:marcadordetruco/pages/game_page/rounds_tab/rounds_tab.dart';
 import './points_tab/points_tab.dart';
 import '../../controllers/game_controller.dart';
 
@@ -13,7 +13,7 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  final gameController;
+  final GameController gameController;
   _GameState(this.gameController);
 
   @override
@@ -46,7 +46,7 @@ class _GameState extends State<Game> {
             indicatorColor: Theme.of(context).hintColor,
             tabs: <Widget>[
               Tab(icon: Icon(Icons.play_circle_filled)),
-              Tab(icon: Icon(Icons.history)),
+              Tab(icon: Icon(Icons.list)),
             ],
           ),
         ),
@@ -59,7 +59,7 @@ class _GameState extends State<Game> {
                 gameController.player2Wins,
               );
             }),
-            HistoryTab(gameController),
+            RoundsTab(gameController.getCurrent),
           ],
         ),
       ),
