@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/pages/victory_page/victory_page.dart';
 import 'package:mobx/mobx.dart';
-import '../models/player.dart';
 import '../models/truco.dart';
 
 part 'game_controller.g.dart';
@@ -9,7 +10,8 @@ part 'game_controller.g.dart';
 class GameController = _GameControllerBase with _$GameController;
 
 abstract class _GameControllerBase with Store {
-  ObservableList<Truco> games = ObservableList<Truco>();
+  @observable
+  Truco currentGame;
 
   @observable
   int player1Wins = 0;
@@ -17,10 +19,9 @@ abstract class _GameControllerBase with Store {
   @observable
   int player2Wins = 0;
 
-  ReactionDisposer disposer;
-
   @action
-  incrementWins(Players playerNumber) {
+  incrementWins() {
+    Players playerNumber = currentGame.getWinner.description.playerNumber;
     if (playerNumber == Players.p1) {
       player1Wins++;
     } else {
@@ -29,28 +30,14 @@ abstract class _GameControllerBase with Store {
   }
 
   @action
-  void addGame(Truco truco) {
-    games.insert(0, truco);
+  void newGame({PlayerDescription p1, PlayerDescription p2, int maxPoints}) {
+    Truco truco = Truco(
+      player1: Player(description: p1),
+      player2: Player(description: p2),
+      maxPoints: maxPoints,
+    );
+    currentGame = truco;
   }
 
-  Truco get getCurrent => games[0];
-
-  void victoryReaction(BuildContext pageContext) {
-    disposer = reaction((_) => getCurrent.finishedGame, (finishGame) async {
-      if (finishGame) {
-        incrementWins(getCurrent.getWinner.playerNumber);
-        Truco truco = await Navigator.of(pageContext).push(MaterialPageRoute(
-          builder: (context) => VictoryPage(truco: games[0]),
-        ));
-        if (truco != null) {
-          addGame(truco);
-        }
-      }
-    });
-  }
-
-  void dispose() {
-    disposer?.call();
-    getCurrent?.reset();
-  }
+  bool get finishedGame => currentGame.finishedGame;
 }

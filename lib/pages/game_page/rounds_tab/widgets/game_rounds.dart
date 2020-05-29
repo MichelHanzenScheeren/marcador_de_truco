@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/round.dart';
 import 'package:marcadordetruco/models/truco.dart';
 

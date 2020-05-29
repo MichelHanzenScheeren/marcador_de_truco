@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
-import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
-import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_names.dart';
@@ -95,15 +92,13 @@ class InitGame extends StatelessWidget {
 
     homeController.setLoading(true);
     FocusScope.of(context).requestFocus(FocusNode());
-    GameController gameController = GameController();
-    gameController.addGame(Truco(
-      player1: Player(description: p1Description),
-      player2: Player(description: p2Description),
-      maxPoints: int.parse(homeController.maxPoints),
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Game(
+        p1Description,
+        p2Description,
+        int.parse(homeController.maxPoints),
+      ),
     ));
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => Game(gameController)),
-    );
     homeController.setLoading(false);
   }
 }

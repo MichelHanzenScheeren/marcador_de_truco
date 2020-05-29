@@ -41,8 +41,8 @@ class PlayerWidget extends StatelessWidget {
                       return ImageContainer(
                         width: 100,
                         height: 100,
-                        image: player.image,
-                        type: player.imageType,
+                        image: player.description.image,
+                        type: player.description.imageType,
                       );
                     }),
                     onTap: () {
@@ -50,7 +50,8 @@ class PlayerWidget extends StatelessWidget {
                         isScrollControlled: true,
                         enableDrag: false,
                         context: context,
-                        builder: (context) => EditImagePlayer(player),
+                        builder: (context) =>
+                            EditImagePlayer(player.description),
                       );
                     },
                   ),
@@ -61,7 +62,7 @@ class PlayerWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(2),
                       child: Observer(builder: (_) {
                         return Text(
-                          player.name,
+                          player.description.name,
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 25),
                         );
@@ -74,9 +75,9 @@ class PlayerWidget extends StatelessWidget {
                         enableDrag: false,
                         isDismissible: true,
                         builder: (context) => EditNamePlayer(
-                          initialValue: player.name,
-                          setName: player.setName,
-                          playerNumber: player.playerNumber,
+                          initialValue: player.description.name,
+                          setName: player.description.setName,
+                          playerNumber: player.description.playerNumber,
                         ),
                       );
                     },
@@ -118,7 +119,7 @@ class PlayerWidget extends StatelessWidget {
                   }),
                 ),
               ),
-              onTap: () => truco.doRound(player.playerNumber),
+              onTap: () => truco.doRound(player.description.playerNumber),
             )
           ],
         ),

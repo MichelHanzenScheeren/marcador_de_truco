@@ -37,7 +37,7 @@ class VictoryPage extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              "${winner.name}",
+              "${winner.description.name}",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 40,
@@ -52,7 +52,7 @@ class VictoryPage extends StatelessWidget {
               borderColor: primaryColor,
               backColor: primaryColor,
               function: () {
-                Navigator.pop(context, newTruco());
+                Navigator.pop(context, true);
               },
             ),
             SizedBox(height: 10),
@@ -62,30 +62,12 @@ class VictoryPage extends StatelessWidget {
               backColor: backColor,
               borderColor: primaryColor,
               function: () {
-                Navigator.pop(context);
+                Navigator.pop(context, false);
                 Navigator.pop(context);
               },
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Truco newTruco() {
-    return Truco(
-      maxPoints: truco.maxPoints,
-      player1: Player(
-        image: truco.player1.image,
-        imageType: truco.player1.imageType,
-        name: truco.player1.name,
-        playerNumber: Players.p1,
-      ),
-      player2: Player(
-        image: truco.player2.image,
-        imageType: truco.player2.imageType,
-        name: truco.player2.name,
-        playerNumber: Players.p2,
       ),
     );
   }

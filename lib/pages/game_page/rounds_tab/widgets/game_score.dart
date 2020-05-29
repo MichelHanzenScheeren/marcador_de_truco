@@ -16,8 +16,10 @@ class GameScore extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(truco.player1.name, style: TextStyle(fontSize: 18)),
-              Text(truco.player2.name, style: TextStyle(fontSize: 18)),
+              Text(truco.player1.description.name,
+                  style: TextStyle(fontSize: 18)),
+              Text(truco.player2.description.name,
+                  style: TextStyle(fontSize: 18)),
             ],
           ),
         ),
@@ -27,8 +29,8 @@ class GameScore extends StatelessWidget {
           children: <Widget>[
             Observer(builder: (_) {
               return ImageContainer(
-                image: truco.player1.image,
-                type: truco.player1.imageType,
+                image: truco.player1.description.image,
+                type: truco.player1.description.imageType,
                 width: 70,
                 height: 70,
               );
@@ -38,8 +40,8 @@ class GameScore extends StatelessWidget {
             Text("${truco.player2.points}", style: TextStyle(fontSize: 40)),
             Observer(builder: (_) {
               return ImageContainer(
-                image: truco.player2.image,
-                type: truco.player2.imageType,
+                image: truco.player2.description.image,
+                type: truco.player2.description.imageType,
                 width: 70,
                 height: 70,
               );

@@ -9,6 +9,21 @@ part of 'game_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GameController on _GameControllerBase, Store {
+  final _$currentGameAtom = Atom(name: '_GameControllerBase.currentGame');
+
+  @override
+  Truco get currentGame {
+    _$currentGameAtom.reportRead();
+    return super.currentGame;
+  }
+
+  @override
+  set currentGame(Truco value) {
+    _$currentGameAtom.reportWrite(value, super.currentGame, () {
+      super.currentGame = value;
+    });
+  }
+
   final _$player1WinsAtom = Atom(name: '_GameControllerBase.player1Wins');
 
   @override
@@ -43,22 +58,22 @@ mixin _$GameController on _GameControllerBase, Store {
       ActionController(name: '_GameControllerBase');
 
   @override
-  dynamic incrementWins(dynamic playerNumber) {
+  dynamic incrementWins() {
     final _$actionInfo = _$_GameControllerBaseActionController.startAction(
         name: '_GameControllerBase.incrementWins');
     try {
-      return super.incrementWins(playerNumber);
+      return super.incrementWins();
     } finally {
       _$_GameControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void addGame(Truco truco) {
+  void newGame({PlayerDescription p1, PlayerDescription p2, int maxPoints}) {
     final _$actionInfo = _$_GameControllerBaseActionController.startAction(
-        name: '_GameControllerBase.addGame');
+        name: '_GameControllerBase.newGame');
     try {
-      return super.addGame(truco);
+      return super.newGame(p1: p1, p2: p2, maxPoints: maxPoints);
     } finally {
       _$_GameControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -67,6 +82,7 @@ mixin _$GameController on _GameControllerBase, Store {
   @override
   String toString() {
     return '''
+currentGame: ${currentGame},
 player1Wins: ${player1Wins},
 player2Wins: ${player2Wins}
     ''';
