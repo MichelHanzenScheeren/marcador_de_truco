@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../widgets/edit_image_player.dart';
-import '../../../../widgets/edit_name_player.dart';
 import '../../../../models/truco.dart';
 import '../../../../models/player.dart';
 import '../../../../widgets/image_container.dart';
@@ -35,52 +34,24 @@ class PlayerWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  InkWell(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  Observer(builder: (_) {
+                    return ImageContainer(
+                      width: 120,
+                      height: 120,
+                      image: player.description.image,
+                      type: player.description.imageType,
+                    );
+                  }),
+                  SizedBox(height: 5),
+                  Padding(
+                    padding: const EdgeInsets.all(2),
                     child: Observer(builder: (_) {
-                      return ImageContainer(
-                        width: 100,
-                        height: 100,
-                        image: player.description.image,
-                        type: player.description.imageType,
+                      return Text(
+                        player.description.name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 25),
                       );
                     }),
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        enableDrag: false,
-                        context: context,
-                        builder: (context) =>
-                            EditImagePlayer(player.description),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 8),
-                  InkWell(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(2),
-                      child: Observer(builder: (_) {
-                        return Text(
-                          player.description.name,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 25),
-                        );
-                      }),
-                    ),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        enableDrag: false,
-                        isDismissible: true,
-                        builder: (context) => EditNamePlayer(
-                          initialValue: player.description.name,
-                          setName: player.description.setName,
-                          playerNumber: player.description.playerNumber,
-                        ),
-                      );
-                    },
                   ),
                 ],
               ),

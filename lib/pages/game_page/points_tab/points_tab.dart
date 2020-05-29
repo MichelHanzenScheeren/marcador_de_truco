@@ -40,7 +40,7 @@ class PointsTab extends StatelessWidget {
             ],
           ),
           Container(
-            padding: EdgeInsets.only(top: 15),
+            padding: EdgeInsets.only(top: 20),
             width: width,
             height: height * 0.35,
             child: Column(
