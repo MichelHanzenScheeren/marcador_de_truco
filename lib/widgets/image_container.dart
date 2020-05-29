@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 
 class ImageContainer extends StatelessWidget {
   final String image;

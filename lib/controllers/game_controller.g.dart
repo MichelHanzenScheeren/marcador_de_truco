@@ -43,7 +43,7 @@ mixin _$GameController on _GameControllerBase, Store {
       ActionController(name: '_GameControllerBase');
 
   @override
-  dynamic incrementWins(Players playerNumber) {
+  dynamic incrementWins(dynamic playerNumber) {
     final _$actionInfo = _$_GameControllerBaseActionController.startAction(
         name: '_GameControllerBase.incrementWins');
     try {

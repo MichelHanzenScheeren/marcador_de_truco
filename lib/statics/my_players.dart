@@ -1,17 +1,17 @@
-import '../models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import './my_images.dart';
 
 class MyPlayers {
   MyPlayers._();
 
-  static final Player player1 = Player(
+  static final PlayerDescription p1Description = PlayerDescription(
     image: MyImages.player1,
     imageType: ImageType.asset,
     name: "Nós",
     playerNumber: Players.p1,
   );
 
-  static final Player player2 = Player(
+  static final PlayerDescription p2Description = PlayerDescription(
     image: MyImages.player2,
     imageType: ImageType.asset,
     name: "Eles",

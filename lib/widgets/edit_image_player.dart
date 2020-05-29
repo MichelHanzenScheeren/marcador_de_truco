@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import './custom_button.dart';
 import './image_container.dart';
-import '../models/player.dart';
 
 class EditImagePlayer extends StatelessWidget {
-  final Player player;
+  final PlayerDescription playerDescription;
   final style = TextStyle(color: Colors.white, fontSize: 15);
   final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
-  EditImagePlayer(this.player);
+  EditImagePlayer(this.playerDescription);
 
   void imageSelected(BuildContext context, File image, ImageType type) async {
     if (image == null) return;
     File cropped = await croppImage(image);
     if (cropped == null) return;
-    player.setImage(cropped.path, ImageType.file);
+    playerDescription.setImage(cropped.path, ImageType.file);
   }
 
   Future<File> croppImage(File image) async {
@@ -43,8 +43,8 @@ class EditImagePlayer extends StatelessWidget {
                 return ImageContainer(
                   width: 220,
                   height: 220,
-                  image: player.image,
-                  type: player.imageType,
+                  image: playerDescription.image,
+                  type: playerDescription.imageType,
                 );
               }),
               SizedBox(height: 10),

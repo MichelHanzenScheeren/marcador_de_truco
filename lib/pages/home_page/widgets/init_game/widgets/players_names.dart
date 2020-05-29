@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import '../../../../../validators/form_validators.dart';
 import '../../../../../widgets/custom_text_field.dart';
-import '../../../../../models/player.dart';
 
 class PlayersNames extends StatelessWidget {
-  final Player player1;
-  final Player player2;
+  final PlayerDescription p1Description;
+  final PlayerDescription p2Description;
   final double space;
   PlayersNames({
-    @required this.player1,
-    @required this.player2,
+    @required this.p1Description,
+    @required this.p2Description,
     @required this.space,
   });
 
@@ -23,9 +23,9 @@ class PlayersNames extends StatelessWidget {
           flex: 1,
           child: CustomTextField(
             myPadding: EdgeInsets.only(right: space / 2),
-            initialValue: player1.name,
+            initialValue: p1Description.name,
             label: "Player 1",
-            changed: player1.setName,
+            changed: p1Description.setName,
             validator: FormValidators.playerName,
           ),
         ),
@@ -33,9 +33,9 @@ class PlayersNames extends StatelessWidget {
           flex: 1,
           child: CustomTextField(
             myPadding: EdgeInsets.only(left: space / 2),
-            initialValue: player2.name,
+            initialValue: p2Description.name,
             label: "Player 2",
-            changed: player2.setName,
+            changed: p2Description.setName,
             validator: FormValidators.playerName,
           ),
         ),

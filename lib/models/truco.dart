@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/round.dart';
 import 'package:mobx/mobx.dart';
 part 'truco.g.dart';
@@ -52,7 +53,7 @@ abstract class _TrucoBase with Store {
     if (rounds.length == 0) return;
 
     Round round = rounds.removeLast();
-    if (round.playerNumber == player1.playerNumber)
+    if (round.playerNumber == player1.description.playerNumber)
       decrementPoint(player1, round.points);
     else
       decrementPoint(player2, round.points);
@@ -85,7 +86,7 @@ abstract class _TrucoBase with Store {
   }
 
   void incrementPoint(Players playerNumber) {
-    if (playerNumber == player1.playerNumber)
+    if (playerNumber == player1.description.playerNumber)
       increment(player1);
     else
       increment(player2);

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
 import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
@@ -15,9 +16,9 @@ import 'package:marcadordetruco/widgets/title_divider.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 
 class InitGame extends StatelessWidget {
+  final PlayerDescription p1Description = MyPlayers.p1Description;
+  final PlayerDescription p2Description = MyPlayers.p2Description;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final Player player1 = MyPlayers.player1;
-  final Player player2 = MyPlayers.player2;
   final HomeController homeController;
   InitGame(this.homeController);
 
@@ -43,14 +44,14 @@ class InitGame extends StatelessWidget {
               ),
               SizedBox(height: space),
               PlayersImages(
-                player1: player1,
-                player2: player2,
+                p1Description: this.p1Description,
+                p2Description: this.p2Description,
                 imageSize: (width / 2) - (space * 1.5),
               ),
               SizedBox(height: space),
               PlayersNames(
-                player1: player1,
-                player2: player2,
+                p1Description: this.p1Description,
+                p2Description: this.p2Description,
                 space: space,
               ),
               SizedBox(height: 2 * space),
@@ -96,8 +97,8 @@ class InitGame extends StatelessWidget {
     FocusScope.of(context).requestFocus(FocusNode());
     GameController gameController = GameController();
     gameController.addGame(Truco(
-      player1: player1,
-      player2: player2,
+      player1: Player(description: p1Description),
+      player2: Player(description: p2Description),
       maxPoints: int.parse(homeController.maxPoints),
     ));
     Navigator.of(context).push(

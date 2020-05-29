@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import './player.dart';
+import 'package:marcadordetruco/models/player_description.dart';
 
 class Round {
   DateTime dateTime;
