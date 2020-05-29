@@ -5,11 +5,20 @@ import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart
 import '../../controllers/home_controller.dart';
 import '../../models/my_theme.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   static final homeController = HomeController();
-  final tabs = [InitGame(homeController), GameHistory(homeController)];
   final MyTheme myTheme;
   Home(this.myTheme);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final tabs = [
+    InitGame(Home.homeController),
+    GameHistory(Home.homeController)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +28,16 @@ class Home extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.lightbulb_outline),
-            onPressed: myTheme.setTheme,
+            onPressed: widget.myTheme.setTheme,
           ),
         ],
       ),
-      body: Observer(builder: (_) {
-        return tabs[homeController.currentPage];
+      body: Observer(builder: (context) {
+        return tabs[Home.homeController.currentPage];
       }),
       bottomNavigationBar: Observer(builder: (context) {
         return BottomNavigationBar(
-          currentIndex: homeController.currentPage,
+          currentIndex: Home.homeController.currentPage,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.play_circle_outline),
@@ -39,7 +48,7 @@ class Home extends StatelessWidget {
               title: Text("Histórico"),
             ),
           ],
-          onTap: homeController.setPage,
+          onTap: Home.homeController.setPage,
         );
       }),
     );

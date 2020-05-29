@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
-import 'package:marcadordetruco/pages/victory_page/victory_page.dart';
 import 'package:mobx/mobx.dart';
 import '../models/truco.dart';
 
@@ -19,6 +17,10 @@ abstract class _GameControllerBase with Store {
   @observable
   int player2Wins = 0;
 
+  _GameControllerBase(Truco truco) {
+    currentGame = truco;
+  }
+
   @action
   incrementWins() {
     Players playerNumber = currentGame.getWinner.description.playerNumber;
@@ -30,11 +32,11 @@ abstract class _GameControllerBase with Store {
   }
 
   @action
-  void newGame({PlayerDescription p1, PlayerDescription p2, int maxPoints}) {
+  void newGame() {
     Truco truco = Truco(
-      player1: Player(description: p1),
-      player2: Player(description: p2),
-      maxPoints: maxPoints,
+      player1: Player(description: currentGame.player1.description),
+      player2: Player(description: currentGame.player2.description),
+      maxPoints: currentGame.maxPoints,
     );
     currentGame = truco;
   }

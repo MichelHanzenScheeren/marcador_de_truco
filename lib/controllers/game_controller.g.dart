@@ -69,11 +69,11 @@ mixin _$GameController on _GameControllerBase, Store {
   }
 
   @override
-  void newGame({PlayerDescription p1, PlayerDescription p2, int maxPoints}) {
+  void newGame() {
     final _$actionInfo = _$_GameControllerBaseActionController.startAction(
         name: '_GameControllerBase.newGame');
     try {
-      return super.newGame(p1: p1, p2: p2, maxPoints: maxPoints);
+      return super.newGame();
     } finally {
       _$_GameControllerBaseActionController.endAction(_$actionInfo);
     }

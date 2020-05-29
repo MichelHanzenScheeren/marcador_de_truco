@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     myTheme.configureOrientation();
 
-    return Observer(builder: (_) {
+    return Observer(builder: (context) {
       return MaterialApp(
         title: 'Marcador de truco',
         debugShowCheckedModeBanner: false,

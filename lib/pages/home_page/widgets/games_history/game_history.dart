@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
 
 class GameHistory extends StatelessWidget {
-  HomeController homeController;
+  final HomeController homeController;
   GameHistory(this.homeController);
 
   @override

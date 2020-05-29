@@ -57,13 +57,12 @@ class VictoryPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             MyButton(
-              text: "Alterar Jogadores",
+              text: "Voltar ao menu",
               size: size,
               backColor: backColor,
               borderColor: primaryColor,
               function: () {
                 Navigator.pop(context, false);
-                Navigator.pop(context);
               },
             ),
           ],
