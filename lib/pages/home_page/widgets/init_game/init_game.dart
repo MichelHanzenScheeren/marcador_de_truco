@@ -64,7 +64,6 @@ class InitGame extends StatelessWidget {
                 if (homeController.isLoading) {
                   return WaitingIndicator(
                     size: 50,
-                    backGroundColor: primaryColor,
                     valueColor: secondaryColor,
                   );
                 }

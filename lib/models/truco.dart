@@ -22,11 +22,13 @@ abstract class _TrucoBase with Store {
   ObservableList<Round> rounds = ObservableList<Round>();
 
   _TrucoBase({
+    this.id,
     @required this.player1,
     @required this.player2,
     this.maxPoints: 12,
+    startDate,
   }) {
-    startDate = DateTime.now();
+    if (startDate == null) this.startDate = DateTime.now();
     currentValue = 1;
   }
 

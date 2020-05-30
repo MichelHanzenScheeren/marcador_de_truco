@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class WaitingIndicator extends StatelessWidget {
   final double size;
   final Color valueColor;
-  final Color backGroundColor;
   WaitingIndicator({
-    this.size,
+    this.size: 100,
     this.valueColor: Colors.white,
-    this.backGroundColor: Colors.black,
   });
 
   @override
@@ -15,13 +13,7 @@ class WaitingIndicator extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        color: backGroundColor,
-        shape: BoxShape.circle,
-      ),
-      alignment: Alignment.center,
       child: CircularProgressIndicator(
-        backgroundColor: Colors.transparent,
         valueColor: AlwaysStoppedAnimation<Color>(valueColor),
       ),
     );

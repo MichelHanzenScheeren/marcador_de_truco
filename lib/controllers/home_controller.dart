@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
+import 'package:marcadordetruco/database/my_database.dart';
+import 'package:marcadordetruco/database/truco_db.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/statics/my_players.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 part 'home_controller.g.dart';
 
 class HomeController = _HomeControllerBase with _$HomeController;
@@ -19,6 +23,9 @@ abstract class _HomeControllerBase with Store {
   PlayerDescription p1Desc = MyPlayers.p1Description;
   PlayerDescription p2Desc = MyPlayers.p2Description;
   String maxPoints = "12";
+
+  MyDatabase myDatabase;
+  TrucoDb trucoDb;
 
   @action
   void setPage(int number) => currentPage = number;
@@ -36,5 +43,24 @@ abstract class _HomeControllerBase with Store {
     ));
     final gamePage = Game(controller);
     return gamePage;
+  }
+
+  void getMyDatabase(BuildContext context) {
+    if (myDatabase == null) {
+      myDatabase = Provider.of<MyDatabase>(context);
+    }
+  }
+
+  void closeDatabase() {
+    myDatabase.closeDb();
+  }
+
+  void initDataBaseClasses() {
+    if (trucoDb == null) trucoDb = TrucoDb(myDatabase);
+  }
+
+  Future<List<Truco>> getData() async {
+    initDataBaseClasses();
+    return await trucoDb.getAll();
   }
 }

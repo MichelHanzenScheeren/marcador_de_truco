@@ -6,22 +6,33 @@ import '../../controllers/home_controller.dart';
 import '../../models/my_theme.dart';
 
 class Home extends StatefulWidget {
-  static final homeController = HomeController();
+  final homeController = HomeController();
   final MyTheme myTheme;
   Home(this.myTheme);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomeState createState() => _HomeState(homeController);
 }
 
 class _HomeState extends State<Home> {
-  final tabs = [
-    InitGame(Home.homeController),
-    GameHistory(Home.homeController)
-  ];
+  final HomeController homeController;
+  _HomeState(this.homeController);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    homeController.getMyDatabase(context);
+  }
+
+  @override
+  void dispose() {
+    homeController.closeDatabase();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final tabs = [InitGame(homeController), GameHistory(homeController)];
     return Scaffold(
       appBar: AppBar(
         title: Text("Marcador de Truco"),
@@ -33,11 +44,11 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Observer(builder: (context) {
-        return tabs[Home.homeController.currentPage];
+        return tabs[homeController.currentPage];
       }),
       bottomNavigationBar: Observer(builder: (context) {
         return BottomNavigationBar(
-          currentIndex: Home.homeController.currentPage,
+          currentIndex: homeController.currentPage,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.play_circle_outline),
@@ -48,7 +59,7 @@ class _HomeState extends State<Home> {
               title: Text("Histórico"),
             ),
           ],
-          onTap: Home.homeController.setPage,
+          onTap: homeController.setPage,
         );
       }),
     );

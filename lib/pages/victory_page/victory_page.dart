@@ -58,7 +58,6 @@ class VictoryPage extends StatelessWidget {
                     children: <Widget>[
                       WaitingIndicator(
                         size: 80,
-                        backGroundColor: backColor,
                         valueColor: primaryColor,
                       ),
                       Text("Salvando partida..."),
