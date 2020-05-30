@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../../widgets/edit_image_player.dart';
 import '../../../../models/truco.dart';
 import '../../../../models/player.dart';
 import '../../../../widgets/image_container.dart';
@@ -34,24 +33,20 @@ class PlayerWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Observer(builder: (_) {
-                    return ImageContainer(
-                      width: 120,
-                      height: 120,
-                      image: player.description.image,
-                      type: player.description.imageType,
-                    );
-                  }),
+                  ImageContainer(
+                    width: 120,
+                    height: 120,
+                    image: player.description.image,
+                    type: player.description.imageType,
+                  ),
                   SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(2),
-                    child: Observer(builder: (_) {
-                      return Text(
-                        player.description.name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 25),
-                      );
-                    }),
+                    child: Text(
+                      player.description.name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
                 ],
               ),

@@ -12,14 +12,24 @@ class GameScore extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(truco.player1.description.name,
-                  style: TextStyle(fontSize: 18)),
-              Text(truco.player2.description.name,
-                  style: TextStyle(fontSize: 18)),
+              Flexible(
+                flex: 1,
+                child: Text(
+                  truco.player1.description.name,
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              Flexible(
+                flex: 1,
+                child: Text(
+                  truco.player2.description.name,
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
             ],
           ),
         ),

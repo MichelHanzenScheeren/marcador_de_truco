@@ -11,6 +11,30 @@ class RoundsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      controller: controller,
+      child: Card(
+        borderOnForeground: false,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        color: Colors.grey[300],
+        elevation: 0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Column(
+            children: <Widget>[
+              GameScore(truco),
+              Divider(),
+              GameRounds(truco, controller),
+              verificateIfIsEmpty(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget verificateIfIsEmpty() {
     return Observer(
       builder: (context) {
         if (truco.rounds.isEmpty) {
@@ -26,28 +50,9 @@ class RoundsTab extends StatelessWidget {
               ),
             ],
           );
+        } else {
+          return Container();
         }
-        return SingleChildScrollView(
-          controller: controller,
-          child: Card(
-            borderOnForeground: false,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            color: Colors.grey[300],
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Column(
-                children: <Widget>[
-                  GameScore(truco),
-                  Divider(),
-                  GameRounds(truco, controller),
-                ],
-              ),
-            ),
-          ),
-        );
       },
     );
   }
