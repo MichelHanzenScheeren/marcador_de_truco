@@ -54,6 +54,21 @@ mixin _$GameController on _GameControllerBase, Store {
     });
   }
 
+  final _$isSavingAtom = Atom(name: '_GameControllerBase.isSaving');
+
+  @override
+  bool get isSaving {
+    _$isSavingAtom.reportRead();
+    return super.isSaving;
+  }
+
+  @override
+  set isSaving(bool value) {
+    _$isSavingAtom.reportWrite(value, super.isSaving, () {
+      super.isSaving = value;
+    });
+  }
+
   final _$_GameControllerBaseActionController =
       ActionController(name: '_GameControllerBase');
 
@@ -80,11 +95,23 @@ mixin _$GameController on _GameControllerBase, Store {
   }
 
   @override
+  dynamic setIsSaving(bool condition) {
+    final _$actionInfo = _$_GameControllerBaseActionController.startAction(
+        name: '_GameControllerBase.setIsSaving');
+    try {
+      return super.setIsSaving(condition);
+    } finally {
+      _$_GameControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentGame: ${currentGame},
 player1Wins: ${player1Wins},
-player2Wins: ${player2Wins}
+player2Wins: ${player2Wins},
+isSaving: ${isSaving}
     ''';
   }
 }

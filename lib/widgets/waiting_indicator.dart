@@ -13,8 +13,8 @@ class WaitingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size + 10,
-      height: size + 10,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         color: backGroundColor,
         shape: BoxShape.circle,

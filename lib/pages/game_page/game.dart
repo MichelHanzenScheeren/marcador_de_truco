@@ -16,17 +16,19 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   final GameController gameController;
-  ReactionDisposer myDisposer;
   _GameState(this.gameController);
+  ReactionDisposer myDisposer;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    gameController.initTrucoDb(context);
     myDisposer = reaction((_) => gameController.finishedGame, (result) async {
       if (result) {
+        gameController.currentGame.saveFinalDate();
         gameController.incrementWins();
         bool newGame = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => VictoryPage(truco: gameController.currentGame),
+          builder: (context) => VictoryPage(gameController: gameController),
         ));
         if (newGame)
           gameController.newGame();

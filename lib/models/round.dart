@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 
 class Round {
+  int id;
+  int trucoId;
+
   DateTime dateTime;
   Players playerNumber;
   int points;

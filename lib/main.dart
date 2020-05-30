@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marcadordetruco/database/my_database.dart';
+import 'package:provider/provider.dart';
 import './models/my_theme.dart';
 import './pages/home_page/home.dart';
 
@@ -12,13 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     myTheme.configureOrientation();
 
-    return Observer(builder: (context) {
-      return MaterialApp(
-        title: 'Marcador de truco',
-        debugShowCheckedModeBanner: false,
-        theme: myTheme.getTheme,
-        home: Home(myTheme),
-      );
-    });
+    return Provider<MyDatabase>(
+      create: (context) => MyDatabase(),
+      child: Observer(builder: (context) {
+        return MaterialApp(
+          title: 'Marcador de truco',
+          debugShowCheckedModeBanner: false,
+          theme: myTheme.getTheme,
+          home: Home(myTheme),
+        );
+      }),
+    );
   }
 }

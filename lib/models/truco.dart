@@ -8,6 +8,8 @@ part 'truco.g.dart';
 class Truco = _TrucoBase with _$Truco;
 
 abstract class _TrucoBase with Store {
+  int id;
+
   Player player1;
   Player player2;
   int maxPoints;
@@ -106,5 +108,9 @@ abstract class _TrucoBase with Store {
   void reset() {
     player1?.resetPoints();
     player2?.resetPoints();
+  }
+
+  void saveFinalDate() {
+    finalDate = DateTime.now();
   }
 }

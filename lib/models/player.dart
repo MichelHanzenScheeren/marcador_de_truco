@@ -6,6 +6,9 @@ part 'player.g.dart';
 class Player = _PlayerBase with _$Player;
 
 abstract class _PlayerBase with Store {
+  int id;
+  int trucoId;
+
   PlayerDescription description;
 
   @observable
