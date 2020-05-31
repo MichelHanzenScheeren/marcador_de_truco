@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:marcadordetruco/database/my_database.dart';
+import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:provider/provider.dart';
 import './models/my_theme.dart';
 import './pages/home_page/home.dart';
@@ -14,9 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     myTheme.configureOrientation();
 
-    return Provider<MyDatabase>(
-      create: (context) => MyDatabase(),
+    return Provider<DatabaseConnection>(
+      create: (context) => DatabaseConnection(),
       child: Observer(builder: (context) {
+        //final db = Provider.of<DatabaseConnection>(context);
+        //db.deleteDb();
         return MaterialApp(
           title: 'Marcador de truco',
           debugShowCheckedModeBanner: false,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/round.dart';
 import 'package:marcadordetruco/models/truco.dart';
@@ -70,10 +71,11 @@ class GameRounds extends StatelessWidget {
   }
 
   Widget buildDate(DateTime dateTime) {
+    var hourFormat = DateFormat("HH:mm");
     return Container(
       padding: EdgeInsets.only(top: 15),
       child: Text(
-        "${dateTime.hour}:${dateTime.minute}",
+        "${hourFormat.format(dateTime)}",
         style: TextStyle(fontSize: 10, color: Colors.grey),
         textAlign: TextAlign.left,
       ),

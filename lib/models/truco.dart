@@ -8,7 +8,7 @@ part 'truco.g.dart';
 class Truco = _TrucoBase with _$Truco;
 
 abstract class _TrucoBase with Store {
-  int id;
+  int trucoID;
 
   Player player1;
   Player player2;
@@ -22,14 +22,32 @@ abstract class _TrucoBase with Store {
   ObservableList<Round> rounds = ObservableList<Round>();
 
   _TrucoBase({
-    this.id,
+    this.trucoID,
     @required this.player1,
     @required this.player2,
     this.maxPoints: 12,
-    startDate,
   }) {
-    if (startDate == null) this.startDate = DateTime.now();
+    startDate = DateTime.now();
     currentValue = 1;
+  }
+
+  _TrucoBase.fromMap(Map map, Player p1, Player p2) {
+    player1 = p1;
+    player2 = p2;
+    trucoID = map["trucoID"];
+    maxPoints = map["maxPoints"];
+    startDate = DateTime.parse(map["startDate"]);
+    finalDate = DateTime.parse(map["finalDate"]);
+  }
+
+  Map toMap() {
+    Map<String, dynamic> map = {
+      "maxPoints": maxPoints,
+      "startDate": startDate.toString(),
+      "finalDate": finalDate.toString(),
+    };
+    if (trucoID != null) map["trucoID"] = trucoID;
+    return map;
   }
 
   @action

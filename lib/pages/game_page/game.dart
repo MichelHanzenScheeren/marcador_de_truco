@@ -30,7 +30,7 @@ class _GameState extends State<Game> {
         bool newGame = await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => VictoryPage(gameController: gameController),
         ));
-        if (newGame)
+        if (newGame != null && newGame)
           gameController.newGame();
         else
           Navigator.pop(context);

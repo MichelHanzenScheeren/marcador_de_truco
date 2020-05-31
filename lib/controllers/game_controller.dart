@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
-import 'package:marcadordetruco/database/truco_db.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:mobx/mobx.dart';
@@ -24,7 +24,7 @@ abstract class _GameControllerBase with Store {
   @observable
   bool isSaving = false;
 
-  TrucoDb trucoDb;
+  MyDatabase myDatabase;
 
   _GameControllerBase(Truco truco) {
     currentGame = truco;
@@ -56,14 +56,14 @@ abstract class _GameControllerBase with Store {
   bool get finishedGame => currentGame.finishedGame;
 
   initTrucoDb(BuildContext context) {
-    if (trucoDb == null) {
-      trucoDb = TrucoDb(Provider.of<MyDatabase>(context));
+    if (myDatabase == null) {
+      myDatabase = MyDatabase(Provider.of<DatabaseConnection>(context));
     }
   }
 
   void save() async {
     setIsSaving(true);
-    currentGame.id = await trucoDb.save(currentGame);
+    currentGame.trucoID = await myDatabase.save(currentGame);
     setIsSaving(false);
   }
 }

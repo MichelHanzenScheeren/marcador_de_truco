@@ -1,54 +1,62 @@
+import 'package:marcadordetruco/database/database_connection.dart';
+import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/round.dart';
+import 'package:marcadordetruco/models/truco.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 const String trucoTable = "trucoTable";
 const String playerTable = "playerTable";
 const String roundTable = "roundTable";
 
 class MyDatabase {
-  Database _database;
+  DatabaseConnection connection;
 
-  Future<Database> get getDatabase async {
-    if (_database == null) {
-      await _initDatabase();
-    }
-    return _database;
+  MyDatabase(this.connection);
+
+  void closeDb() async {
+    await connection.closeDb();
   }
 
-  Future _initDatabase() async {
-    final String dataBasePath = await getDatabasesPath();
-    final String path = join(dataBasePath, "contacts.db");
-    _database = await openDatabase(path, version: 1,
-        onCreate: (Database db, int newVersion) async {
-      await db.execute("CREATE TABLE $trucoTable(" +
-          "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-          "maxPoints INTEGER," +
-          "startDate TEXT," +
-          "finalDate TEXT" +
-          ");");
-      await db.execute("CREATE TABLE $playerTable(" +
-          "id INTEGER PRIMARY KEY," +
-          "trucoID INTEGER," +
-          "points INTEGER," +
-          "image TEXT," +
-          "imageType TEXT," +
-          "name TEXT," +
-          "playerNumber TEXT," +
-          "FOREIGN KEY (trucoID) REFERENCES $trucoTable (id)" +
-          ");");
-      await db.execute("CREATE TABLE $roundTable(" +
-          "id INTEGER PRIMARY KEY," +
-          "trucoID INTEGER," +
-          "dateTime TEXT," +
-          "playerNumber TEXT," +
-          "points INTEGER," +
-          "FOREIGN KEY (trucoID) REFERENCES $trucoTable (id)" +
-          ");");
+  Future save(Truco truco) async {
+    Database db = await connection.getDatabase;
+    int trucoID = await db.insert(trucoTable, truco.toMap());
+    await db.insert(playerTable, truco.player1.toMap(trucoID));
+    await db.insert(playerTable, truco.player2.toMap(trucoID));
+
+    final batch = db.batch();
+    truco.rounds.forEach((element) {
+      batch.insert(roundTable, element.toMap(trucoID));
+    });
+    await batch.commit();
+  }
+
+  Future<List> getAll() async {
+    Database db = await connection.getDatabase;
+    List<Map> trucoMaps = await db.rawQuery("SELECT * FROM $trucoTable;");
+    List<Map> playerMaps = await db.rawQuery("SELECT * FROM $playerTable;");
+
+    return List<Truco>.generate(trucoMaps.length, (i) {
+      return Truco.fromMap(
+        trucoMaps[i],
+        obtainPlayer("p1", playerMaps, trucoMaps[i]),
+        obtainPlayer("p2", playerMaps, trucoMaps[i]),
+      );
     });
   }
 
-  Future closeDb() async {
-    Database db = await getDatabase;
-    await db.close();
+  Player obtainPlayer(String number, List<Map> playerMaps, Map trucoMap) {
+    return Player.fromMap(playerMaps
+        .where((element) =>
+            element["trucoID"] == trucoMap["trucoID"] &&
+            element["playerNumber"] == number)
+        .first);
+  }
+
+  Future<List<Round>> getRounds(int trucoID) async {
+    Database db = await connection.getDatabase;
+    List<Map> rounds = await db
+        .rawQuery("SELECT * FROM $roundTable WHERE trucoID = $trucoID;");
+
+    return List<Round>.generate(rounds.length, (i) => Round.fromMap(rounds[i]));
   }
 }

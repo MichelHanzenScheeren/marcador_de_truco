@@ -30,6 +30,17 @@ abstract class _PlayerDescriptionBase with Store {
     if (image.isEmpty) setImage(getRandomImage(), ImageType.asset);
   }
 
+  _PlayerDescriptionBase.fromMap(Map map) {
+    image = map["image"];
+    imageType = ImageType.values.firstWhere(
+      (e) => e.toString().split(".").last == map["imageType"],
+    );
+    name = map["name"];
+    playerNumber = Players.values.firstWhere(
+      (e) => e.toString().split(".").last == map["playerNumber"],
+    );
+  }
+
   String getRandomImage() {
     return <String>[MyImages.player1, MyImages.player2]
         .elementAt(Random().nextInt(2));

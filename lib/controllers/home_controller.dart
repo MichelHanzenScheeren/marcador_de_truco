@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
+import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
-import 'package:marcadordetruco/database/truco_db.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
+import 'package:marcadordetruco/models/round.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/statics/my_players.dart';
@@ -25,7 +26,6 @@ abstract class _HomeControllerBase with Store {
   String maxPoints = "12";
 
   MyDatabase myDatabase;
-  TrucoDb trucoDb;
 
   @action
   void setPage(int number) => currentPage = number;
@@ -47,7 +47,7 @@ abstract class _HomeControllerBase with Store {
 
   void getMyDatabase(BuildContext context) {
     if (myDatabase == null) {
-      myDatabase = Provider.of<MyDatabase>(context);
+      myDatabase = MyDatabase(Provider.of<DatabaseConnection>(context));
     }
   }
 
@@ -55,12 +55,11 @@ abstract class _HomeControllerBase with Store {
     myDatabase.closeDb();
   }
 
-  void initDataBaseClasses() {
-    if (trucoDb == null) trucoDb = TrucoDb(myDatabase);
+  Future<List<Truco>> getData() async {
+    return await myDatabase.getAll();
   }
 
-  Future<List<Truco>> getData() async {
-    initDataBaseClasses();
-    return await trucoDb.getAll();
+  Future<List<Round>> getRounds(int trucoID) async {
+    return await myDatabase.getRounds(trucoID);
   }
 }
