@@ -36,12 +36,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Marcador de Truco"),
-        actions: <Widget>[
+        /*actions: <Widget>[
           IconButton(
             icon: Icon(Icons.lightbulb_outline),
             onPressed: widget.myTheme.setTheme,
           ),
-        ],
+        ],*/
       ),
       body: Observer(builder: (context) {
         return tabs[homeController.currentPage];

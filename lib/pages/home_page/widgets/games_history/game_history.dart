@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/build_rounds.dart';
+import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/exclude_option.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/time_details.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/truco_score.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
+import 'package:mobx/mobx.dart';
 
-class GameHistory extends StatelessWidget {
+class GameHistory extends StatefulWidget {
   final HomeController homeController;
   GameHistory(this.homeController);
 
+  @override
+  _GameHistoryState createState() => _GameHistoryState();
+}
+
+class _GameHistoryState extends State<GameHistory> {
   final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Truco>>(
-      future: homeController.getData(),
+    return FutureBuilder<ObservableList<Truco>>(
+      future: widget.homeController.getData(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return waiting(context);
         else if (snapshot.data.length == 0) return emptyWidget(context);
 
-        return ListView.builder(
-          controller: scrollController,
-          itemCount: snapshot.data.length,
-          itemBuilder: (context, index) {
-            return trucoCard(context, snapshot.data[index]);
-          },
-        );
+        return Observer(builder: (_) {
+          if (snapshot.data.length == 0) return emptyWidget(context);
+          return ListView.builder(
+            controller: scrollController,
+            itemCount: snapshot.data.length,
+            itemBuilder: (context, index) {
+              return trucoCard(context, snapshot.data[index], index);
+            },
+          );
+        });
       },
     );
   }
@@ -60,32 +71,46 @@ class GameHistory extends StatelessWidget {
     );
   }
 
-  Widget trucoCard(BuildContext context, Truco truco) {
-    return Card(
-      borderOnForeground: false,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+  Widget trucoCard(BuildContext context, Truco truco, int index) {
+    return InkWell(
+      child: Card(
+        borderOnForeground: false,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+        color: Colors.grey[300],
+        elevation: 0,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            dividerColor: Colors.transparent,
+            accentColor: Colors.black,
+          ),
+          child: ExpansionTile(
+            title: TrucoScore(truco),
+            children: <Widget>[
+              TimeDetails(truco.startDate, truco.finalDate),
+              BuildRounds(
+                widget.homeController.getRounds,
+                truco.trucoID,
+                scrollController,
+              ),
+            ],
+          ),
+        ),
       ),
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-      color: Colors.grey[300],
+      onLongPress: () => excludeItem(context, truco.trucoID),
+    );
+  }
+
+  void excludeItem(BuildContext context, int trucoID) {
+    showModalBottomSheet(
+      context: context,
       elevation: 0,
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          dividerColor: Colors.transparent,
-          accentColor: Colors.black,
-        ),
-        child: ExpansionTile(
-          title: TrucoScore(truco),
-          children: <Widget>[
-            TimeDetails(truco.startDate, truco.finalDate),
-            BuildRounds(
-              homeController.getRounds,
-              truco.trucoID,
-              scrollController,
-            ),
-          ],
-        ),
-      ),
+      enableDrag: false,
+      builder: (context) {
+        return ExcludeOption(widget.homeController, trucoID);
+      },
     );
   }
 }

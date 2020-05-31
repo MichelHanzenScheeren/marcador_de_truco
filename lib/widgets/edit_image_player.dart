@@ -65,7 +65,7 @@ class EditImagePlayer extends StatelessWidget {
               SizedBox(height: 10),
               CustomButton(
                 buttonText: "Cancelar",
-                backGroundColor: Colors.transparent,
+                backGroundColor: Theme.of(context).backgroundColor,
                 borderColor: Colors.red,
                 textColor: Colors.black,
                 onPressed: () {

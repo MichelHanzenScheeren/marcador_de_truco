@@ -21,6 +21,8 @@ abstract class _HomeControllerBase with Store {
   @observable
   bool isLoading = false;
 
+  ObservableList<Truco> games = ObservableList<Truco>();
+
   PlayerDescription p1Desc = MyPlayers.p1Description;
   PlayerDescription p2Desc = MyPlayers.p2Description;
   String maxPoints = "12";
@@ -55,11 +57,23 @@ abstract class _HomeControllerBase with Store {
     myDatabase.closeDb();
   }
 
-  Future<List<Truco>> getData() async {
-    return await myDatabase.getAll();
+  @action
+  Future<ObservableList<Truco>> getData() async {
+    games.clear();
+    List<Truco> aux = await myDatabase.getAll();
+    aux.sort((a, b) => a.startDate.compareTo(b.startDate));
+    aux.forEach((element) => games.add(element));
+    return games;
   }
 
   Future<List<Round>> getRounds(int trucoID) async {
     return await myDatabase.getRounds(trucoID);
+  }
+
+  Future deleteRegister(int trucoID) async {
+    setLoading(true);
+    await myDatabase.deleteRegister(trucoID);
+    games.removeWhere((element) => element.trucoID == trucoID);
+    setLoading(false);
   }
 }

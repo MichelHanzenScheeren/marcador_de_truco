@@ -29,6 +29,7 @@ abstract class _MyThemeBase with Store {
   }
 
   final ThemeData lightTheme = ThemeData(
+    backgroundColor: Colors.white,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: Colors.deepPurpleAccent,
     accentColor: Colors.deepPurpleAccent,
@@ -43,6 +44,7 @@ abstract class _MyThemeBase with Store {
   );
 
   final ThemeData darkTheme = ThemeData(
+    backgroundColor: Colors.black87,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: Colors.deepPurple,
     accentColor: Colors.deepPurple,

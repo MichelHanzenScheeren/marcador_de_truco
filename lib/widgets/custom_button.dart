@@ -6,20 +6,25 @@ class CustomButton extends StatelessWidget {
   final String buttonText;
   final Color textColor;
   final Function onPressed;
+  final double heigth;
+  final double width;
   CustomButton({
-    this.backGroundColor: Colors.white,
+    this.backGroundColor: Colors.transparent,
     this.borderColor: Colors.transparent,
     this.buttonText: "",
     this.textColor: Colors.black,
     this.onPressed,
+    this.heigth: 50,
+    this.width: double.infinity,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: heigth,
+      width: width,
       child: RaisedButton(
-        elevation: 0,
+        elevation: 1,
         color: backGroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),

@@ -53,10 +53,17 @@ class MyDatabase {
   }
 
   Future<List<Round>> getRounds(int trucoID) async {
+    await Future.delayed(Duration(seconds: 1));
     Database db = await connection.getDatabase;
     List<Map> rounds = await db
         .rawQuery("SELECT * FROM $roundTable WHERE trucoID = $trucoID;");
 
     return List<Round>.generate(rounds.length, (i) => Round.fromMap(rounds[i]));
+  }
+
+  Future deleteRegister(int trucoID) async {
+    await Future.delayed(Duration(milliseconds: 500));
+    Database db = await connection.getDatabase;
+    await db.delete(trucoTable, where: "trucoID = ?", whereArgs: [trucoID]);
   }
 }
