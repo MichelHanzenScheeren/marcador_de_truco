@@ -19,7 +19,7 @@ class GameHistory extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return waiting(context);
-        else if (snapshot.data.length == 0) return Text("VAZIO");
+        else if (snapshot.data.length == 0) return emptyWidget(context);
 
         return ListView.builder(
           controller: scrollController,
@@ -37,6 +37,25 @@ class GameHistory extends StatelessWidget {
       alignment: Alignment.center,
       child: WaitingIndicator(
         valueColor: Theme.of(context).primaryColor,
+      ),
+    );
+  }
+
+  Widget emptyWidget(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.history, size: 180),
+          SizedBox(height: 10),
+          Text(
+            "Seu histórico de partidas será mostrado aqui...",
+            style: TextStyle(fontSize: 22),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
