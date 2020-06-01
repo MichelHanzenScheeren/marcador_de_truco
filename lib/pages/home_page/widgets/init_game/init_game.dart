@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_names.dart';
-import 'package:marcadordetruco/validators/form_validators.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:marcadordetruco/widgets/custom_text_field.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
@@ -44,6 +43,7 @@ class InitGame extends StatelessWidget {
               PlayersNames(
                 p1Description: homeController.p1Desc,
                 p2Description: homeController.p2Desc,
+                validateName: homeController.validateName,
                 space: space,
               ),
               SizedBox(height: 2 * space),
@@ -56,7 +56,7 @@ class InitGame extends StatelessWidget {
                 initialValue: "12",
                 label: "Máximo de Pontos",
                 keyboardType: TextInputType.number,
-                validator: FormValidators.maxPoint,
+                validator: homeController.validateMaxPoints,
                 changed: homeController.setMaxPoints,
               ),
               SizedBox(height: space * 2),

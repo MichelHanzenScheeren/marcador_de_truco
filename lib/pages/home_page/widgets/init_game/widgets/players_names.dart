@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/models/player_description.dart';
-import '../../../../../validators/form_validators.dart';
 import '../../../../../widgets/custom_text_field.dart';
 
 class PlayersNames extends StatelessWidget {
   final PlayerDescription p1Description;
   final PlayerDescription p2Description;
+  final Function(String) validateName;
   final double space;
   PlayersNames({
     @required this.p1Description,
     @required this.p2Description,
+    @required this.validateName,
     @required this.space,
   });
 
@@ -28,7 +29,7 @@ class PlayersNames extends StatelessWidget {
               initialValue: p1Description.name,
               label: "Player 1",
               changed: p1Description.setName,
-              validator: FormValidators.playerName,
+              validator: validateName,
             );
           }),
         ),
@@ -40,7 +41,7 @@ class PlayersNames extends StatelessWidget {
               initialValue: p2Description.name,
               label: "Player 2",
               changed: p2Description.setName,
-              validator: FormValidators.playerName,
+              validator: validateName,
             );
           }),
         ),
