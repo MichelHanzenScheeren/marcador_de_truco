@@ -17,29 +17,29 @@ mixin _$MyTheme on _MyThemeBase, Store {
               name: '_MyThemeBase.getTheme'))
           .value;
 
-  final _$currentThemeAtom = Atom(name: '_MyThemeBase.currentTheme');
+  final _$isDarkThemeAtom = Atom(name: '_MyThemeBase.isDarkTheme');
 
   @override
-  theme get currentTheme {
-    _$currentThemeAtom.reportRead();
-    return super.currentTheme;
+  bool get isDarkTheme {
+    _$isDarkThemeAtom.reportRead();
+    return super.isDarkTheme;
   }
 
   @override
-  set currentTheme(theme value) {
-    _$currentThemeAtom.reportWrite(value, super.currentTheme, () {
-      super.currentTheme = value;
+  set isDarkTheme(bool value) {
+    _$isDarkThemeAtom.reportWrite(value, super.isDarkTheme, () {
+      super.isDarkTheme = value;
     });
   }
 
   final _$_MyThemeBaseActionController = ActionController(name: '_MyThemeBase');
 
   @override
-  void setTheme() {
+  void setTheme(bool value) {
     final _$actionInfo = _$_MyThemeBaseActionController.startAction(
         name: '_MyThemeBase.setTheme');
     try {
-      return super.setTheme();
+      return super.setTheme(value);
     } finally {
       _$_MyThemeBaseActionController.endAction(_$actionInfo);
     }
@@ -48,7 +48,7 @@ mixin _$MyTheme on _MyThemeBase, Store {
   @override
   String toString() {
     return '''
-currentTheme: ${currentTheme},
+isDarkTheme: ${isDarkTheme},
 getTheme: ${getTheme}
     ''';
   }

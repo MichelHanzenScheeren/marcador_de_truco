@@ -32,7 +32,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = [InitGame(homeController), GameHistory(homeController)];
+    final tabs = [
+      InitGame(homeController, widget.myTheme),
+      GameHistory(homeController)
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,15 +43,6 @@ class _HomeState extends State<Home> {
           style: TextStyle(color: Theme.of(context).textSelectionHandleColor),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.lightbulb_outline,
-              color: Theme.of(context).textSelectionHandleColor,
-            ),
-            onPressed: widget.myTheme.setTheme,
-          ),
-        ],
       ),
       body: Observer(builder: (context) {
         return tabs[homeController.currentPage];

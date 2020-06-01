@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
+import 'package:marcadordetruco/models/my_theme.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_names.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:marcadordetruco/widgets/custom_text_field.dart';
+import 'package:marcadordetruco/widgets/switch_component.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
-import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 
 class InitGame extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final HomeController homeController;
-  InitGame(this.homeController);
+  final MyTheme mytheme;
+  InitGame(this.homeController, this.mytheme);
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +62,20 @@ class InitGame extends StatelessWidget {
                 validator: homeController.validateMaxPoints,
                 changed: homeController.setMaxPoints,
               ),
-              SizedBox(height: space * 2),
-              Observer(builder: (context) {
-                if (homeController.isLoading) {
-                  return WaitingIndicator(
-                    size: 50,
-                    valueColor: theme.primaryColor,
-                  );
-                }
-                return CustomButton(
-                  backGroundColor: theme.primaryColor,
-                  buttonText: "Iniciar Partida",
-                  textColor: theme.textSelectionHandleColor,
-                  onPressed: () => initGame(context),
+              SizedBox(height: space),
+              Observer(builder: (_) {
+                return SwitchComponent(
+                  mytheme.isDarkTheme,
+                  mytheme.setTheme,
                 );
               }),
+              SizedBox(height: space * 2),
+              CustomButton(
+                backGroundColor: theme.primaryColor,
+                buttonText: "Iniciar Partida",
+                textColor: theme.textSelectionHandleColor,
+                onPressed: () => initGame(context),
+              ),
             ],
           ),
         ),

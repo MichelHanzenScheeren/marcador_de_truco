@@ -10,22 +10,17 @@ class MyTheme = _MyThemeBase with _$MyTheme;
 
 abstract class _MyThemeBase with Store {
   @observable
-  theme currentTheme = theme.light;
+  bool isDarkTheme = false;
 
   @action
-  void setTheme() {
-    if (currentTheme == theme.light)
-      currentTheme = theme.dark;
-    else
-      currentTheme = theme.light;
-  }
+  void setTheme(bool value) => isDarkTheme = value;
 
   @computed
   ThemeData get getTheme {
-    if (currentTheme == theme.light)
-      return lightTheme;
-    else
+    if (isDarkTheme) {
       return darkTheme;
+    }
+    return lightTheme;
   }
 
   final ThemeData lightTheme = ThemeData(
@@ -69,6 +64,7 @@ abstract class _MyThemeBase with Store {
     primaryColor: Colors.deepPurple,
     accentColor: Colors.deepPurple,
     hintColor: Colors.grey[900],
+    focusColor: Colors.grey[800],
     textSelectionColor: Colors.white.withAlpha(200), // comum
     textSelectionHandleColor: Colors.white.withAlpha(200), // botões
     iconTheme: IconThemeData(color: Colors.white.withAlpha(200)),
