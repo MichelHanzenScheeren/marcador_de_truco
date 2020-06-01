@@ -63,7 +63,10 @@ class _GameHistoryState extends State<GameHistory> {
           SizedBox(height: 10),
           Text(
             "Seu histórico de partidas será mostrado aqui...",
-            style: TextStyle(fontSize: 22),
+            style: TextStyle(
+              fontSize: 22,
+              color: Theme.of(context).textSelectionColor,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -75,16 +78,10 @@ class _GameHistoryState extends State<GameHistory> {
     return InkWell(
       child: Card(
         borderOnForeground: false,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5),
-        ),
-        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        color: Colors.grey[300],
-        elevation: 0,
         child: Theme(
           data: Theme.of(context).copyWith(
             dividerColor: Colors.transparent,
-            accentColor: Colors.black,
+            accentColor: Theme.of(context).textSelectionColor,
           ),
           child: ExpansionTile(
             title: TrucoScore(truco),

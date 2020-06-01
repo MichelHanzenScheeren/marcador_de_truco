@@ -9,6 +9,7 @@ class TimeDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).textSelectionColor;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Column(
@@ -16,17 +17,20 @@ class TimeDetails extends StatelessWidget {
           TitleDivider(
             text: "Tempo de Jogo",
             dividerColor: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textSelectionColor,
           ),
           SizedBox(height: 5),
-          getDateRow(startDate, "iniciada", Icons.hourglass_empty),
-          getDateRow(finalDate, "finalizada", Icons.hourglass_full),
-          getDurationRow(finalDate.difference(startDate), Icons.access_time),
+          getDateRow(startDate, "iniciada", Icons.hourglass_empty, color),
+          getDateRow(finalDate, "finalizada", Icons.hourglass_full, color),
+          getDurationRow(
+              finalDate.difference(startDate), Icons.access_time, color),
         ],
       ),
     );
   }
 
-  Widget getDateRow(DateTime date, String condition, IconData icon) {
+  Widget getDateRow(
+      DateTime date, String condition, IconData icon, Color color) {
     var dateFormat = DateFormat("dd/MM/yyyy");
     var hourFormat = DateFormat("HH:mm");
     return Padding(
@@ -37,15 +41,18 @@ class TimeDetails extends StatelessWidget {
           SizedBox(width: 5),
           Flexible(
             flex: 1,
-            child: Text("Partida $condition em ${dateFormat.format(date)}" +
-                " às ${hourFormat.format(date)}hrs."),
+            child: Text(
+              "Partida $condition em ${dateFormat.format(date)}" +
+                  " às ${hourFormat.format(date)}hrs.",
+              style: TextStyle(color: color),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget getDurationRow(Duration difference, IconData icon) {
+  Widget getDurationRow(Duration difference, IconData icon, Color color) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
@@ -55,10 +62,16 @@ class TimeDetails extends StatelessWidget {
           Flexible(
             flex: 1,
             child: difference.inMinutes == 0
-                ? Text("Menos de um minuto de jogo.")
-                : Text("${difference.inMinutes} " +
-                    (difference.inMinutes > 1 ? "minutos" : "minuto") +
-                    " de jogo."),
+                ? Text(
+                    "Menos de um minuto de jogo.",
+                    style: TextStyle(color: color),
+                  )
+                : Text(
+                    "${difference.inMinutes} " +
+                        (difference.inMinutes > 1 ? "minutos" : "minuto") +
+                        " de jogo.",
+                    style: TextStyle(color: color),
+                  ),
           ),
         ],
       ),

@@ -15,10 +15,6 @@ class RoundsTab extends StatelessWidget {
       controller: controller,
       child: Card(
         borderOnForeground: false,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        color: Colors.grey[300],
-        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Column(

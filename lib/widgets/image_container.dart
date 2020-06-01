@@ -22,7 +22,7 @@ class ImageContainer extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.grey[350],
+        color: Theme.of(context).hintColor,
         shape: BoxShape.circle,
         border: Border.all(color: borderColor),
         image: DecorationImage(

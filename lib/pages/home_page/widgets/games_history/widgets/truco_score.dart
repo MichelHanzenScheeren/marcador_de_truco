@@ -8,6 +8,8 @@ class TrucoScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).textSelectionColor;
+    TextStyle style = TextStyle(color: color, fontSize: 40);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
@@ -21,14 +23,14 @@ class TrucoScore extends StatelessWidget {
                   flex: 1,
                   child: Text(
                     truco.player1.description.name,
-                    style: TextStyle(fontSize: 18),
+                    style: style.copyWith(fontSize: 18),
                   ),
                 ),
                 Flexible(
                   flex: 1,
                   child: Text(
                     truco.player2.description.name,
-                    style: TextStyle(fontSize: 18),
+                    style: style.copyWith(fontSize: 18),
                   ),
                 ),
               ],
@@ -44,9 +46,9 @@ class TrucoScore extends StatelessWidget {
                 width: 70,
                 height: 70,
               ),
-              Text("${truco.player1.points}", style: TextStyle(fontSize: 40)),
-              Text("X", style: TextStyle(fontSize: 40)),
-              Text("${truco.player2.points}", style: TextStyle(fontSize: 40)),
+              Text("${truco.player1.points}", style: style),
+              Text("X", style: style),
+              Text("${truco.player2.points}", style: style),
               ImageContainer(
                 image: truco.player2.description.image,
                 type: truco.player2.description.imageType,

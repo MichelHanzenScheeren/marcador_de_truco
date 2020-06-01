@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: myPadding,
       child: TextFormField(
+        style: TextStyle(color: Theme.of(context).textSelectionColor),
         key: fieldKey,
         controller: textController,
         autofocus: autoFocus,

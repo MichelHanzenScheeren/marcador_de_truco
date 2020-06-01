@@ -35,19 +35,29 @@ class _HomeState extends State<Home> {
     final tabs = [InitGame(homeController), GameHistory(homeController)];
     return Scaffold(
       appBar: AppBar(
-        title: Text("Marcador de Truco"),
-        /*actions: <Widget>[
+        title: Text(
+          "Marcador de Truco",
+          style: TextStyle(color: Theme.of(context).textSelectionHandleColor),
+        ),
+        actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.lightbulb_outline),
+            icon: Icon(
+              Icons.lightbulb_outline,
+              color: Theme.of(context).textSelectionHandleColor,
+            ),
             onPressed: widget.myTheme.setTheme,
           ),
-        ],*/
+        ],
       ),
       body: Observer(builder: (context) {
         return tabs[homeController.currentPage];
       }),
       bottomNavigationBar: Observer(builder: (context) {
+        final theme = Theme.of(context);
         return BottomNavigationBar(
+          backgroundColor: theme.primaryColor,
+          selectedItemColor: theme.textSelectionHandleColor,
+          unselectedItemColor: theme.textSelectionHandleColor.withAlpha(150),
           currentIndex: homeController.currentPage,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

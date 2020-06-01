@@ -17,8 +17,7 @@ class InitGame extends StatelessWidget {
   Widget build(BuildContext context) {
     final double space = 10;
     final width = MediaQuery.of(context).size.width;
-    final primaryColor = Theme.of(context).accentColor;
-    final secondaryColor = Theme.of(context).splashColor;
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(space),
@@ -31,7 +30,8 @@ class InitGame extends StatelessWidget {
               SizedBox(height: space),
               TitleDivider(
                 text: "Jogadores",
-                dividerColor: primaryColor,
+                textColor: theme.textSelectionColor,
+                dividerColor: theme.primaryColor,
               ),
               SizedBox(height: space),
               PlayersImages(
@@ -49,7 +49,8 @@ class InitGame extends StatelessWidget {
               SizedBox(height: 2 * space),
               TitleDivider(
                 text: "Configurações da Partida",
-                dividerColor: primaryColor,
+                textColor: theme.textSelectionColor,
+                dividerColor: theme.primaryColor,
               ),
               SizedBox(height: space),
               CustomTextField(
@@ -64,13 +65,13 @@ class InitGame extends StatelessWidget {
                 if (homeController.isLoading) {
                   return WaitingIndicator(
                     size: 50,
-                    valueColor: secondaryColor,
+                    valueColor: theme.primaryColor,
                   );
                 }
                 return CustomButton(
-                  backGroundColor: primaryColor,
+                  backGroundColor: theme.primaryColor,
                   buttonText: "Iniciar Partida",
-                  textColor: secondaryColor,
+                  textColor: theme.textSelectionHandleColor,
                   onPressed: () => initGame(context),
                 );
               }),

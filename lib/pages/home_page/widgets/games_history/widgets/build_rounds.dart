@@ -20,6 +20,7 @@ class BuildRounds extends StatelessWidget {
           TitleDivider(
             text: "Rodadas",
             dividerColor: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textSelectionColor,
           ),
           SizedBox(height: 10),
           FutureBuilder<List<Round>>(
@@ -41,7 +42,7 @@ class BuildRounds extends StatelessWidget {
                     Round round = snapshot.data[index];
                     return Padding(
                       padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
-                      child: roundLine(round, index),
+                      child: roundLine(round, index, context),
                     );
                   },
                 );
@@ -53,7 +54,7 @@ class BuildRounds extends StatelessWidget {
     );
   }
 
-  Widget roundLine(Round round, int index) {
+  Widget roundLine(Round round, int index, BuildContext context) {
     return Row(
       mainAxisAlignment: round.playerNumber == Players.p1
           ? MainAxisAlignment.start
@@ -62,15 +63,18 @@ class BuildRounds extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: Colors.grey[400],
+            color: Colors.grey[500],
             shape: BoxShape.circle,
           ),
-          child: Text("${index + 1}ª"),
+          child: Text(
+            "${index + 1}ª",
+          ),
         ),
         SizedBox(width: 5),
         Text(
           "Marcou ${round.points} " + (round.points == 1 ? "ponto" : "pontos"),
           textAlign: TextAlign.left,
+          style: TextStyle(color: Theme.of(context).textSelectionColor),
         ),
       ],
     );

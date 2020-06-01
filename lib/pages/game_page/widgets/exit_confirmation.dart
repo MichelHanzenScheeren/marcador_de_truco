@@ -7,7 +7,7 @@ class ExitConfirmation extends StatelessWidget {
     return SimpleDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       title: Text(
-        "Deseja mesmo sair?\n" + "Todo o progresso atual será perido.",
+        "Deseja mesmo sair?\n" + "Todo o progresso atual do jogo será perdido.",
         textAlign: TextAlign.center,
       ),
       backgroundColor: Theme.of(context).backgroundColor,
