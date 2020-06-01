@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/models/truco.dart';
-import 'package:marcadordetruco/pages/game_page/rounds_tab/widgets/game_rounds.dart';
-import 'package:marcadordetruco/pages/game_page/rounds_tab/widgets/game_score.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/rounds_tab/widgets/game_rounds.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/rounds_tab/widgets/game_score.dart';
 
 class RoundsTab extends StatelessWidget {
   final Truco truco;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../../models/truco.dart';
-import '../../../../models/player.dart';
-import '../../../../widgets/image_container.dart';
+import 'package:marcadordetruco/models/player.dart';
+import 'package:marcadordetruco/models/truco.dart';
+import 'package:marcadordetruco/widgets/image_container.dart';
 
 class PlayerWidget extends StatelessWidget {
   final Player player;

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marcadordetruco/models/truco.dart';
+import 'package:marcadordetruco/statics/my_images.dart';
 import './widgets/truco_button.dart';
 import './widgets/player_widget.dart';
 import './widgets/undo_round_button.dart';
-import '../../../models/truco.dart';
-import '../../../statics/my_images.dart';
 
 class PointsTab extends StatelessWidget {
   final Truco truco;

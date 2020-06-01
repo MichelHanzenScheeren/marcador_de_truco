@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/exit_confirmation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import '../models/truco.dart';
@@ -65,5 +67,19 @@ abstract class _GameControllerBase with Store {
     setIsSaving(true);
     currentGame.trucoID = await myDatabase.save(currentGame);
     setIsSaving(false);
+  }
+
+  Future<bool> willPop(BuildContext context) async {
+    if (currentGame != null &&
+        !currentGame.finishedGame &&
+        (currentGame.player1.points != 0 || currentGame.player2.points != 0)) {
+      await showDialog(
+        context: context,
+        child: ExitConfirmation(),
+      );
+      return Future.value(false);
+    } else {
+      return Future.value(true);
+    }
   }
 }
