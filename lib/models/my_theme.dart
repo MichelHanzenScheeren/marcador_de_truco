@@ -54,13 +54,18 @@ abstract class _MyThemeBase with Store {
       errorBorder: getBorder(Colors.red),
       focusedErrorBorder: getBorder(Colors.red),
     ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 30,
+    ),
   );
 
   final ThemeData darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     backgroundColor: Colors.black54,
     canvasColor: Colors.black54, //cor do fundo
-    dialogBackgroundColor: Colors.black,
+    dialogBackgroundColor: Colors.grey[900],
+    errorColor: Colors.red[400],
     primaryColor: Colors.deepPurple,
     accentColor: Colors.deepPurple,
     hintColor: Colors.grey[900],
@@ -74,7 +79,6 @@ abstract class _MyThemeBase with Store {
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
     ),
-
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: TextStyle(color: Colors.grey[400]),
       contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
@@ -82,6 +86,10 @@ abstract class _MyThemeBase with Store {
       focusedBorder: getBorder(Colors.deepPurple),
       errorBorder: getBorder(Colors.red),
       focusedErrorBorder: getBorder(Colors.red),
+    ),
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 30,
     ),
   );
 

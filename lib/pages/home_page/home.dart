@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
           "Marcador de Truco",
           style: TextStyle(color: Theme.of(context).textSelectionHandleColor),
         ),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(

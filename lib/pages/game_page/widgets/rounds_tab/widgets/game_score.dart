@@ -8,6 +8,10 @@ class GameScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      color: Theme.of(context).textSelectionColor,
+      fontSize: 40,
+    );
     return Column(
       children: <Widget>[
         Padding(
@@ -19,14 +23,14 @@ class GameScore extends StatelessWidget {
                 flex: 1,
                 child: Text(
                   truco.player1.description.name,
-                  style: TextStyle(fontSize: 18),
+                  style: textStyle.copyWith(fontSize: 18),
                 ),
               ),
               Flexible(
                 flex: 1,
                 child: Text(
                   truco.player2.description.name,
-                  style: TextStyle(fontSize: 18),
+                  style: textStyle.copyWith(fontSize: 18),
                 ),
               ),
             ],
@@ -42,9 +46,9 @@ class GameScore extends StatelessWidget {
               width: 70,
               height: 70,
             ),
-            Text("${truco.player1.points}", style: TextStyle(fontSize: 40)),
-            Text("X", style: TextStyle(fontSize: 40)),
-            Text("${truco.player2.points}", style: TextStyle(fontSize: 40)),
+            Text("${truco.player1.points}", style: textStyle),
+            Text("X", style: textStyle),
+            Text("${truco.player2.points}", style: textStyle),
             ImageContainer(
               image: truco.player2.description.image,
               type: truco.player2.description.imageType,

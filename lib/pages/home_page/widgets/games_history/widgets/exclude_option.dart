@@ -12,14 +12,13 @@ class ExcludeOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      height: 70,
+      height: 80,
       child: IconButton(
         icon: Icon(
           Icons.delete_forever,
-          size: 50,
-          color: Colors.red,
+          size: 60,
+          color: Theme.of(context).errorColor,
         ),
         onPressed: () => showExcludeDialog(context),
       ),
@@ -27,16 +26,16 @@ class ExcludeOption extends StatelessWidget {
   }
 
   void showExcludeDialog(BuildContext context) {
+    final theme = Theme.of(context);
     showDialog(
       context: context,
       child: SimpleDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        contentPadding: EdgeInsets.all(15),
         title: Text(
           "Tem certeza?\n" + "Registros apagados não podem ser recuperados!",
           textAlign: TextAlign.center,
+          style: TextStyle(color: theme.textSelectionColor),
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
-        contentPadding: EdgeInsets.all(15),
         children: <Widget>[
           SizedBox(height: 5),
           Observer(builder: (_) {
@@ -47,16 +46,16 @@ class ExcludeOption extends StatelessWidget {
                   height: 30,
                   width: 30,
                   child: WaitingIndicator(
-                    valueColor: Theme.of(context).primaryColor,
+                    valueColor: theme.primaryColor,
                   ),
                 ),
               );
             }
             return CustomButton(
-              backGroundColor: Theme.of(context).backgroundColor,
-              borderColor: Colors.red,
+              backGroundColor: theme.dialogBackgroundColor,
+              borderColor: theme.errorColor,
               buttonText: "APAGAR",
-              textColor: Colors.red,
+              textColor: theme.errorColor,
               onPressed: () async {
                 await homeController.deleteRegister(trucoID);
                 close(context);
@@ -65,10 +64,10 @@ class ExcludeOption extends StatelessWidget {
           }),
           SizedBox(height: 10),
           CustomButton(
-            backGroundColor: Theme.of(context).primaryColor,
-            borderColor: Colors.transparent,
+            backGroundColor: theme.primaryColor,
+            borderColor: theme.primaryColor,
             buttonText: "CANCELAR",
-            textColor: Colors.white,
+            textColor: theme.textSelectionHandleColor,
             onPressed: () {
               close(context);
             },

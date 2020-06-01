@@ -9,12 +9,13 @@ class TrucoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       alignment: Alignment.center,
       width: 220,
       decoration: BoxDecoration(
-        color: Colors.deepPurpleAccent,
+        color: theme.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: InkWell(
@@ -27,7 +28,10 @@ class TrucoButton extends StatelessWidget {
               child: Observer(builder: (_) {
                 return Text(
                   truco.getTrucoText,
-                  style: TextStyle(fontSize: 25, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: theme.textSelectionHandleColor.withAlpha(240),
+                  ),
                 );
               }),
             ),

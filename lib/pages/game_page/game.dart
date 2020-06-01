@@ -46,22 +46,20 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return WillPopScope(
       onWillPop: () => gameController.willPop(context),
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Marcador de truco"),
+            title: Text(
+              "Marcador de truco",
+              style: TextStyle(color: theme.textSelectionHandleColor),
+            ),
             centerTitle: true,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
-            ],
             bottom: TabBar(
-              indicatorColor: Theme.of(context).hintColor,
+              indicatorColor: theme.textSelectionHandleColor,
               tabs: <Widget>[
                 Tab(icon: Icon(Icons.play_circle_filled)),
                 Tab(icon: Icon(Icons.list)),

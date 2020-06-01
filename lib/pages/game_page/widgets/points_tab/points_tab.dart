@@ -18,6 +18,10 @@ class PointsTab extends StatelessWidget {
     final double appBarHeight = Scaffold.of(context).appBarMaxHeight;
     final double height = size.height - appBarHeight;
     final double width = size.width;
+    final textStyle = TextStyle(
+      color: Theme.of(context).textSelectionColor,
+      fontSize: 20,
+    );
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,9 +58,9 @@ class PointsTab extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text("$p1Wins", style: TextStyle(fontSize: 20)),
-                      Text("Vitórias", style: TextStyle(fontSize: 20)),
-                      Text("$p2Wins", style: TextStyle(fontSize: 20)),
+                      Text("$p1Wins", style: textStyle),
+                      Text("Vitórias", style: textStyle),
+                      Text("$p2Wins", style: textStyle),
                     ],
                   ),
                 )

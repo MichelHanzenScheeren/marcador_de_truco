@@ -39,11 +39,15 @@ class RoundsTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Icon(Icons.history, size: 150),
-              SizedBox(height: 20),
+              SizedBox(height: 15),
               Text(
                 "Nenhuma rodada por enquanto...",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).textSelectionColor,
+                ),
               ),
+              SizedBox(height: 15),
             ],
           );
         } else {

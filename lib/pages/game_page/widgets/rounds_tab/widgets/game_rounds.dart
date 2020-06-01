@@ -11,11 +11,16 @@ class GameRounds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: 5),
-        Text("Rodadas", style: TextStyle(fontSize: 25)),
+        Text("Rodadas",
+            style: TextStyle(
+              fontSize: 25,
+              color: theme.textSelectionColor,
+            )),
         SizedBox(height: 10),
         ListView.builder(
           controller: controller,
@@ -30,13 +35,13 @@ class GameRounds extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: round.playerNumber == Players.p1
-                        ? roundLine(round, index)
+                        ? roundLine(round, index, theme)
                         : Container(),
                   ),
                   Flexible(
                     flex: 1,
                     child: round.playerNumber == Players.p2
-                        ? roundLine(round, index)
+                        ? roundLine(round, index, theme)
                         : Container(),
                   ),
                 ],
@@ -48,13 +53,13 @@ class GameRounds extends StatelessWidget {
     );
   }
 
-  Widget roundLine(Round round, int index) {
+  Widget roundLine(Round round, int index, ThemeData theme) {
     return Row(
       children: <Widget>[
         Container(
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: Colors.grey[400],
+            color: Colors.grey[500],
             shape: BoxShape.circle,
           ),
           child: Text("${index + 1}ª"),
@@ -63,6 +68,7 @@ class GameRounds extends StatelessWidget {
         Text(
           "Marcou ${round.points} " + (round.points == 1 ? "ponto" : "pontos"),
           textAlign: TextAlign.left,
+          style: TextStyle(color: theme.textSelectionColor),
         ),
         SizedBox(width: 2),
         buildDate(round.dateTime),

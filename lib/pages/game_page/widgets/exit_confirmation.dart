@@ -4,21 +4,21 @@ import 'package:marcadordetruco/widgets/custom_button.dart';
 class ExitConfirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SimpleDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      contentPadding: EdgeInsets.all(15),
       title: Text(
         "Deseja mesmo sair?\n" + "Todo o progresso atual do jogo será perdido.",
         textAlign: TextAlign.center,
+        style: TextStyle(color: theme.textSelectionColor),
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      contentPadding: EdgeInsets.all(15),
       children: <Widget>[
         SizedBox(height: 5),
         CustomButton(
-          backGroundColor: Theme.of(context).backgroundColor,
-          borderColor: Colors.red,
+          backGroundColor: theme.dialogBackgroundColor,
+          borderColor: theme.errorColor,
           buttonText: "SAIR",
-          textColor: Colors.red,
+          textColor: theme.errorColor,
           onPressed: () {
             Navigator.pop(context);
             Navigator.pop(context);
@@ -26,10 +26,10 @@ class ExitConfirmation extends StatelessWidget {
         ),
         SizedBox(height: 10),
         CustomButton(
-          backGroundColor: Theme.of(context).primaryColor,
-          borderColor: Colors.transparent,
+          backGroundColor: theme.primaryColor,
+          borderColor: theme.primaryColor,
           buttonText: "CANCELAR",
-          textColor: Colors.white,
+          textColor: theme.textSelectionHandleColor,
           onPressed: () {
             Navigator.pop(context);
           },

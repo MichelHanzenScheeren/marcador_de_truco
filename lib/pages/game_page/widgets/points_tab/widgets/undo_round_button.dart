@@ -6,10 +6,11 @@ class UndoRoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: 180,
       decoration: BoxDecoration(
-        color: Colors.grey[350],
+        color: theme.hintColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: GestureDetector(
@@ -18,7 +19,10 @@ class UndoRoundButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Desfazer rodada"),
+              Text(
+                "Desfazer rodada",
+                style: TextStyle(color: theme.textSelectionColor),
+              ),
               SizedBox(width: 5),
               Icon(Icons.settings_backup_restore),
             ],

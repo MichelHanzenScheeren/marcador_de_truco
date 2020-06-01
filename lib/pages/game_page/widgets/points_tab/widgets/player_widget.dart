@@ -19,6 +19,7 @@ class PlayerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       width: size.width * 0.5,
       height: size.height * 0.65,
@@ -45,7 +46,10 @@ class PlayerWidget extends StatelessWidget {
                     child: Text(
                       player.description.name,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: theme.textSelectionColor,
+                      ),
                     ),
                   ),
                 ],
@@ -54,7 +58,10 @@ class PlayerWidget extends StatelessWidget {
             Observer(builder: (_) {
               return Text(
                 "${player.points}",
-                style: TextStyle(fontSize: 85),
+                style: TextStyle(
+                  fontSize: 85,
+                  color: theme.textSelectionColor,
+                ),
               );
             }),
             InkWell(
@@ -72,12 +79,14 @@ class PlayerWidget extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent, shape: BoxShape.circle),
+                    color: theme.primaryColor,
+                    shape: BoxShape.circle,
+                  ),
                   child: Observer(builder: (_) {
                     return Text(
                       "${truco.currentValue}",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: theme.textSelectionHandleColor.withAlpha(240),
                         fontWeight: FontWeight.bold,
                         fontSize: 22,
                       ),

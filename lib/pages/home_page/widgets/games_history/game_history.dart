@@ -103,7 +103,8 @@ class _GameHistoryState extends State<GameHistory> {
   void excludeItem(BuildContext context, int trucoID) {
     showModalBottomSheet(
       context: context,
-      elevation: 0,
+      elevation: 30,
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       enableDrag: false,
       builder: (context) {
         return ExcludeOption(widget.homeController, trucoID);
