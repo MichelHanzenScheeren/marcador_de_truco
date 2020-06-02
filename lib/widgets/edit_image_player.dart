@@ -7,29 +7,46 @@ import './custom_button.dart';
 
 class EditImagePlayer extends StatelessWidget {
   final PlayerDescription playerDescription;
-  final style = TextStyle(color: Colors.white, fontSize: 15);
-  final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(20));
-  EditImagePlayer(this.playerDescription);
+  final Function() onSucess;
+  final Function(Exception erro) onFail;
+  EditImagePlayer(
+    this.playerDescription, {
+    @required this.onSucess,
+    @required this.onFail,
+  });
 
-  void imageSelected(BuildContext context, File image, ImageType type) async {
-    if (image == null) return;
-    File cropped = await croppImage(image);
-    if (cropped == null) return;
-    playerDescription.setImage(cropped.path, ImageType.file);
-    Navigator.pop(context);
+  void selectNewImage(ImageSource mySource) async {
+    try {
+      await getImage(mySource);
+      onSucess();
+    } catch (erro) {
+      onFail(erro);
+    }
   }
 
-  Future<File> croppImage(File image) async {
-    return await ImageCropper.cropImage(
+  Future getImage(ImageSource mySource) async {
+    File image = await ImagePicker.pickImage(source: mySource);
+    if (image != null) await croppImage(image);
+  }
+
+  Future croppImage(File image) async {
+    File cropped = await ImageCropper.cropImage(
       sourcePath: image.path,
       cropStyle: CropStyle.circle,
       aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
     );
+    if (cropped != null) defineNewImage(cropped);
+  }
+
+  void defineNewImage(File image) {
+    playerDescription.setImage(image.path, ImageType.file);
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BottomSheet(
+      backgroundColor: theme.dialogBackgroundColor,
       enableDrag: false,
       builder: (context) {
         return Padding(
@@ -41,35 +58,32 @@ class EditImagePlayer extends StatelessWidget {
             children: <Widget>[
               CustomButton(
                 buttonText: "Imagem da galeria",
-                backGroundColor: Theme.of(context).accentColor,
-                textColor: Theme.of(context).splashColor,
-                onPressed: () async {
-                  File image = await ImagePicker.pickImage(
-                    source: ImageSource.gallery,
-                  );
-                  imageSelected(context, image, ImageType.file);
+                textColor: theme.textSelectionColor,
+                backGroundColor: theme.primaryColor,
+                borderColor: theme.primaryColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  selectNewImage(ImageSource.gallery);
                 },
               ),
               SizedBox(height: 10),
               CustomButton(
                 buttonText: "Imagem da câmera",
-                backGroundColor: Theme.of(context).accentColor,
-                textColor: Theme.of(context).splashColor,
-                onPressed: () async {
-                  File image = await ImagePicker.pickImage(
-                    source: ImageSource.camera,
-                  );
-                  imageSelected(context, image, ImageType.file);
+                textColor: theme.textSelectionColor,
+                backGroundColor: theme.primaryColor,
+                borderColor: theme.primaryColor,
+                onPressed: () {
+                  Navigator.pop(context);
+                  selectNewImage(ImageSource.camera);
                 },
               ),
               SizedBox(height: 10),
               CustomButton(
                 buttonText: "Cancelar",
-                backGroundColor: Theme.of(context).backgroundColor,
-                borderColor: Colors.red,
-                textColor: Colors.black,
+                textColor: theme.errorColor,
+                backGroundColor: theme.dialogBackgroundColor,
+                borderColor: theme.errorColor,
                 onPressed: () {
-                  FocusScope.of(context).requestFocus(FocusNode());
                   Navigator.pop(context);
                 },
               ),
@@ -78,16 +92,6 @@ class EditImagePlayer extends StatelessWidget {
         );
       },
       onClosing: () {},
-    );
-  }
-
-  Widget textButton(String text) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15),
-      child: Text(
-        text,
-        style: style,
-      ),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
-import 'package:marcadordetruco/models/my_theme.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_names.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';

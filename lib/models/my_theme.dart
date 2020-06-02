@@ -54,6 +54,8 @@ abstract class _MyThemeBase with Store {
     backgroundColor: Colors.white,
     canvasColor: Colors.white, //cor do fundo
     dialogBackgroundColor: Colors.white,
+    errorColor: Colors.red[400],
+    highlightColor: Colors.green[400],
     primaryColor: Colors.deepPurpleAccent,
     accentColor: Colors.deepPurpleAccent,
     hintColor: Colors.grey[400],
@@ -87,6 +89,7 @@ abstract class _MyThemeBase with Store {
     canvasColor: Colors.black54, //cor do fundo
     dialogBackgroundColor: Colors.grey[900],
     errorColor: Colors.red[400],
+    highlightColor: Colors.green[400],
     primaryColor: Colors.deepPurple,
     accentColor: Colors.deepPurple,
     hintColor: Colors.grey[900],
@@ -95,6 +98,7 @@ abstract class _MyThemeBase with Store {
     textSelectionHandleColor: Colors.white.withAlpha(200), // botões
     iconTheme: IconThemeData(color: Colors.white.withAlpha(200)),
     unselectedWidgetColor: Colors.white.withAlpha(200),
+
     cardTheme: CardTheme(
       color: Colors.grey[900].withAlpha(180),
       elevation: 0,

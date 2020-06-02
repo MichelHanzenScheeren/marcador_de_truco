@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/models/player_description.dart';
+import 'package:marcadordetruco/widgets/custom_snackbar.dart';
 import '../../../../../widgets/edit_image_player.dart';
 import '../../../../../widgets/image_container.dart';
 
-class PlayersImages extends StatelessWidget {
+class PlayersImages extends StatefulWidget {
   final PlayerDescription p1Description;
   final PlayerDescription p2Description;
   final double imageSize;
@@ -14,11 +16,50 @@ class PlayersImages extends StatelessWidget {
     @required this.imageSize,
   });
 
-  void editImage(BuildContext context, PlayerDescription playerDescription) {
+  @override
+  _PlayersImagesState createState() => _PlayersImagesState();
+}
+
+class _PlayersImagesState extends State<PlayersImages> {
+  void editImage(PlayerDescription playerDescription) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => EditImagePlayer(playerDescription),
+      builder: (context) => EditImagePlayer(
+        playerDescription,
+        onSucess: sucess,
+        onFail: fail,
+      ),
     );
+  }
+
+  void sucess() {
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: "Imagem alterada com sucesso!",
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.highlightColor,
+      secondsDuration: 2,
+    ));
+  }
+
+  void fail(Exception erro) {
+    String myText;
+    if (erro.runtimeType == PlatformException) {
+      myText = "A permissão de acesso aos arquivos é necessária para" +
+          " a opção escolhida...";
+    } else {
+      myText = "Um erro inesperado ocorreu!";
+    }
+    print(erro.toString());
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: myText,
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.errorColor,
+      secondsDuration: 3,
+    ));
   }
 
   @override
@@ -31,27 +72,27 @@ class PlayersImages extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
           child: Observer(builder: (_) {
             return ImageContainer(
-              image: p1Description.image,
-              type: p1Description.imageType,
-              height: imageSize,
-              width: imageSize,
+              image: widget.p1Description.image,
+              type: widget.p1Description.imageType,
+              height: widget.imageSize,
+              width: widget.imageSize,
               borderColor: primaryColor,
             );
           }),
-          onTap: () => editImage(context, p1Description),
+          onTap: () => editImage(widget.p1Description),
         ),
         InkWell(
           borderRadius: BorderRadius.all(Radius.circular(20)),
           child: Observer(builder: (_) {
             return ImageContainer(
-              image: p2Description.image,
-              type: p2Description.imageType,
-              height: imageSize,
-              width: imageSize,
+              image: widget.p2Description.image,
+              type: widget.p2Description.imageType,
+              height: widget.imageSize,
+              width: widget.imageSize,
               borderColor: primaryColor,
             );
           }),
-          onTap: () => editImage(context, p2Description),
+          onTap: () => editImage(widget.p2Description),
         ),
       ],
     );

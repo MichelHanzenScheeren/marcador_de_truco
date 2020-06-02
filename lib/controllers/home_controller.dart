@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
