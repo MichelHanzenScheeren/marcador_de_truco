@@ -1,6 +1,8 @@
+import 'package:marcadordetruco/models/settings.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+const String settingsTable = "settingsTable";
 const String trucoTable = "trucoTable";
 const String playerTable = "playerTable";
 const String roundTable = "roundTable";
@@ -20,6 +22,10 @@ class DatabaseConnection {
     final String path = join(dataBasePath, "contacts.db");
     _database = await openDatabase(path, version: 1,
         onCreate: (Database db, int newVersion) async {
+      await db.execute("CREATE TABLE $settingsTable(" +
+          "settingsID INTEGER PRIMARY KEY," +
+          "isDarkTheme INTEGER" +
+          ");");
       await db.execute("CREATE TABLE $trucoTable(" +
           "trucoID INTEGER PRIMARY KEY AUTOINCREMENT," +
           "maxPoints INTEGER," +
@@ -44,6 +50,7 @@ class DatabaseConnection {
           "points INTEGER," +
           "FOREIGN KEY (trucoID) REFERENCES $trucoTable (trucoID)" +
           ");");
+      await db.insert("$settingsTable", Settings(1, false).toMap());
     });
   }
 

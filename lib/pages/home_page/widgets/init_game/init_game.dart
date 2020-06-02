@@ -12,8 +12,7 @@ import 'package:marcadordetruco/widgets/title_divider.dart';
 class InitGame extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final HomeController homeController;
-  final MyTheme mytheme;
-  InitGame(this.homeController, this.mytheme);
+  InitGame(this.homeController);
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +64,8 @@ class InitGame extends StatelessWidget {
               SizedBox(height: space),
               Observer(builder: (_) {
                 return SwitchComponent(
-                  mytheme.isDarkTheme,
-                  mytheme.setTheme,
+                  homeController.myTheme.isDarkTheme,
+                  homeController.myTheme.setTheme,
                 );
               }),
               SizedBox(height: space * 2),

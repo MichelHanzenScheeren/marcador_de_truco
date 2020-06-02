@@ -1,9 +1,11 @@
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/round.dart';
+import 'package:marcadordetruco/models/settings.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:sqflite/sqflite.dart';
 
+const String settingsTable = "settingsTable";
 const String trucoTable = "trucoTable";
 const String playerTable = "playerTable";
 const String roundTable = "roundTable";
@@ -65,5 +67,22 @@ class MyDatabase {
     await Future.delayed(Duration(milliseconds: 500));
     Database db = await connection.getDatabase;
     await db.delete(trucoTable, where: "trucoID = ?", whereArgs: [trucoID]);
+  }
+
+  Future<Settings> getSettings() async {
+    Database db = await connection.getDatabase;
+    String query = "SELECT * FROM $settingsTable WHERE settingsID = 1;";
+    List<Map> settings = await db.rawQuery(query);
+
+    return settings.length > 0
+        ? Settings.fromMap(settings[0])
+        : Settings(1, false);
+  }
+
+  Future saveNewTheme(bool value) async {
+    Database db = await connection.getDatabase;
+    int newValue = value == false ? 0 : 1;
+    await db.rawQuery("UPDATE $settingsTable SET isDarkTheme = $newValue " +
+        "WHERE settingsID = 1;");
   }
 }

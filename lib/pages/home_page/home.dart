@@ -3,25 +3,19 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/game_history.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
 import '../../controllers/home_controller.dart';
-import '../../models/my_theme.dart';
 
 class Home extends StatefulWidget {
-  final homeController = HomeController();
-  final MyTheme myTheme;
-  Home(this.myTheme);
-
   @override
-  _HomeState createState() => _HomeState(homeController);
+  _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final HomeController homeController;
-  _HomeState(this.homeController);
+  final HomeController homeController = HomeController();
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    homeController.getMyDatabase(context);
+    homeController.getDependencies(context);
   }
 
   @override
@@ -32,10 +26,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = [
-      InitGame(homeController, widget.myTheme),
-      GameHistory(homeController)
-    ];
+    final tabs = [InitGame(homeController), GameHistory(homeController)];
     return Scaffold(
       appBar: AppBar(
         title: Text(

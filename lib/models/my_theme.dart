@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:marcadordetruco/database/database_connection.dart';
+import 'package:marcadordetruco/database/my_database.dart';
+import 'package:marcadordetruco/models/settings.dart';
 import 'package:mobx/mobx.dart';
 
 part 'my_theme.g.dart';
@@ -9,21 +11,46 @@ enum theme { light, dark }
 class MyTheme = _MyThemeBase with _$MyTheme;
 
 abstract class _MyThemeBase with Store {
+  MyDatabase myDatabase;
+  Settings settings;
+
   @observable
-  bool isDarkTheme = false;
+  bool isDarkTheme = true;
+
+  _MyThemeBase(DatabaseConnection connection) {
+    myDatabase = MyDatabase(connection);
+    validateCurrentTheme();
+  }
+
+  Future validateCurrentTheme() async {
+    settings = await myDatabase.getSettings();
+    if (settings.isDarkTheme != isDarkTheme) {
+      _setTheme(settings.isDarkTheme);
+    }
+  }
 
   @action
-  void setTheme(bool value) => isDarkTheme = value;
+  void _setTheme(bool value) => isDarkTheme = value;
+
+  @action
+  void setTheme(bool value) {
+    isDarkTheme = value;
+    _saveNewTheme(value);
+  }
+
+  void _saveNewTheme(bool value) async {
+    await myDatabase.saveNewTheme(value);
+  }
 
   @computed
   ThemeData get getTheme {
     if (isDarkTheme) {
-      return darkTheme;
+      return _darkTheme;
     }
-    return lightTheme;
+    return _lightTheme;
   }
 
-  final ThemeData lightTheme = ThemeData(
+  final ThemeData _lightTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     backgroundColor: Colors.white,
     canvasColor: Colors.white, //cor do fundo
@@ -55,7 +82,7 @@ abstract class _MyThemeBase with Store {
     ),
   );
 
-  final ThemeData darkTheme = ThemeData(
+  final ThemeData _darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     backgroundColor: Colors.black54,
     canvasColor: Colors.black54, //cor do fundo
@@ -94,12 +121,5 @@ abstract class _MyThemeBase with Store {
       borderRadius: BorderRadius.circular(30),
       borderSide: BorderSide(color: receivedColor),
     );
-  }
-
-  void configureOrientation() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
   }
 }
