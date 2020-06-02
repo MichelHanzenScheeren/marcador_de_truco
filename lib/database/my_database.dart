@@ -79,10 +79,8 @@ class MyDatabase {
         : Settings(1, false);
   }
 
-  Future saveNewTheme(bool value) async {
+  Future saveNewTheme(Settings settings) async {
     Database db = await connection.getDatabase;
-    int newValue = value == false ? 0 : 1;
-    await db.rawQuery("UPDATE $settingsTable SET isDarkTheme = $newValue " +
-        "WHERE settingsID = 1;");
+    await db.update("$settingsTable", settings.toMap());
   }
 }

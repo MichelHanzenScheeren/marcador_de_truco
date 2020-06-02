@@ -10,9 +10,10 @@ class Settings {
   }
 
   Map toMap() {
-    return {
+    Map<String, dynamic> settings = {
       "settingsID": settingsID,
       "isDarkTheme": isDarkTheme == false ? 0 : 1,
     };
+    return settings;
   }
 }

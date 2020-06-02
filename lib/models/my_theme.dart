@@ -6,8 +6,6 @@ import 'package:mobx/mobx.dart';
 
 part 'my_theme.g.dart';
 
-enum theme { light, dark }
-
 class MyTheme = _MyThemeBase with _$MyTheme;
 
 abstract class _MyThemeBase with Store {
@@ -39,7 +37,8 @@ abstract class _MyThemeBase with Store {
   }
 
   void _saveNewTheme(bool value) async {
-    await myDatabase.saveNewTheme(value);
+    settings.isDarkTheme = value;
+    await myDatabase.saveNewTheme(settings);
   }
 
   @computed
