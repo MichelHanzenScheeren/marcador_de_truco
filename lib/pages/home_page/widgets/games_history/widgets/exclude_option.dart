@@ -7,7 +7,14 @@ import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 class ExcludeOption extends StatelessWidget {
   final HomeController homeController;
   final int trucoID;
-  ExcludeOption(this.homeController, this.trucoID);
+  final Function() onSucess;
+  final Function(Exception erro) onFail;
+  ExcludeOption(
+    this.homeController,
+    this.trucoID, {
+    @required this.onSucess,
+    @required this.onFail,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +64,7 @@ class ExcludeOption extends StatelessWidget {
               buttonText: "APAGAR",
               textColor: theme.errorColor,
               onPressed: () async {
-                await homeController.deleteRegister(trucoID);
-                close(context);
+                delete(context);
               },
             );
           }),
@@ -75,6 +81,17 @@ class ExcludeOption extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future delete(BuildContext context) async {
+    try {
+      await homeController.deleteRegister(trucoID);
+      onSucess();
+    } catch (erro) {
+      onFail(erro);
+    } finally {
+      close(context);
+    }
   }
 
   void close(BuildContext context) {

@@ -55,7 +55,7 @@ abstract class _MyThemeBase with Store {
     canvasColor: Colors.white, //cor do fundo
     dialogBackgroundColor: Colors.white,
     errorColor: Colors.red[400],
-    highlightColor: Colors.green[400],
+    primaryColorLight: Colors.green[400],
     primaryColor: Colors.deepPurpleAccent,
     accentColor: Colors.deepPurpleAccent,
     hintColor: Colors.grey[400],
@@ -89,7 +89,7 @@ abstract class _MyThemeBase with Store {
     canvasColor: Colors.black54, //cor do fundo
     dialogBackgroundColor: Colors.grey[900],
     errorColor: Colors.red[400],
-    highlightColor: Colors.green[400],
+    primaryColorLight: Colors.green[400],
     primaryColor: Colors.deepPurple,
     accentColor: Colors.deepPurple,
     hintColor: Colors.grey[900],

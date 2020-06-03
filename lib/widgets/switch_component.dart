@@ -25,7 +25,7 @@ class SwitchComponent extends StatelessWidget {
             ),
           ),
           Container(
-            width: 70,
+            width: 80,
             child: Switch(
               materialTapTargetSize: MaterialTapTargetSize.padded,
               value: isDarkTheme,

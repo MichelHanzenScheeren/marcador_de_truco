@@ -6,6 +6,7 @@ import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/bu
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/exclude_option.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/time_details.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/truco_score.dart';
+import 'package:marcadordetruco/widgets/custom_snackbar.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 import 'package:mobx/mobx.dart';
 
@@ -26,11 +27,11 @@ class _GameHistoryState extends State<GameHistory> {
       future: widget.homeController.getData(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
-          return waiting(context);
-        else if (snapshot.data.length == 0) return emptyWidget(context);
+          return waiting();
+        else if (snapshot.data.length == 0) return emptyWidget();
 
         return Observer(builder: (_) {
-          if (snapshot.data.length == 0) return emptyWidget(context);
+          if (snapshot.data.length == 0) return emptyWidget();
           return ListView.builder(
             controller: scrollController,
             itemCount: snapshot.data.length,
@@ -43,7 +44,7 @@ class _GameHistoryState extends State<GameHistory> {
     );
   }
 
-  Widget waiting(BuildContext context) {
+  Widget waiting() {
     return Container(
       alignment: Alignment.center,
       child: WaitingIndicator(
@@ -52,7 +53,7 @@ class _GameHistoryState extends State<GameHistory> {
     );
   }
 
-  Widget emptyWidget(BuildContext context) {
+  Widget emptyWidget() {
     return Container(
       margin: EdgeInsets.all(15),
       alignment: Alignment.center,
@@ -96,19 +97,44 @@ class _GameHistoryState extends State<GameHistory> {
           ),
         ),
       ),
-      onLongPress: () => excludeItem(context, truco.trucoID),
+      onLongPress: () => excludeItem(truco.trucoID),
     );
   }
 
-  void excludeItem(BuildContext context, int trucoID) {
+  void excludeItem(int trucoID) {
     showModalBottomSheet(
       context: context,
       elevation: 30,
       backgroundColor: Theme.of(context).dialogBackgroundColor,
       enableDrag: false,
       builder: (context) {
-        return ExcludeOption(widget.homeController, trucoID);
+        return ExcludeOption(
+          widget.homeController,
+          trucoID,
+          onSucess: onSucess,
+          onFail: onFail,
+        );
       },
     );
+  }
+
+  void onSucess() {
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: "Registro deletado com sucesso!",
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.primaryColorLight,
+      secondsDuration: 2,
+    ));
+  }
+
+  void onFail(Exception erro) {
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: "Não foi possível deleterar este registro!",
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.errorColor,
+      secondsDuration: 3,
+    ));
   }
 }

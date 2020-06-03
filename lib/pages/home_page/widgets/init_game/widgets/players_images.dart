@@ -21,47 +21,6 @@ class PlayersImages extends StatefulWidget {
 }
 
 class _PlayersImagesState extends State<PlayersImages> {
-  void editImage(PlayerDescription playerDescription) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => EditImagePlayer(
-        playerDescription,
-        onSucess: sucess,
-        onFail: fail,
-      ),
-    );
-  }
-
-  void sucess() {
-    final ThemeData theme = Theme.of(context);
-    Scaffold.of(context).removeCurrentSnackBar();
-    Scaffold.of(context).showSnackBar(CustomSnackbar(
-      text: "Imagem alterada com sucesso!",
-      textColor: theme.textSelectionHandleColor,
-      backgroundColor: theme.highlightColor,
-      secondsDuration: 2,
-    ));
-  }
-
-  void fail(Exception erro) {
-    String myText;
-    if (erro.runtimeType == PlatformException) {
-      myText = "A permissão de acesso aos arquivos é necessária para" +
-          " a opção escolhida...";
-    } else {
-      myText = "Um erro inesperado ocorreu!";
-    }
-    print(erro.toString());
-    final ThemeData theme = Theme.of(context);
-    Scaffold.of(context).removeCurrentSnackBar();
-    Scaffold.of(context).showSnackBar(CustomSnackbar(
-      text: myText,
-      textColor: theme.textSelectionHandleColor,
-      backgroundColor: theme.errorColor,
-      secondsDuration: 3,
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
     final Color primaryColor = Theme.of(context).primaryColor;
@@ -96,5 +55,46 @@ class _PlayersImagesState extends State<PlayersImages> {
         ),
       ],
     );
+  }
+
+  void editImage(PlayerDescription playerDescription) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => EditImagePlayer(
+        playerDescription,
+        onSucess: sucess,
+        onFail: fail,
+      ),
+    );
+  }
+
+  void sucess() {
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: "Imagem alterada com sucesso!",
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.primaryColorLight,
+      secondsDuration: 2,
+    ));
+  }
+
+  void fail(Exception erro) {
+    String myText;
+    if (erro.runtimeType == PlatformException) {
+      myText = "A permissão de acesso aos arquivos é necessária para" +
+          " a opção escolhida...";
+    } else {
+      myText = "Um erro inesperado ocorreu!";
+    }
+    print(erro.toString());
+    final ThemeData theme = Theme.of(context);
+    Scaffold.of(context).removeCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(CustomSnackbar(
+      text: myText,
+      textColor: theme.textSelectionHandleColor,
+      backgroundColor: theme.errorColor,
+      secondsDuration: 3,
+    ));
   }
 }
