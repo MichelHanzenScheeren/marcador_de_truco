@@ -20,6 +20,7 @@ dependencies:
   sqflite: ^1.3.0+2
   provider: ^4.1.2
   intl: ^0.16.1
+  flutter_launcher_icons: ^0.7.5
 
 dev_dependencies:
   flutter_test:
@@ -32,4 +33,10 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/images/
+
+flutter_icons:
+  image_path: "assets/logo/logo.png"
+  android: true
+  ios: true
+  

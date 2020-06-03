@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Observer(builder: (context) {
         return MaterialApp(
-          title: 'Marcador de truco',
+          title: 'Ás de Espada',
           debugShowCheckedModeBanner: false,
           theme: myTheme.getTheme,
           home: Home(),

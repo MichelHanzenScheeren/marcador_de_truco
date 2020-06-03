@@ -50,7 +50,7 @@ class DatabaseConnection {
           "points INTEGER," +
           "FOREIGN KEY (trucoID) REFERENCES $trucoTable (trucoID)" +
           ");");
-      await db.insert("$settingsTable", Settings(1, false).toMap());
+      await db.insert("$settingsTable", Settings(1, true).toMap());
     });
   }
 
