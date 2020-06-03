@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/widgets/custom_snackbar.dart';
-import '../../../../../widgets/edit_image_player.dart';
 import '../../../../../widgets/image_container.dart';
+import 'edit_image_player.dart';
 
 class PlayersImages extends StatefulWidget {
   final PlayerDescription p1Description;

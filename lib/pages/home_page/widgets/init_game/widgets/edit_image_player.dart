@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:marcadordetruco/models/player_description.dart';
-import './custom_button.dart';
+import 'package:marcadordetruco/widgets/custom_button.dart';
 
 class EditImagePlayer extends StatelessWidget {
   final PlayerDescription playerDescription;
@@ -17,19 +17,18 @@ class EditImagePlayer extends StatelessWidget {
 
   void selectNewImage(ImageSource mySource) async {
     try {
-      await getImage(mySource);
-      onSucess();
+      getImage(mySource);
     } catch (erro) {
       onFail(erro);
     }
   }
 
-  Future getImage(ImageSource mySource) async {
+  void getImage(ImageSource mySource) async {
     File image = await ImagePicker.pickImage(source: mySource);
-    if (image != null) await croppImage(image);
+    if (image != null) croppImage(image);
   }
 
-  Future croppImage(File image) async {
+  void croppImage(File image) async {
     File cropped = await ImageCropper.cropImage(
       sourcePath: image.path,
       cropStyle: CropStyle.circle,
@@ -40,6 +39,7 @@ class EditImagePlayer extends StatelessWidget {
 
   void defineNewImage(File image) {
     playerDescription.setImage(image.path, ImageType.file);
+    onSucess();
   }
 
   @override
