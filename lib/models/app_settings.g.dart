@@ -48,19 +48,18 @@ mixin _$AppSettings on _AppSettingsBase, Store {
     });
   }
 
-  final _$isLoadingAtom = Atom(name: '_AppSettingsBase.isLoading');
+  final _$setThemeAsyncAction = AsyncAction('_AppSettingsBase.setTheme');
 
   @override
-  bool get isLoading {
-    _$isLoadingAtom.reportRead();
-    return super.isLoading;
+  Future<dynamic> setTheme(bool value) {
+    return _$setThemeAsyncAction.run(() => super.setTheme(value));
   }
 
+  final _$setWakeLockAsyncAction = AsyncAction('_AppSettingsBase.setWakeLock');
+
   @override
-  set isLoading(bool value) {
-    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
-      super.isLoading = value;
-    });
+  Future<dynamic> setWakeLock(bool value) {
+    return _$setWakeLockAsyncAction.run(() => super.setWakeLock(value));
   }
 
   final _$_AppSettingsBaseActionController =
@@ -89,44 +88,10 @@ mixin _$AppSettings on _AppSettingsBase, Store {
   }
 
   @override
-  void setTheme(bool value) {
-    final _$actionInfo = _$_AppSettingsBaseActionController.startAction(
-        name: '_AppSettingsBase.setTheme');
-    try {
-      return super.setTheme(value);
-    } finally {
-      _$_AppSettingsBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setWakeLock(bool value) {
-    final _$actionInfo = _$_AppSettingsBaseActionController.startAction(
-        name: '_AppSettingsBase.setWakeLock');
-    try {
-      return super.setWakeLock(value);
-    } finally {
-      _$_AppSettingsBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setIsLoading(bool value) {
-    final _$actionInfo = _$_AppSettingsBaseActionController.startAction(
-        name: '_AppSettingsBase.setIsLoading');
-    try {
-      return super.setIsLoading(value);
-    } finally {
-      _$_AppSettingsBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 isDarkTheme: ${isDarkTheme},
 isEnabledWakelock: ${isEnabledWakelock},
-isLoading: ${isLoading},
 getTheme: ${getTheme}
     ''';
   }

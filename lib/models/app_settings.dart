@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
 import 'package:mobx/mobx.dart';
+import 'package:wakelock/wakelock.dart';
 part 'app_settings.g.dart';
 
 class AppSettings = _AppSettingsBase with _$AppSettings;
@@ -13,10 +14,7 @@ abstract class _AppSettingsBase with Store {
   bool isDarkTheme = true;
 
   @observable
-  bool isEnabledWakelock = true;
-
-  @observable
-  bool isLoading = false; //not saved
+  bool isEnabledWakelock = false;
 
   MyDatabase myDatabase; //not saved
 
@@ -24,12 +22,6 @@ abstract class _AppSettingsBase with Store {
     myDatabase = MyDatabase(connection);
     validateCurrentSettings();
   }
-
-  _AppSettingsBase.fromValues(
-    this.appSettingsID,
-    this.isDarkTheme,
-    this.isEnabledWakelock,
-  );
 
   fromMap(Map map) {
     appSettingsID = map["appSettingsID"];
@@ -65,28 +57,27 @@ abstract class _AppSettingsBase with Store {
   void _setTheme(bool value) => isDarkTheme = value;
 
   @action
-  void _setWakeLock(bool value) => isEnabledWakelock = value;
-
-  @action
-  void setTheme(bool value) {
-    isDarkTheme = value;
-    _saveSetting();
-  }
-
-  @action
-  void setWakeLock(bool value) {
+  void _setWakeLock(bool value) {
     isEnabledWakelock = value;
-    _saveSetting();
-  }
-
-  void _saveSetting() async {
-    setIsLoading(true);
-    await myDatabase.saveSetting(toMap());
-    setIsLoading(false);
+    Wakelock.toggle(on: value);
   }
 
   @action
-  setIsLoading(bool value) => isLoading = value;
+  Future setTheme(bool value) async {
+    isDarkTheme = value;
+    await _saveSetting();
+  }
+
+  @action
+  Future setWakeLock(bool value) async {
+    isEnabledWakelock = value;
+    await Wakelock.toggle(on: value);
+    await _saveSetting();
+  }
+
+  Future _saveSetting() async {
+    await myDatabase.saveSetting(toMap());
+  }
 
   @computed
   ThemeData get getTheme {

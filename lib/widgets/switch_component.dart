@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 
 class SwitchComponent extends StatelessWidget {
-  final bool isDarkTheme;
-  final Function(bool value) setTheme;
-  final bool isLoading;
-  SwitchComponent(this.isDarkTheme, this.setTheme, this.isLoading);
+  final String text;
+  final bool isEnabled;
+  final Future Function(bool value) function;
+  SwitchComponent({
+    this.text: "",
+    this.isEnabled: true,
+    @required this.function,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,33 +25,22 @@ class SwitchComponent extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Text(
-              "Modo Noturno:",
+              text,
               style: TextStyle(color: theme.textSelectionColor),
             ),
           ),
-          isLoading
-              ? Container(
-                  alignment: Alignment.center,
-                  width: 50,
-                  height: 45,
-                  padding: EdgeInsets.fromLTRB(0, 5, 15, 5),
-                  child: WaitingIndicator(
-                    valueColor: theme.primaryColor,
-                    size: 40,
-                  ),
-                )
-              : Container(
-                  width: 80,
-                  child: Switch(
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    value: isDarkTheme,
-                    inactiveThumbColor: theme.backgroundColor,
-                    inactiveTrackColor: theme.hintColor,
-                    activeTrackColor: theme.hintColor,
-                    activeColor: theme.focusColor,
-                    onChanged: setTheme,
-                  ),
-                ),
+          Container(
+            width: 80,
+            child: Switch(
+              materialTapTargetSize: MaterialTapTargetSize.padded,
+              value: isEnabled,
+              inactiveThumbColor: theme.primaryColor.withAlpha(150),
+              inactiveTrackColor: theme.primaryColor.withAlpha(120),
+              activeTrackColor: theme.primaryColor.withAlpha(230),
+              activeColor: theme.primaryColor,
+              onChanged: (value) async => await function(value),
+            ),
+          ),
         ],
       ),
     );

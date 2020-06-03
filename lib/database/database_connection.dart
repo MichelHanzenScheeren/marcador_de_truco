@@ -52,7 +52,7 @@ class DatabaseConnection {
           ");");
       await db.insert(
         "$appSettingsTable",
-        {"appSettingsID": 1, "isDarkTheme": 1, "isEnabledWakelock": 1},
+        {"appSettingsID": 1, "isDarkTheme": 1, "isEnabledWakelock": 0},
       );
     });
   }

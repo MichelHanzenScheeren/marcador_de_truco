@@ -63,9 +63,17 @@ class InitGame extends StatelessWidget {
               SizedBox(height: space),
               Observer(builder: (_) {
                 return SwitchComponent(
-                  homeController.appSettings.isDarkTheme,
-                  homeController.appSettings.setTheme,
-                  homeController.appSettings.isLoading,
+                  text: "Modo Noturno:",
+                  isEnabled: homeController.appSettings.isDarkTheme,
+                  function: homeController.appSettings.setTheme,
+                );
+              }),
+              SizedBox(height: space),
+              Observer(builder: (_) {
+                return SwitchComponent(
+                  text: "Manter Tela Ligada:",
+                  isEnabled: homeController.appSettings.isEnabledWakelock,
+                  function: homeController.appSettings.setWakeLock,
                 );
               }),
               SizedBox(height: space * 2),
