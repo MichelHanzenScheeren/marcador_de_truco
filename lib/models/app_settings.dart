@@ -123,8 +123,8 @@ abstract class _AppSettingsBase with Store {
 
   final ThemeData _darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    backgroundColor: Colors.black54,
-    canvasColor: Colors.black54, //cor do fundo
+    backgroundColor: Colors.black,
+    canvasColor: Colors.black, //cor do fundo
     dialogBackgroundColor: Colors.grey[900],
     errorColor: Colors.red[400],
     primaryColorLight: Colors.green[400],

@@ -62,13 +62,14 @@ abstract class _HomeControllerBase with Store {
   }
 
   Game initGame() {
-    GameController controller = GameController(Truco(
-      player1: Player(description: p1Desc),
-      player2: Player(description: p2Desc),
-      maxPoints: int.parse(maxPoints),
-    ));
-    final gamePage = Game(controller);
-    return gamePage;
+    GameController controller = GameController(
+      Truco(
+        player1: Player(description: p1Desc),
+        player2: Player(description: p2Desc),
+        maxPoints: int.parse(maxPoints),
+      ),
+    );
+    return Game(controller);
   }
 
   void getDependencies(BuildContext context) {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
+import 'package:marcadordetruco/pages/game_page/game.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_images.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/players_names.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
+import 'package:marcadordetruco/widgets/custom_page_route.dart';
 import 'package:marcadordetruco/widgets/custom_text_field.dart';
 import 'package:marcadordetruco/widgets/switch_component.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
@@ -94,8 +96,7 @@ class InitGame extends StatelessWidget {
     if (!formKey.currentState.validate()) return;
 
     FocusScope.of(context).requestFocus(FocusNode());
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => homeController.initGame()),
-    );
+    Game gamePage = homeController.initGame();
+    Navigator.of(context).push(CustomPageRoute(gamePage));
   }
 }

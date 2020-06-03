@@ -4,6 +4,7 @@ import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/pages/game_page/widgets/points_tab/points_tab.dart';
 import 'package:marcadordetruco/pages/game_page/widgets/rounds_tab/rounds_tab.dart';
 import 'package:marcadordetruco/pages/victory_page/victory_page.dart';
+import 'package:marcadordetruco/widgets/custom_page_route.dart';
 import 'package:mobx/mobx.dart';
 
 class Game extends StatefulWidget {
@@ -27,9 +28,8 @@ class _GameState extends State<Game> {
       if (result) {
         gameController.currentGame.saveFinalDate();
         gameController.incrementWins();
-        bool newGame = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => VictoryPage(gameController: gameController),
-        ));
+        bool newGame = await Navigator.of(context)
+            .push(CustomPageRoute(VictoryPage(gameController: gameController)));
         if (newGame != null && newGame)
           gameController.newGame();
         else
