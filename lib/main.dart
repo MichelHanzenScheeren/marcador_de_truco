@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
+import 'package:marcadordetruco/models/app_settings.dart';
 import 'package:provider/provider.dart';
-import './models/my_theme.dart';
 import './pages/home_page/home.dart';
 
 void main() => runApp(MyApp());
@@ -16,17 +16,18 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     final DatabaseConnection connection = DatabaseConnection();
-    final MyTheme myTheme = MyTheme(connection);
+    //connection.deleteDb();
+    final AppSettings appSettings = AppSettings(connection);
     return MultiProvider(
       providers: [
         Provider<DatabaseConnection>(create: (context) => connection),
-        Provider<MyTheme>(create: (context) => myTheme),
+        Provider<AppSettings>(create: (context) => appSettings),
       ],
       child: Observer(builder: (context) {
         return MaterialApp(
           title: 'Ás de Espada',
           debugShowCheckedModeBanner: false,
-          theme: myTheme.getTheme,
+          theme: appSettings.getTheme,
           home: Home(),
         );
       }),

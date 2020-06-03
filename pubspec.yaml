@@ -21,6 +21,7 @@ dependencies:
   provider: ^4.1.2
   intl: ^0.16.1
   flutter_launcher_icons: ^0.7.5
+  wakelock: ^0.1.4+1
 
 dev_dependencies:
   flutter_test:

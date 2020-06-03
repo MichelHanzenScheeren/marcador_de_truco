@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
-import 'package:marcadordetruco/models/my_theme.dart';
+import 'package:marcadordetruco/models/app_settings.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/models/round.dart';
@@ -29,7 +29,7 @@ abstract class _HomeControllerBase with Store {
   String maxPoints = "12";
 
   MyDatabase myDatabase;
-  MyTheme myTheme;
+  AppSettings appSettings;
 
   @action
   void setPage(int number) => currentPage = number;
@@ -75,7 +75,7 @@ abstract class _HomeControllerBase with Store {
     if (myDatabase == null)
       myDatabase = MyDatabase(Provider.of<DatabaseConnection>(context));
 
-    if (myTheme == null) myTheme = Provider.of<MyTheme>(context);
+    if (appSettings == null) appSettings = Provider.of<AppSettings>(context);
   }
 
   void closeDatabase() {

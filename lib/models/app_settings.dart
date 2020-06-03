@@ -1,32 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/database/my_database.dart';
-import 'package:marcadordetruco/models/settings.dart';
 import 'package:mobx/mobx.dart';
+part 'app_settings.g.dart';
 
-part 'my_theme.g.dart';
+class AppSettings = _AppSettingsBase with _$AppSettings;
 
-class MyTheme = _MyThemeBase with _$MyTheme;
-
-abstract class _MyThemeBase with Store {
-  MyDatabase myDatabase;
-  Settings settings;
+abstract class _AppSettingsBase with Store {
+  int appSettingsID;
 
   @observable
   bool isDarkTheme = true;
 
   @observable
-  bool isLoading = false;
+  bool isEnabledWakelock = true;
 
-  _MyThemeBase(DatabaseConnection connection) {
+  @observable
+  bool isLoading = false; //not saved
+
+  MyDatabase myDatabase; //not saved
+
+  _AppSettingsBase(DatabaseConnection connection) {
     myDatabase = MyDatabase(connection);
-    validateCurrentTheme();
+    validateCurrentSettings();
   }
 
-  Future validateCurrentTheme() async {
-    settings = await myDatabase.getSettings();
-    if (settings.isDarkTheme != isDarkTheme) {
-      _setTheme(settings.isDarkTheme);
+  _AppSettingsBase.fromValues(
+    this.appSettingsID,
+    this.isDarkTheme,
+    this.isEnabledWakelock,
+  );
+
+  fromMap(Map map) {
+    appSettingsID = map["appSettingsID"];
+
+    bool auxIsDarkTheme = intToBool(map["isDarkTheme"]);
+    if (isDarkTheme != auxIsDarkTheme) _setTheme(auxIsDarkTheme);
+
+    bool auxIsEnabledWakelock = intToBool(map["isEnabledWakelock"]);
+    if (auxIsEnabledWakelock != isEnabledWakelock)
+      _setWakeLock(auxIsEnabledWakelock);
+  }
+
+  Map toMap() {
+    Map<String, dynamic> appSettings = {
+      "appSettingsID": appSettingsID,
+      "isDarkTheme": boolToInt(isDarkTheme),
+      "isEnabledWakelock": boolToInt(isEnabledWakelock),
+    };
+    return appSettings;
+  }
+
+  int boolToInt(bool value) => value == false ? 0 : 1;
+  bool intToBool(int value) => value == 0 ? false : true;
+
+  Future validateCurrentSettings() async {
+    Map values = await myDatabase.getSettings();
+    if (values != null) {
+      fromMap(values); //atualiza
     }
   }
 
@@ -34,15 +65,23 @@ abstract class _MyThemeBase with Store {
   void _setTheme(bool value) => isDarkTheme = value;
 
   @action
+  void _setWakeLock(bool value) => isEnabledWakelock = value;
+
+  @action
   void setTheme(bool value) {
     isDarkTheme = value;
-    _saveNewTheme(value);
+    _saveSetting();
   }
 
-  void _saveNewTheme(bool value) async {
+  @action
+  void setWakeLock(bool value) {
+    isEnabledWakelock = value;
+    _saveSetting();
+  }
+
+  void _saveSetting() async {
     setIsLoading(true);
-    settings.isDarkTheme = value;
-    await myDatabase.saveNewTheme(settings);
+    await myDatabase.saveSetting(toMap());
     setIsLoading(false);
   }
 

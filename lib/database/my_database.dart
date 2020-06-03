@@ -1,11 +1,10 @@
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/round.dart';
-import 'package:marcadordetruco/models/settings.dart';
 import 'package:marcadordetruco/models/truco.dart';
 import 'package:sqflite/sqflite.dart';
 
-const String settingsTable = "settingsTable";
+const String appSettingsTable = "appSettingsTable";
 const String trucoTable = "trucoTable";
 const String playerTable = "playerTable";
 const String roundTable = "roundTable";
@@ -69,18 +68,16 @@ class MyDatabase {
     await db.delete(trucoTable, where: "trucoID = ?", whereArgs: [trucoID]);
   }
 
-  Future<Settings> getSettings() async {
+  Future<Map> getSettings() async {
     Database db = await connection.getDatabase;
-    String query = "SELECT * FROM $settingsTable WHERE settingsID = 1;";
+    String query = "SELECT * FROM $appSettingsTable;";
     List<Map> settings = await db.rawQuery(query);
 
-    return settings.length > 0
-        ? Settings.fromMap(settings[0])
-        : Settings(1, false);
+    return settings.length > 0 ? settings[0] : null;
   }
 
-  Future saveNewTheme(Settings settings) async {
+  Future saveSetting(Map map) async {
     Database db = await connection.getDatabase;
-    await db.update("$settingsTable", settings.toMap());
+    await db.update("$appSettingsTable", map);
   }
 }
