@@ -15,6 +15,9 @@ abstract class _MyThemeBase with Store {
   @observable
   bool isDarkTheme = true;
 
+  @observable
+  bool isLoading = false;
+
   _MyThemeBase(DatabaseConnection connection) {
     myDatabase = MyDatabase(connection);
     validateCurrentTheme();
@@ -37,9 +40,14 @@ abstract class _MyThemeBase with Store {
   }
 
   void _saveNewTheme(bool value) async {
+    setIsLoading(true);
     settings.isDarkTheme = value;
     await myDatabase.saveNewTheme(settings);
+    setIsLoading(false);
   }
+
+  @action
+  setIsLoading(bool value) => isLoading = value;
 
   @computed
   ThemeData get getTheme {

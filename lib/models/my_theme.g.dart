@@ -32,7 +32,33 @@ mixin _$MyTheme on _MyThemeBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_MyThemeBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$_MyThemeBaseActionController = ActionController(name: '_MyThemeBase');
+
+  @override
+  void _setTheme(bool value) {
+    final _$actionInfo = _$_MyThemeBaseActionController.startAction(
+        name: '_MyThemeBase._setTheme');
+    try {
+      return super._setTheme(value);
+    } finally {
+      _$_MyThemeBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setTheme(bool value) {
@@ -46,9 +72,21 @@ mixin _$MyTheme on _MyThemeBase, Store {
   }
 
   @override
+  dynamic setIsLoading(bool value) {
+    final _$actionInfo = _$_MyThemeBaseActionController.startAction(
+        name: '_MyThemeBase.setIsLoading');
+    try {
+      return super.setIsLoading(value);
+    } finally {
+      _$_MyThemeBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isDarkTheme: ${isDarkTheme},
+isLoading: ${isLoading},
 getTheme: ${getTheme}
     ''';
   }

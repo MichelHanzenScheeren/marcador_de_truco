@@ -7,6 +7,7 @@ import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:marcadordetruco/widgets/custom_text_field.dart';
 import 'package:marcadordetruco/widgets/switch_component.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
+import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 
 class InitGame extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -65,6 +66,7 @@ class InitGame extends StatelessWidget {
                 return SwitchComponent(
                   homeController.myTheme.isDarkTheme,
                   homeController.myTheme.setTheme,
+                  homeController.myTheme.isLoading,
                 );
               }),
               SizedBox(height: space * 2),
