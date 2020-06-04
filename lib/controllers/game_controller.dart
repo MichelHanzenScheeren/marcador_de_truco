@@ -5,6 +5,8 @@ import 'package:marcadordetruco/database/my_database.dart';
 import 'package:marcadordetruco/models/player.dart';
 import 'package:marcadordetruco/models/player_description.dart';
 import 'package:marcadordetruco/pages/game_page/widgets/exit_confirmation.dart';
+import 'package:marcadordetruco/pages/victory_page/victory_page.dart';
+import 'package:marcadordetruco/widgets/custom_page_route.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 import '../models/truco.dart';
@@ -27,6 +29,7 @@ abstract class _GameControllerBase with Store {
   bool isSaving = false;
 
   MyDatabase myDatabase;
+  ReactionDisposer myDisposer;
 
   _GameControllerBase(Truco truco) {
     currentGame = truco;
@@ -57,11 +60,32 @@ abstract class _GameControllerBase with Store {
 
   bool get finishedGame => currentGame.finishedGame;
 
-  initTrucoDb(BuildContext context) {
+  void initTrucoDb(BuildContext context) {
     if (myDatabase == null) {
       myDatabase = MyDatabase(Provider.of<DatabaseConnection>(context));
     }
   }
+
+  void initVictoryReaction(BuildContext context) {
+    myDisposer = reaction((_) => finishedGame, (haveFinished) async {
+      if (haveFinished) applyReaction(context);
+    });
+  }
+
+  void applyReaction(BuildContext context) async {
+    currentGame.saveFinalDate();
+    bool startNewGame = await Navigator.of(context).push(
+      CustomPageRoute(VictoryPage(gameController: this)),
+    );
+    if (startNewGame != null && startNewGame == true) {
+      incrementWins();
+      newGame();
+    } else {
+      Navigator.pop(context);
+    }
+  }
+
+  void dispose() => myDisposer.call();
 
   void save() async {
     setIsSaving(true);

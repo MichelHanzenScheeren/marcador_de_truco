@@ -5,7 +5,7 @@ class CustomPageRoute<T> extends PageRouteBuilder<T> {
 
   CustomPageRoute(this.page)
       : super(
-          transitionDuration: Duration(milliseconds: 800),
+          transitionDuration: Duration(seconds: 1),
           transitionsBuilder: (context, animation, secAnimation, child) {
             animation = CurvedAnimation(
               parent: animation,
