@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/home_controller.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/game_history.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
+import 'package:marcadordetruco/widgets/custom_appbar.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -34,13 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Marcador de Truco",
-          style: TextStyle(color: Theme.of(context).textSelectionHandleColor),
-        ),
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(),
       body: Observer(builder: (context) {
         return tabs[homeController.currentPage];
       }),

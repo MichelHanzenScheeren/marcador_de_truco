@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
 import 'package:marcadordetruco/pages/game_page/widgets/points_tab/points_tab.dart';
 import 'package:marcadordetruco/pages/game_page/widgets/rounds_tab/rounds_tab.dart';
+import 'package:marcadordetruco/widgets/custom_appbar.dart';
 
 class Game extends StatefulWidget {
   final GameController gameController;
@@ -31,25 +32,16 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return WillPopScope(
       onWillPop: () => gameController.willPop(context),
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Ás de Espada",
-              style: TextStyle(color: theme.textSelectionHandleColor),
-            ),
+            title: Observer(builder: (_) {
+              return Text("Partida ${gameController.getTotalMatches + 1}");
+            }),
             centerTitle: true,
-            bottom: TabBar(
-              indicatorColor: theme.textSelectionHandleColor,
-              tabs: <Widget>[
-                Tab(icon: Icon(Icons.play_circle_filled)),
-                Tab(icon: Icon(Icons.list)),
-              ],
-            ),
           ),
           body: Observer(builder: (_) {
             return TabBarView(

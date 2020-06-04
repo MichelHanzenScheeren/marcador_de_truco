@@ -58,6 +58,9 @@ abstract class _GameControllerBase with Store {
   @action
   setIsSaving(bool condition) => isSaving = condition;
 
+  @computed
+  int get getTotalMatches => player1Wins + player2Wins;
+
   bool get finishedGame => currentGame.finishedGame;
 
   void initTrucoDb(BuildContext context) {
