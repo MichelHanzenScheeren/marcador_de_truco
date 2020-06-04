@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/pages/home_page/home.dart';
 import 'package:marcadordetruco/statics/my_images.dart';
+import 'package:marcadordetruco/widgets/custom_page_route.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 
 class Logo extends StatefulWidget {
@@ -27,10 +28,7 @@ class _LogoState extends State<Logo> with SingleTickerProviderStateMixin {
       if (status == AnimationStatus.completed) {
         await Future.delayed(Duration(milliseconds: 1500));
         controller.dispose();
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
+        Navigator.pushReplacement(context, CustomPageRoute(Home()));
       }
     });
     controller.forward();

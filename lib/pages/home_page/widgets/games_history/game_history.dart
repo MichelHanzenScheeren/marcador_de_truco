@@ -15,16 +15,18 @@ class GameHistory extends StatefulWidget {
   GameHistory(this.homeController);
 
   @override
-  _GameHistoryState createState() => _GameHistoryState();
+  _GameHistoryState createState() => _GameHistoryState(homeController);
 }
 
 class _GameHistoryState extends State<GameHistory> {
   final scrollController = ScrollController();
+  final HomeController homeController;
+  _GameHistoryState(this.homeController);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ObservableList<Truco>>(
-      future: widget.homeController.getData(),
+      future: homeController.getData(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return waiting();
@@ -89,7 +91,7 @@ class _GameHistoryState extends State<GameHistory> {
             children: <Widget>[
               TimeDetails(truco.startDate, truco.finalDate),
               BuildRounds(
-                widget.homeController.getRounds,
+                homeController.getRounds,
                 truco.trucoID,
                 scrollController,
               ),
@@ -109,7 +111,7 @@ class _GameHistoryState extends State<GameHistory> {
       enableDrag: false,
       builder: (context) {
         return ExcludeOption(
-          widget.homeController,
+          homeController,
           trucoID,
           onSucess: onSucess,
           onFail: onFail,

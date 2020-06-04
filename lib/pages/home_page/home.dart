@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeController homeController = HomeController();
-  List<StatefulWidget> tabs;
+  var tabs;
 
   @override
   void initState() {

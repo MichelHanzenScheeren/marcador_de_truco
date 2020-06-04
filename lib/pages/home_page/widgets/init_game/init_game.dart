@@ -10,18 +10,10 @@ import 'package:marcadordetruco/widgets/custom_text_field.dart';
 import 'package:marcadordetruco/widgets/switch_component.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
 
-class InitGame extends StatefulWidget {
-  final HomeController homeController;
-  InitGame(this.homeController);
-
-  @override
-  _InitGameState createState() => _InitGameState(homeController);
-}
-
-class _InitGameState extends State<InitGame> {
+class InitGame extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final HomeController homeController;
-  _InitGameState(this.homeController);
+  InitGame(this.homeController);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +83,7 @@ class _InitGameState extends State<InitGame> {
                 backGroundColor: theme.primaryColor,
                 buttonText: "Iniciar Partida",
                 textColor: theme.textSelectionHandleColor,
-                onPressed: initGame,
+                onPressed: () => initGame(context),
               ),
             ],
           ),
@@ -100,11 +92,11 @@ class _InitGameState extends State<InitGame> {
     );
   }
 
-  void initGame() {
+  void initGame(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
     if (!formKey.currentState.validate()) return;
 
-    Game gamePage = widget.homeController.initGame();
+    Game gamePage = homeController.initGame();
     Navigator.of(context).push(CustomPageRoute(gamePage));
   }
 }

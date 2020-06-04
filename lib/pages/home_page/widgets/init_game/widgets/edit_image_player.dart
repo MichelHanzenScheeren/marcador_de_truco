@@ -58,7 +58,7 @@ class EditImagePlayer extends StatelessWidget {
             children: <Widget>[
               CustomButton(
                 buttonText: "Imagem da galeria",
-                textColor: theme.textSelectionColor,
+                textColor: theme.textSelectionHandleColor,
                 backGroundColor: theme.primaryColor,
                 borderColor: theme.primaryColor,
                 onPressed: () {
@@ -69,7 +69,7 @@ class EditImagePlayer extends StatelessWidget {
               SizedBox(height: 10),
               CustomButton(
                 buttonText: "Imagem da câmera",
-                textColor: theme.textSelectionColor,
+                textColor: theme.textSelectionHandleColor,
                 backGroundColor: theme.primaryColor,
                 borderColor: theme.primaryColor,
                 onPressed: () {

@@ -18,7 +18,7 @@ class _GameState extends State<Game> {
 
   @override
   void didChangeDependencies() {
-    //gameController.initTrucoDb(context);
+    gameController.initTrucoDb(context);
     gameController.initVictoryReaction(context);
     super.didChangeDependencies();
   }
