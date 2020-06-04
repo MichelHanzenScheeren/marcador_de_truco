@@ -39,7 +39,7 @@ class _GameState extends State<Game> {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Marcador de truco",
+              "Ás de Espada",
               style: TextStyle(color: theme.textSelectionHandleColor),
             ),
             centerTitle: true,

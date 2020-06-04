@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/database/database_connection.dart';
 import 'package:marcadordetruco/models/app_settings.dart';
+import 'package:marcadordetruco/pages/logo_page/logo.dart';
 import 'package:provider/provider.dart';
-import './pages/home_page/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,12 +28,9 @@ class MyApp extends StatelessWidget {
           title: 'Ás de Espada',
           debugShowCheckedModeBanner: false,
           theme: appSettings.getTheme,
-          home: Home(),
+          home: Logo(),
         );
       }),
     );
   }
 }
-
-// final db = Provider.of<DatabaseConnection>(context);
-// db.deleteDb();

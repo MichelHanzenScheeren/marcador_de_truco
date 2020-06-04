@@ -30,7 +30,7 @@ class SwitchComponent extends StatelessWidget {
             ),
           ),
           Container(
-            width: 80,
+            width: 70,
             child: Switch(
               materialTapTargetSize: MaterialTapTargetSize.padded,
               value: isEnabled,

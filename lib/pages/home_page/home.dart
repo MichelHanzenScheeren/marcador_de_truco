@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:marcadordetruco/controllers/home_controller.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/game_history.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/init_game/init_game.dart';
-import '../../controllers/home_controller.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -11,6 +11,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final HomeController homeController = HomeController();
+  List<StatefulWidget> tabs;
+
+  @override
+  void initState() {
+    super.initState();
+    tabs = [InitGame(homeController), GameHistory(homeController)];
+  }
 
   @override
   void didChangeDependencies() {
@@ -26,7 +33,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final tabs = [InitGame(homeController), GameHistory(homeController)];
     return Scaffold(
       appBar: AppBar(
         title: Text(
