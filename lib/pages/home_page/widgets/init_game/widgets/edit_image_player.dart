@@ -17,18 +17,18 @@ class EditImagePlayer extends StatelessWidget {
 
   void selectNewImage(ImageSource mySource) async {
     try {
-      getImage(mySource);
+      await getImage(mySource);
     } catch (erro) {
       onFail(erro);
     }
   }
 
-  void getImage(ImageSource mySource) async {
+  Future getImage(ImageSource mySource) async {
     File image = await ImagePicker.pickImage(source: mySource);
-    if (image != null) croppImage(image);
+    if (image != null) await croppImage(image);
   }
 
-  void croppImage(File image) async {
+  Future croppImage(File image) async {
     File cropped = await ImageCropper.cropImage(
       sourcePath: image.path,
       cropStyle: CropStyle.circle,

@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(context),
       body: Observer(builder: (context) {
         return tabs[homeController.currentPage];
       }),

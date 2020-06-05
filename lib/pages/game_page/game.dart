@@ -37,12 +37,7 @@ class _GameState extends State<Game> {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          appBar: AppBar(
-            title: Observer(builder: (_) {
-              return Text("Partida ${gameController.getTotalMatches + 1}");
-            }),
-            centerTitle: true,
-          ),
+          appBar: CustomAppBar(context, hasBottom: true),
           body: Observer(builder: (_) {
             return TabBarView(
               children: <Widget>[
