@@ -33,8 +33,8 @@ class MyDatabase {
 
   Future<List> getAll() async {
     Database db = await connection.getDatabase;
-    List<Map> trucoMaps = await db.rawQuery("SELECT * FROM $trucoTable;");
-    List<Map> playerMaps = await db.rawQuery("SELECT * FROM $playerTable;");
+    List<Map> trucoMaps = await db.query(trucoTable, orderBy: "startDate");
+    List<Map> playerMaps = await db.query(playerTable);
 
     return List<Truco>.generate(trucoMaps.length, (i) {
       return Truco.fromMap(

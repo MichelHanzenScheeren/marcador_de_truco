@@ -9,6 +9,14 @@ part of 'game_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GameController on _GameControllerBase, Store {
+  Computed<int> _$getTotalMatchesComputed;
+
+  @override
+  int get getTotalMatches =>
+      (_$getTotalMatchesComputed ??= Computed<int>(() => super.getTotalMatches,
+              name: '_GameControllerBase.getTotalMatches'))
+          .value;
+
   final _$currentGameAtom = Atom(name: '_GameControllerBase.currentGame');
 
   @override
@@ -111,7 +119,8 @@ mixin _$GameController on _GameControllerBase, Store {
 currentGame: ${currentGame},
 player1Wins: ${player1Wins},
 player2Wins: ${player2Wins},
-isSaving: ${isSaving}
+isSaving: ${isSaving},
+getTotalMatches: ${getTotalMatches}
     ''';
   }
 }

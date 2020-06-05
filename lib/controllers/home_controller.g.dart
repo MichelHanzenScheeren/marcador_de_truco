@@ -42,7 +42,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   final _$getDataAsyncAction = AsyncAction('_HomeControllerBase.getData');
 
   @override
-  Future<ObservableList<Truco>> getData() {
+  Future<dynamic> getData() {
     return _$getDataAsyncAction.run(() => super.getData());
   }
 

@@ -8,7 +8,6 @@ import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/ti
 import 'package:marcadordetruco/widgets/custom_snackbar.dart';
 import 'package:marcadordetruco/widgets/game_score.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
-import 'package:mobx/mobx.dart';
 
 class GameHistory extends StatefulWidget {
   final HomeController homeController;
@@ -24,25 +23,29 @@ class _GameHistoryState extends State<GameHistory> {
   _GameHistoryState(this.homeController);
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<ObservableList<Truco>>(
-      future: homeController.getData(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData)
-          return waiting();
-        else if (snapshot.data.length == 0) return emptyWidget();
+  void initState() {
+    super.initState();
+    homeController.getData();
+  }
 
-        return Observer(builder: (_) {
-          if (snapshot.data.length == 0) return emptyWidget();
-          return ListView.builder(
-            controller: scrollController,
-            itemCount: snapshot.data.length,
-            itemBuilder: (context, index) {
-              return trucoCard(context, snapshot.data[index], index);
-            },
-          );
-        });
-      },
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Observer(builder: (_) {
+        if (homeController.isLoading) {
+          return waiting();
+        } else if (homeController.games.length == 0) {
+          return emptyWidget();
+        }
+        return ListView.builder(
+          controller: scrollController,
+          itemCount: homeController.games.length,
+          itemBuilder: (context, index) {
+            return trucoCard(context, homeController.games[index], index);
+          },
+        );
+      }),
     );
   }
 
