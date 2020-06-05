@@ -88,7 +88,7 @@ abstract class _HomeControllerBase with Store {
     games.clear();
     List<Truco> aux = await myDatabase.getAll();
     aux.sort((a, b) => a.startDate.compareTo(b.startDate));
-    aux.forEach((element) => games.add(element));
+    aux.reversed.forEach((element) => games.add(element));
     return games;
   }
 
