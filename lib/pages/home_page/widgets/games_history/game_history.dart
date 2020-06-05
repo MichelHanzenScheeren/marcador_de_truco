@@ -5,8 +5,8 @@ import 'package:marcadordetruco/models/truco.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/build_rounds.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/exclude_option.dart';
 import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/time_details.dart';
-import 'package:marcadordetruco/pages/home_page/widgets/games_history/widgets/truco_score.dart';
 import 'package:marcadordetruco/widgets/custom_snackbar.dart';
+import 'package:marcadordetruco/widgets/game_score.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 import 'package:mobx/mobx.dart';
 
@@ -87,7 +87,7 @@ class _GameHistoryState extends State<GameHistory> {
             accentColor: Theme.of(context).textSelectionColor,
           ),
           child: ExpansionTile(
-            title: TrucoScore(truco),
+            title: GameScore(truco),
             children: <Widget>[
               TimeDetails(truco.startDate, truco.finalDate),
               BuildRounds(

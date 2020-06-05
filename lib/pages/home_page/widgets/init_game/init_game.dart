@@ -7,8 +7,8 @@ import 'package:marcadordetruco/pages/home_page/widgets/init_game/widgets/player
 import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:marcadordetruco/widgets/custom_page_route.dart';
 import 'package:marcadordetruco/widgets/custom_text_field.dart';
-import 'package:marcadordetruco/widgets/switch_component.dart';
 import 'package:marcadordetruco/widgets/title_divider.dart';
+import 'widgets/switch_component.dart';
 
 class InitGame extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:marcadordetruco/controllers/game_controller.dart';
-import 'package:marcadordetruco/pages/game_page/widgets/rounds_tab/widgets/game_score.dart';
 import 'package:marcadordetruco/widgets/custom_button.dart';
 import 'package:marcadordetruco/widgets/waiting_indicator.dart';
 import 'announce_winner.dart';
