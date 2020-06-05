@@ -82,9 +82,9 @@ mixin _$PlayerDescription on _PlayerDescriptionBase, Store {
   @override
   String toString() {
     return '''
-image: ${image},
-imageType: ${imageType},
-name: ${name}
+image: $image,
+imageType: $imageType,
+name: $name
     ''';
   }
 }

@@ -74,8 +74,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-currentPage: ${currentPage},
-isLoading: ${isLoading}
+currentPage: $currentPage,
+isLoading: $isLoading
     ''';
   }
 }

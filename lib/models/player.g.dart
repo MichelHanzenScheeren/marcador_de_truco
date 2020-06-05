@@ -51,7 +51,7 @@ mixin _$Player on _PlayerBase, Store {
   @override
   String toString() {
     return '''
-points: ${points}
+points: $points
     ''';
   }
 }

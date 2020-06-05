@@ -116,11 +116,11 @@ mixin _$GameController on _GameControllerBase, Store {
   @override
   String toString() {
     return '''
-currentGame: ${currentGame},
-player1Wins: ${player1Wins},
-player2Wins: ${player2Wins},
-isSaving: ${isSaving},
-getTotalMatches: ${getTotalMatches}
+currentGame: $currentGame,
+player1Wins: $player1Wins,
+player2Wins: $player2Wins,
+isSaving: $isSaving,
+getTotalMatches: $getTotalMatches
     ''';
   }
 }
