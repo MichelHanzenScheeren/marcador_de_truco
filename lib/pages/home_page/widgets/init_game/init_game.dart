@@ -29,7 +29,6 @@ class InitGame extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: space),
               TitleDivider(
                 text: "Jogadores",
                 textColor: theme.textSelectionColor,
@@ -48,7 +47,7 @@ class InitGame extends StatelessWidget {
                 validateName: homeController.validateName,
                 space: space,
               ),
-              SizedBox(height: 2 * space),
+              SizedBox(height: space * 1.5),
               TitleDivider(
                 text: "Configurações da Partida",
                 textColor: theme.textSelectionColor,
@@ -78,7 +77,7 @@ class InitGame extends StatelessWidget {
                   function: homeController.appSettings.setWakeLock,
                 );
               }),
-              SizedBox(height: space * 2),
+              SizedBox(height: space * 1.5),
               CustomButton(
                 backGroundColor: theme.primaryColor,
                 buttonText: "Iniciar Partida",

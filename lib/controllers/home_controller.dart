@@ -40,12 +40,15 @@ abstract class _HomeControllerBase with Store {
   void setMaxPoints(String value) => maxPoints = value;
 
   String validateName(String value) {
+    value = value.trim();
     if (value == "") {
-      return "O nome do jogador não pode ser vazio...";
+      return "O nome não pode ser vazio...";
     } else if (value.replaceAll(" ", "").length == 0) {
       return "Nome inválido!";
     } else if (value.length > 20) {
-      return "Nome não pode ter mais de 20 caracters...";
+      return "Máx. 20 caracters...";
+    } else if (p1Desc.name.trim() == value && p2Desc.name.trim() == value) {
+      return "Os nomes devem ser diferentes!";
     } else {
       return null;
     }

@@ -5,9 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String initialValue;
   final String label;
   final Function(String value) changed;
-  final TextEditingController textController;
   final TextInputType keyboardType;
-  final bool autoFocus;
   final Function validator;
   final GlobalKey<FormFieldState> fieldKey;
   final bool textCenter;
@@ -17,9 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.initialValue,
     this.label,
     this.changed,
-    this.textController,
     this.keyboardType: TextInputType.text,
-    this.autoFocus: false,
     this.validator,
     this.fieldKey,
     this.textCenter: true,
@@ -32,8 +28,7 @@ class CustomTextField extends StatelessWidget {
       child: TextFormField(
         style: TextStyle(color: Theme.of(context).textSelectionColor),
         key: fieldKey,
-        controller: textController,
-        autofocus: autoFocus,
+        autofocus: false,
         validator: validator,
         keyboardType: keyboardType,
         initialValue: initialValue,
