@@ -84,6 +84,7 @@ class InitGame extends StatelessWidget {
                 textColor: theme.textSelectionHandleColor,
                 onPressed: () => initGame(context),
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),
