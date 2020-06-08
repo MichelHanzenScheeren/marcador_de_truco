@@ -5,15 +5,16 @@ import 'package:marcadordetruco/statics/my_images.dart';
 
 class TrucoButton extends StatelessWidget {
   final Truco truco;
-  TrucoButton({@required this.truco});
+  final double heigth;
+  TrucoButton({@required this.truco, this.heigth: 700});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 8),
       alignment: Alignment.center,
-      width: 220,
+      width: 190,
       decoration: BoxDecoration(
         color: theme.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -29,7 +30,7 @@ class TrucoButton extends StatelessWidget {
                 return Text(
                   truco.getTrucoText,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: heigth * 0.032,
                     color: theme.textSelectionHandleColor.withAlpha(240),
                   ),
                 );
@@ -48,8 +49,8 @@ class TrucoButton extends StatelessWidget {
     return Image.asset(
       MyImages.truco,
       fit: BoxFit.fill,
-      height: 40,
-      width: 40,
+      height: heigth * 0.045,
+      width: 35,
     );
   }
 }

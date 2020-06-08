@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marcadordetruco/models/truco.dart';
-import 'package:marcadordetruco/statics/my_images.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/points_tab/widgets/players_images_row.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/points_tab/widgets/players_names_row.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/points_tab/widgets/players_points_row.dart';
+import 'package:marcadordetruco/pages/game_page/widgets/points_tab/widgets/victorys_row.dart';
 import './widgets/truco_button.dart';
-import './widgets/player_widget.dart';
 import './widgets/undo_round_button.dart';
 
 class PointsTab extends StatelessWidget {
@@ -14,61 +16,46 @@ class PointsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final double appBarHeight = Scaffold.of(context).appBarMaxHeight;
-    final double height = size.height - appBarHeight;
-    final double width = size.width;
-    final textStyle = TextStyle(
-      color: Theme.of(context).textSelectionColor,
-      fontSize: 20,
-    );
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Row(
+    final double heigth = MediaQuery.of(context).size.height;
+    final double space = heigth * 0.023;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              PlayerWidget(
-                player: truco.player1,
-                incrementImage: MyImages.incrementLeft,
-                truco: truco,
-                size: Size(width, height),
+              PlayersImagesRow(
+                p1Description: truco.player1.description,
+                p2Description: truco.player2.description,
+                space: space,
+                imageSize: heigth * 0.16,
               ),
-              PlayerWidget(
-                player: truco.player2,
-                incrementImage: MyImages.incrementRight,
+              PlayersNamesRow(
+                p1Name: truco.player1.description.name,
+                p2Name: truco.player2.description.name,
+                textSize: heigth * 0.032,
+              ),
+              PlayersPointsRow(
                 truco: truco,
-                size: Size(width, height),
+                space: space,
+                screenHeigth: heigth,
               ),
             ],
           ),
-          Container(
-            padding: EdgeInsets.only(top: 20),
-            width: width,
-            height: height * 0.35,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                TrucoButton(truco: truco),
-                UndoRoundButton(undoFunction: truco.undoRound),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text("$p1Wins", style: textStyle),
-                      Text("Vitórias", style: textStyle),
-                      Text("$p2Wins", style: textStyle),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(height: space * 1.8),
+        TrucoButton(truco: truco, heigth: heigth),
+        SizedBox(height: space * 1.4),
+        UndoRoundButton(undoFunction: truco.undoRound),
+        SizedBox(height: space * 1.4),
+        VictorysRow(
+          p1Wins: p1Wins,
+          p2Wins: p2Wins,
+          space: space,
+        ),
+      ],
     );
   }
 }

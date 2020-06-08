@@ -90,9 +90,9 @@ mixin _$AppSettings on _AppSettingsBase, Store {
   @override
   String toString() {
     return '''
-isDarkTheme: ${isDarkTheme},
-isEnabledWakelock: ${isEnabledWakelock},
-getTheme: ${getTheme}
+isDarkTheme: $isDarkTheme,
+isEnabledWakelock: $isEnabledWakelock,
+getTheme: $getTheme
     ''';
   }
 }
